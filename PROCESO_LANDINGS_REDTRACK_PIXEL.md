@@ -178,7 +178,21 @@ https://trk.accbloom.online/[CAMPAIGN_ID]?sub1={{ad.id}}&sub2={{adset.id}}&sub3=
 
 ---
 
-### 🔹 PASO 4: Implementación en Meta Ads Manager
+### 🔹 PASO 4: Configuración de Webhooks en Kommo CRM (Atribución S2S)
+
+Para que Kommo reporte automáticamente cada etapa del embudo a RedTrack y Meta Ads, configura los widgets de **Webhooks** en cada columna del Embudo de Ventas:
+
+| Columna en Kommo CRM | Evento Disparado | URL Exacta del Webhook |
+| :--- | :--- | :--- |
+| **1. LEAD RECIBIDO** | `Lead` | `https://trk.accbloom.online/postback?clickid={{lead.custom_fields.clickId}}&type=Lead` |
+| **2. CBU ENVIADO** | `InitiateCheckout` | `https://trk.accbloom.online/postback?clickid={{lead.custom_fields.clickId}}&type=InitiateCheckout` |
+| **3. DEPOSITO CONFIRMADO** | `Purchase` | `https://trk.accbloom.online/postback?clickid={{lead.custom_fields.clickId}}&type=Purchase` |
+
+> ⚠️ **Regla Crítica de RedTrack:** El parámetro en la URL debe ser **`clickid=` (todo en minúsculas)**. Si se escribe `clickId=`, RedTrack devolverá error 404. La variable de Kommo `{{lead.custom_fields.clickId}}` sí debe coincidir con el nombre del campo en tu CRM.
+
+---
+
+### 🔹 PASO 5: Implementación en Meta Ads Manager
 
 1. Ve a tu administrador de anuncios de Meta (**Meta Ads Manager**).
 2. A nivel de **Anuncio (Ad)**:
@@ -187,7 +201,7 @@ https://trk.accbloom.online/[CAMPAIGN_ID]?sub1={{ad.id}}&sub2={{adset.id}}&sub3=
 
 ---
 
-### 🔹 PASO 5: Protocolo de Validación y Testing Pre-Lanzamiento
+### 🔹 PASO 6: Protocolo de Validación y Testing Pre-Lanzamiento
 
 Antes de activar el presupuesto publicitario, ejecuta estas pruebas:
 
