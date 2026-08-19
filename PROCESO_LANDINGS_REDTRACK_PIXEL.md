@@ -1,22 +1,33 @@
-# 📘 Manual de Operaciones Estándar (SOP)
-## Creación, Despliegue y Tracking de Landings (RedTrack + Meta Pixel + WhatsApp + Vercel)
+# 📘 Manual de Operaciones Estándar (SOP) & Guía de Implementación
+## Creación, Despliegue, A/B Testing (Split URL) y Tracking de Landings
+### Stack: RedTrack + Meta Pixel + WhatsApp + Kommo CRM + GitHub + Vercel
 
-Este documento describe el **proceso exacto y estandarizado paso a paso** para crear, desplegar y conectar landings de alta conversión con Meta Pixel, RedTrack (atribución y postbacks para CRM como Kommo) y despliegue automático en Vercel a través de GitHub.
+Este manual detalla el **proceso secuencial y estandarizado de inicio a fin** para crear, desplegar, rotar mediante **Split URL A/B Testing** y medir con precisión las conversiones de tus páginas de aterrizaje hacia WhatsApp y CRM.
 
 ---
 
-## 🏗️ 1. Arquitectura del Flujo de Tráfico y Atribución
+## 🏗️ 1. Arquitectura del Flujo de Tráfico y Split Testing
 
 ```mermaid
 flowchart TD
-    A[Anuncio en Meta Ads] -->|URL de Campaña RedTrack| B[RedTrack Tracker trk.accbloom.online]
-    B -->|Registra visita + Genera Cookie Sesión| C[Landing Page en Vercel]
-    C -->|Carga de página| D[Meta Pixel: Evento PageView]
-    C -->|Usuario hace clic en WhatsApp| E[Botón CTA / Barra Fija]
-    E -->|1. Dispara evento en navegador| F[Meta Pixel: Eventos Contact y Lead]
-    E -->|2. Redirige a /click| G[RedTrack /click Handler]
-    G -->|Genera {clickid} único y redirige| H[WhatsApp Chat con +595... y Mensaje + ClickID]
-    H -->|Cliente envía mensaje| I[Kommo CRM recibe {clickid} para Atribución]
+    A[Anuncio en Meta Ads] -->|Campaign Tracking Link Único| B[RedTrack Tracker trk.accbloom.online]
+    
+    subgraph SPLIT_URL_ENGINE [Motor de Rotación A/B RedTrack]
+        B -->|50% Tráfico / Peso 50| C1[Landing A: Enfoque Oferta]
+        B -->|50% Tráfico / Peso 50| C2[Landing B: Enfoque Beneficios]
+    end
+    
+    C1 -->|PageView en Vercel| D1[Meta Pixel Helper: PageView]
+    C2 -->|PageView en Vercel| D2[Meta Pixel Helper: PageView]
+    
+    C1 -->|Clic en Botón CTA /click| E1[Dispara Contact + Lead]
+    C2 -->|Clic en Botón CTA /click| E2[Dispara Contact + Lead]
+    
+    E1 --> G[RedTrack /click Handler]
+    E2 --> G
+    
+    G -->|Asigna {clickid} único y redirige| H[WhatsApp Chat con +595... + Mensaje con ClickID]
+    H -->|Cliente envía mensaje| I[Kommo CRM recibe {clickid} para Atribución de Ventas]
 ```
 
 ---
@@ -34,135 +45,191 @@ flowchart TD
 
 ---
 
-## 📋 3. Proceso Paso a Paso para una Nueva Landing
+## 📋 3. Guía de Implementación Secuencial (Paso a Paso)
 
-### 🔹 Paso 1: Preparación del Archivo HTML
-1. Nombre del archivo: `landing_[nombre].html` (ej: `landing_fa.html`) o `index.html` si es la raíz.
-2. **Dentro del `<head>`** colocar obligatoriamente:
-   - **Meta Pixel Code**:
-     ```html
-     <!-- Meta Pixel Code -->
-     <script>
-     !function(f,b,e,v,n,t,s)
-     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-     n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-     if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-     n.queue=[];t=b.createElement(e);t.async=!0;
-     t.src=v;s=b.getElementsByTagName(e)[0];
-     s.parentNode.insertBefore(t,s)}(window, document,'script',
-     'https://connect.facebook.net/en_US/fbevents.js');
-     fbq('init', 'ID_DE_TU_PIXEL');
-     fbq('track', 'PageView');
-     </script>
-     <noscript>
-       <img height="1" width="1" style="display:none"
-       src="https://www.facebook.com/tr?id=ID_DE_TU_PIXEL&ev=PageView&noscript=1" />
-     </noscript>
-     ```
-   - **Script Universal de RedTrack**:
-     ```html
-     <!-- RedTrack Universal Tracking Script -->
-     <script type="text/javascript" src="https://trk.accbloom.online/track.js"></script>
-     ```
-3. **En los enlaces de los botones de WhatsApp (CTA principal y Barra fija)**:
-   - **`href`**: `https://trk.accbloom.online/click`
-   - **`onclick`**: Disparo de eventos del Meta Pixel:
-     ```html
-     <a href="https://trk.accbloom.online/click" 
-        id="whatsapp-btn"  
-        class="cta-button"
-        onclick="if(typeof fbq === 'function') { fbq('track', 'Contact'); fbq('track', 'Lead'); }">
-        Ir a WhatsApp Ahora
-     </a>
-     ```
-   - **Barra inferior fija (Sticky Bar)**:
-     ```html
-     <a href="https://trk.accbloom.online/click" 
-        class="bono-bar"
-        onclick="if(typeof fbq === 'function') { fbq('track', 'Contact'); fbq('track', 'Lead'); }">
-       🎁 BONUS EXTRA ACTIVO - ¡Solicitalo ahora por WhatsApp!
-     </a>
-     ```
-4. **⚠️ Regla Crítica**: Asegurarse de que **NO** existan scripts de tracking obsoletos (como scripts viejos de Adveri o scripts de sobreescritura de enlaces de WhatsApp) que sobreescriban el `href` dinámicamente.
+Sigue rigurosamente este orden cronológico desde el archivo local hasta la optimización en vivo:
+
+```
+[Paso 1: Archivos HTML] ➡️ [Paso 2: Git & Vercel] ➡️ [Paso 3: RedTrack Setup] ➡️ [Paso 4: Meta Ads] ➡️ [Paso 5: Testing] ➡️ [Paso 6: Optimización]
+```
 
 ---
 
-### 🔹 Paso 2: Despliegue en GitHub y Vercel
-Una vez creado o editado el archivo HTML, ejecutar:
+### 🔹 PASO 1: Preparación y Creación de los Archivos HTML (Variaciones A y B)
+
+Crea dos archivos HTML distintos en el repositorio local (o uno solo si no vas a hacer Split Test):
+- Variación A: `landing_fa_a.html` (ej: diseño con enfoque en bono/oferta directa).
+- Variación B: `landing_fa_b.html` (ej: diseño con enfoque en prueba social/seguridad).
+
+#### Requisitos obligatorios dentro del `<head>` de AMBAS versiones:
+1. **Código del Meta Pixel**:
+   ```html
+   <!-- Meta Pixel Code -->
+   <script>
+   !function(f,b,e,v,n,t,s)
+   {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+   n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+   if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+   n.queue=[];t=b.createElement(e);t.async=!0;
+   t.src=v;s=b.getElementsByTagName(e)[0];
+   s.parentNode.insertBefore(t,s)}(window, document,'script',
+   'https://connect.facebook.net/en_US/fbevents.js');
+   fbq('init', '3319413524888816');
+   fbq('track', 'PageView');
+   </script>
+   <noscript>
+     <img height="1" width="1" style="display:none"
+     src="https://www.facebook.com/tr?id=3319413524888816&ev=PageView&noscript=1" />
+   </noscript>
+   ```
+2. **Script Universal de RedTrack**:
+   ```html
+   <!-- RedTrack Universal Tracking Script -->
+   <script type="text/javascript" src="https://trk.accbloom.online/track.js"></script>
+   ```
+
+#### Requisitos obligatorios en TODOS los botones de WhatsApp (CTA Principal y Barra Fija):
+- **`href`**: `https://trk.accbloom.online/click` (Siempre apunta a la ruta de clic de RedTrack).
+- **`onclick`**: Disparo de eventos del Meta Pixel.
+```html
+<!-- Botón Principal -->
+<a href="https://trk.accbloom.online/click" 
+   id="whatsapp-btn"  
+   class="cta-button"
+   onclick="if(typeof fbq === 'function') { fbq('track', 'Contact'); fbq('track', 'Lead'); }">
+   ¡Quiero mi cuenta por WhatsApp!
+</a>
+
+<!-- Barra Fija Inferior (Sticky Bar) -->
+<a href="https://trk.accbloom.online/click" 
+   class="bono-bar"
+   onclick="if(typeof fbq === 'function') { fbq('track', 'Contact'); fbq('track', 'Lead'); }">
+  🎁 BONUS EXTRA ACTIVO - ¡Solicitalo ahora por WhatsApp!
+</a>
+```
+> ⚠️ **Regla de Oro:** No uses enlaces directos a `wa.me` en el HTML. Todo debe pasar por `https://trk.accbloom.online/click` para que RedTrack capture el `clickid` e identifique qué landing generó la interacción.
+
+---
+
+### 🔹 PASO 2: Despliegue en GitHub y Publicación Automática en Vercel
+
+Sube los cambios al repositorio remoto para generar las URLs públicas:
+
 ```bash
 git add .
-git commit -m "Nueva landing o actualización de tracking"
+git commit -m "feat: Agregar landing_fa_a y landing_fa_b para A/B testing"
 git push origin main
 ```
-> Vercel detecta el commit automáticamente y en menos de 10 segundos queda publicada en:
-> `https://sitecreatorbloom.vercel.app/nombre_del_archivo.html`
+
+**Verificación de URLs de Producción:**
+- Landing A: `https://sitecreatorbloom.vercel.app/landing_fa_a.html`
+- Landing B: `https://sitecreatorbloom.vercel.app/landing_fa_b.html`
 
 ---
 
-### 🔹 Paso 3: Configuración en RedTrack
+### 🔹 PASO 3: Configuración Secuencial en RedTrack
 
-#### 1. Crear la Oferta (Offer)
-- Ve a **Offers** ➔ **New**.
-- **Offer name**: `[NombreProyecto]/WhatsApp [Persona/Agente]` (ej: `Landing/WhatsApp Favio`).
-- **Offer source**: `WhatsApp Direct - Kommo CRM` (o la fuente configurada).
-- **URL**: 
-  ```text
-  https://wa.me/CODIGO_PAIS_NUMERO?text=Tu%20Mensaje%20{clickid}
-  ```
-  *(Ejemplo: `https://wa.me/595991596221?text=Quiero%20mi%20cuenta%20de%20ingreso%20{clickid}`)*.
-- Guarda la oferta (**SAVE**).
+Sigue estrictamente este orden dentro del panel de RedTrack:
 
-#### 2. Crear el Lander
-- Ve a **Landers** ➔ **New**.
-- **Name**: `Landing [Nombre]` (ej: `Landing Vercel Favio`).
-- **URL**: `https://sitecreatorbloom.vercel.app/tu_archivo.html` (o la URL raíz si es `index.html`).
-- **Tracking domain**: `trk.accbloom.online`
-- Guarda el lander (**SAVE**).
+#### 1. Configurar la Oferta (Offer)
+*(Si ya la tienes creada para ese asesor/número de WhatsApp, puedes reutilizarla).*
+1. Ve a **Offers** ➔ **New**.
+2. **Offer name**: `Landing/WhatsApp Favio`
+3. **Offer source**: `WhatsApp Direct - Kommo CRM`
+4. **URL**:
+   ```text
+   https://wa.me/595991596221?text=Quiero%20mi%20cuenta%20de%20ingreso%20{clickid}
+   ```
+5. Haz clic en **SAVE**.
 
-#### 3. Crear la Campaña (Campaign)
-- Ve a **Campaigns** ➔ **New**.
-- **Name**: `Meta Ads - WhatsApp [Nombre]`
-- **Traffic channel**: `Facebook perfil X`
-- **Domain**: `trk.accbloom.online`
-- **Funnels** (a la derecha):
-  - Modo: `LANDING > OFFER`
-  - En **Landings**: Selecciona el Lander creado en el sub-paso 2.
-  - En **Offers**: Selecciona la Offer creada en el sub-paso 1.
-- Haz clic en **SAVE** (arriba a la derecha).
+#### 2. Registrar los Landers (Landing A y Landing B)
+1. Ve a **Landers** ➔ **New** (para la primera versión):
+   - **Name**: `Landing Favio - Versión A (Oferta)`
+   - **URL**: `https://sitecreatorbloom.vercel.app/landing_fa_a.html`
+   - **Tracking domain**: `trk.accbloom.online`
+   - Haz clic en **SAVE**.
+2. Ve a **Landers** ➔ **New** (para la segunda versión):
+   - **Name**: `Landing Favio - Versión B (Beneficios)`
+   - **URL**: `https://sitecreatorbloom.vercel.app/landing_fa_b.html`
+   - **Tracking domain**: `trk.accbloom.online`
+   - Haz clic en **SAVE**.
 
----
+#### 3. Configurar la Campaña con Split Test (Rotación A/B)
+1. Ve a **Campaigns** ➔ **New** (o edita la campaña existente).
+2. **General Settings**:
+   - **Name**: `Meta Ads - WhatsApp Favio [Split A/B]`
+   - **Traffic channel**: `Facebook perfil X`
+   - **Domain**: `trk.accbloom.online`
+3. **Funnels / Stream Settings** (Sección derecha):
+   - **Modo del Funnel**: `LANDING > OFFER`
+   - **Sección Landings**:
+     - Agrega **`Landing Favio - Versión A`** ➔ Asigna **Weight (Peso): `50`** (o 100).
+     - Agrega **`Landing Favio - Versión B`** ➔ Asigna **Weight (Peso): `50`** (o 100).
+   - **Sección Offers**:
+     - Agrega **`Landing/WhatsApp Favio`** ➔ Asigna **Weight: `100`**.
+4. Haz clic en **SAVE** (arriba a la derecha).
 
-### 🔹 Paso 4: Obtención del Enlace para Anuncios de Meta Ads
-En la campaña guardada, dentro de la sección **Tracking links and parameters**, copia el **Campaign tracking link**:
+#### 4. Obtener el Enlace de Campaña para Meta Ads
+Dentro de la campaña guardada, en **Tracking links and parameters**, copia el enlace generado:
 
 ```text
 https://trk.accbloom.online/[CAMPAIGN_ID]?sub1={{ad.id}}&sub2={{adset.id}}&sub3={{campaign.id}}&sub4={{ad.name}}&sub5={{adset.name}}&sub6={{campaign.name}}&sub7={{placement}}&sub8={{site_source_name}}&utm_source=facebook&utm_medium=paid
 ```
-> 📌 **Este es el enlace exacto que se pega en el anuncio de Facebook / Instagram Ads.**
 
 ---
 
-## 🧪 4. Checklist de Validación y Testing
+### 🔹 PASO 4: Implementación en Meta Ads Manager
 
-Antes de lanzar pauta publicitaria en Meta Ads, realiza esta prueba:
-
-1. **Abrir el enlace de campaña de RedTrack** en una pestaña nueva o ventana de incógnito:
-   `https://trk.accbloom.online/[CAMPAIGN_ID]`
-2. **Verificar que cargue la landing** en Vercel con los parámetros de sesión (`?rtkcid=...`).
-3. **Verificar con la extensión "Meta Pixel Helper"**:
-   - Que el evento `PageView` esté en verde.
-4. **Hacer clic en el botón de WhatsApp**:
-   - Que Meta Pixel Helper dispare `Lead` y `Contact`.
-   - Que abra WhatsApp con el número correcto (ej: `+595 991 596 221`).
-   - Que el mensaje contenga el código numérico/alfanumérico generado al final (el `clickid`).
-5. **Verificar en RedTrack**:
-   - En **Reports** / **Campaigns**, debe figurar **1 Click** (visita a la landing) y **1 LP Click** (clic hacia WhatsApp).
+1. Ve a tu administrador de anuncios de Meta (**Meta Ads Manager**).
+2. A nivel de **Anuncio (Ad)**:
+   - En el campo **URL del sitio web / Destino**: Pega el enlace de campaña copiado en el Paso 3.4.
+   - No necesitas crear dos anuncios separados para probar las dos páginas; el enlace de RedTrack se encargará de rotar el 50% del tráfico a la Versión A y el 50% a la Versión B de manera transparente.
 
 ---
 
-## 🤖 5. Plantilla Base de Landing One-Page de Alta Conversión
+### 🔹 PASO 5: Protocolo de Validación y Testing Pre-Lanzamiento
 
-Para crear una nueva landing, basta con duplicar esta estructura:
+Antes de activar el presupuesto publicitario, ejecuta estas pruebas:
+
+1. **Prueba de Rotación (Split Test):**
+   - Abre una ventana en modo incógnito y pega el enlace de campaña de RedTrack.
+   - Observa si carga `landing_fa_a.html`.
+   - Cierra y abre otra ventana de incógnito nueva; pega el enlace nuevamente. Debe alternar a `landing_fa_b.html`.
+2. **Prueba del Meta Pixel:**
+   - Abre **Meta Pixel Helper**: Verifica que el evento `PageView` esté en verde.
+3. **Prueba del Botón de WhatsApp:**
+   - Haz clic en el botón principal o barra fija.
+   - Verifica que Meta Pixel Helper registre los eventos `Contact` y `Lead`.
+   - Verifica que se abra WhatsApp con el número correspondiente y que el mensaje incluya el `{clickid}` al final.
+4. **Verificación en RedTrack Reports:**
+   - En **Campaigns** > **Reports** > Agrupar por **Lander**:
+   - Debes ver 1 visita (`Clicks`) y 1 clic a WhatsApp (`LP Clicks`) asignado a la landing correspondiente.
+
+---
+
+### 🔹 PASO 6: Monitoreo, Análisis y Declaración de la Landing Ganadora
+
+Una vez que la campaña acumule tráfico (recomendado: mínimo 100 clics por variación):
+
+1. Ve a **RedTrack** ➔ **Reports** ➔ Selecciona tu campaña.
+2. Agrupa el reporte por **Lander**.
+3. **Evalúa las métricas clave:**
+   - **LP CTR (Click-Through Rate):** % de visitantes que hicieron clic hacia WhatsApp.
+   - **CR% (Conversion Rate):** % de personas que se convirtieron en Leads/Ventas en Kommo CRM.
+   - **CPA (Costo por Adquisición):** Cuánto costó cada contacto o cliente cerrado por landing.
+4. **Declarar la Ganadora (Pasar al 100%):**
+   - Cuando una versión supere claramente a la otra, entra a la Campaña en RedTrack.
+   - En **Funnels**:
+     - Cambia el peso de la landing perdedora a **`0`** (o elimínala del stream).
+     - Cambia el peso de la landing ganadora a **`100`**.
+   - Haz clic en **SAVE**.
+   - *Nota: Todo esto se hace sin pausar el anuncio en Meta Ads y sin pasar nuevamente por revisión publicitaria.*
+
+---
+
+## 🤖 4. Plantilla Base HTML para Nuevas Variaciones
+
+Utiliza esta plantilla limpia y optimizada para cualquier variación nueva que desees crear:
 
 ```html
 <!DOCTYPE html>
@@ -170,7 +237,7 @@ Para crear una nueva landing, basta con duplicar esta estructura:
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Plataforma Verificada | Titulo Landing</title>
+  <title>Plataforma Verificada | Landing Variación A</title>
   <link rel="icon" type="image/png" href="URL_FAVICON" />
 
   <!-- Meta Pixel Code -->
@@ -230,14 +297,14 @@ Para crear una nueva landing, basta con duplicar esta estructura:
       <img src="URL_IMAGEN_LOGO" alt="Logo" />
     </div>
 
-    <h1>✅ Titulo Principal ✅</h1>
-    <h2>Subtitulo o Beneficio</h2>
+    <h1>✅ Titulo Principal Variación ✅</h1>
+    <h2>Subtitulo o Beneficio Diferenciado</h2>
 
     <div class="cta-box">
       💸 OFERTA / BONUS ACTIVO 🎰
     </div>
 
-    <!-- Botón Principal -->
+    <!-- Botón Principal RedTrack -->
     <a href="https://trk.accbloom.online/click" 
        id="whatsapp-btn"  
        class="cta-button"
@@ -250,7 +317,7 @@ Para crear una nueva landing, basta con duplicar esta estructura:
     © 2025 Empresa. Todos los derechos reservados.
   </footer>
 
-  <!-- Barra Fija Inferior -->
+  <!-- Barra Fija Inferior RedTrack -->
   <a href="https://trk.accbloom.online/click" 
      class="bono-bar"
      onclick="if(typeof fbq === 'function') { fbq('track', 'Contact'); fbq('track', 'Lead'); }">
@@ -260,3 +327,4 @@ Para crear una nueva landing, basta con duplicar esta estructura:
 </body>
 </html>
 ```
+

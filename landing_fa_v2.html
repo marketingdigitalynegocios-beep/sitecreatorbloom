@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plataforma Oficial | Cargas y Retiros al Instante</title>
+  <link rel="icon" type="image/png" href="https://imgfz.com/i/gG8bTM6.jpeg" />
+
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '3319413524888816');
+  fbq('track', 'PageView');
+  </script>
+  <noscript>
+    <img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=3319413524888816&ev=PageView&noscript=1" />
+  </noscript>
+
+  <!-- RedTrack Universal Tracking Script -->
+  <script type="text/javascript" src="https://trk.accbloom.online/track.js"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background-color: #0d131a;
+      color: #f1f5f9;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header oficial estilo WhatsApp Dark */
+    header {
+      padding: 14px 20px;
+      text-align: center;
+      border-bottom: 1px solid #1e293b;
+      background-color: #111b21;
+    }
+
+    main {
+      max-width: 480px;
+      width: 100%;
+      margin: 20px auto;
+      padding: 15px 20px;
+      text-align: center;
+      flex: 1;
+    }
+
+    /* Logo Avatar con Halo Neon */
+    .logo-circle {
+      width: 110px;
+      height: 110px;
+      margin: 0 auto 16px;
+      border-radius: 50%;
+      overflow: hidden;
+      box-shadow: 0 0 20px rgba(37, 211, 102, 0.4);
+      border: 3px solid #25d366;
+    }
+
+    .logo-circle img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .badge-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(37, 211, 102, 0.15);
+      border: 1px solid #25d366;
+      color: #25d366;
+      padding: 5px 14px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .badge-status .dot {
+      width: 8px;
+      height: 8px;
+      background-color: #25d366;
+      border-radius: 50%;
+      animation: blink 1.2s infinite ease-in-out;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.2; }
+    }
+
+    h1 {
+      font-size: 23px;
+      font-weight: 800;
+      margin-bottom: 8px;
+      color: #ffffff;
+      line-height: 1.25;
+    }
+
+    h1 span {
+      color: #22c55e;
+    }
+
+    p.subheadline {
+      color: #94a3b8;
+      font-size: 14px;
+      margin-bottom: 18px;
+    }
+
+    /* Tarjeta de Bono Especial */
+    .bonus-card {
+      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+      border: 1.5px solid #22c55e;
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom: 20px;
+      position: relative;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    }
+
+    .bonus-card .tag-top {
+      position: absolute;
+      top: -11px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #eab308;
+      color: #000;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 3px 12px;
+      border-radius: 12px;
+      text-transform: uppercase;
+    }
+
+    .bonus-title {
+      font-size: 19px;
+      font-weight: 800;
+      color: #facc15;
+      margin-top: 4px;
+      margin-bottom: 4px;
+    }
+
+    .bonus-desc {
+      font-size: 13px;
+      color: #cbd5e1;
+    }
+
+    /* Grid de Beneficios / Ventajas */
+    .features-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 20px;
+      text-align: left;
+    }
+
+    .feature-item {
+      background: #1e293b;
+      border: 1px solid #334155;
+      padding: 10px 12px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .feature-icon {
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    .feature-text strong {
+      display: block;
+      font-size: 12px;
+      color: #ffffff;
+    }
+
+    .feature-text span {
+      font-size: 11px;
+      color: #94a3b8;
+    }
+
+    /* Pasos Simples */
+    .steps-container {
+      background: rgba(15, 23, 42, 0.8);
+      border-radius: 12px;
+      padding: 12px 16px;
+      margin-bottom: 20px;
+      border: 1px dashed #334155;
+    }
+
+    .steps-title {
+      font-size: 12px;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: #38bdf8;
+      margin-bottom: 10px;
+      letter-spacing: 0.5px;
+    }
+
+    .steps-list {
+      display: flex;
+      justify-content: space-around;
+      font-size: 11px;
+      color: #e2e8f0;
+    }
+
+    .step-item {
+      flex: 1;
+      padding: 0 4px;
+    }
+
+    .step-num {
+      width: 22px;
+      height: 22px;
+      background: #25d366;
+      color: #000;
+      font-weight: 800;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 5px;
+      font-size: 11px;
+    }
+
+    /* Botón CTA RedTrack */
+    .cta-button {
+      background: linear-gradient(180deg, #28e06c 0%, #1da851 100%);
+      color: #ffffff;
+      padding: 16px 28px;
+      font-size: 17px;
+      font-weight: 800;
+      border: none;
+      border-radius: 35px;
+      text-decoration: none;
+      display: inline-block;
+      width: 100%;
+      max-width: 340px;
+      margin: 8px auto 6px;
+      box-shadow: 0 6px 20px rgba(37, 211, 102, 0.45);
+      animation: pulse 1.6s infinite ease-in-out;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      transition: transform 0.2s;
+    }
+
+    .cta-button:hover, .cta-button:active {
+      transform: scale(1.02);
+      color: #ffffff;
+    }
+
+    .micro-urgency {
+      font-size: 12px;
+      color: #22c55e;
+      font-weight: 600;
+      margin-top: 6px;
+      margin-bottom: 18px;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.03); }
+      100% { transform: scale(1); }
+    }
+
+    /* Métodos de Pago Aceptados */
+    .payment-methods {
+      margin-top: 15px;
+      padding: 10px;
+      border-radius: 10px;
+      background: rgba(30, 41, 59, 0.6);
+    }
+
+    .payment-title {
+      font-size: 11px;
+      color: #94a3b8;
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .payment-chips {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      font-size: 11px;
+      font-weight: 700;
+      color: #e2e8f0;
+    }
+
+    .payment-chip {
+      background: #334155;
+      padding: 4px 10px;
+      border-radius: 6px;
+    }
+
+    /* Barra Fija Inferior */
+    .bono-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: linear-gradient(90deg, #15803d, #22c55e);
+      color: #ffffff;
+      text-align: center;
+      padding: 12px 10px;
+      font-weight: bold;
+      font-size: 14px;
+      text-decoration: none;
+      display: block;
+      z-index: 999;
+      box-shadow: 0 -3px 12px rgba(0, 0, 0, 0.4);
+      animation: flash 2.5s infinite;
+      cursor: pointer;
+    }
+
+    @keyframes flash {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.85; }
+    }
+
+    footer {
+      text-align: center;
+      font-size: 11px;
+      color: #64748b;
+      margin-top: 25px;
+      padding-bottom: 75px;
+    }
+
+    /* Notificaciones Flotantes de Retiros */
+    .xpo-notification-wrap {
+      position: fixed;
+      background: rgba(15, 23, 42, 0.95);
+      color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      width: 290px;
+      z-index: 9999;
+      border: 1px solid #334155;
+      backdrop-filter: blur(8px);
+      opacity: 0;
+      left: -320px;
+      bottom: 75px;
+      transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .xpo-notification-wrap.show {
+      left: 15px;
+      opacity: 1;
+    }
+
+    .xpo-img-wrap img {
+      width: 42px;
+      height: 42px;
+      border-radius: 8px;
+      object-fit: cover;
+      border: 1px solid #22c55e;
+      display: block;
+    }
+
+    .xpo-col {
+      margin-left: 12px;
+      text-align: left;
+    }
+
+    .xpo-notification-name {
+      font-weight: bold;
+      font-size: 13px;
+      color: #ffffff;
+    }
+
+    .xpo-notification-product {
+      font-size: 12px;
+      color: #4ade80;
+      font-weight: 700;
+      margin: 1px 0;
+    }
+
+    .xpo-location {
+      font-size: 11px;
+      color: #94a3b8;
+    }
+
+    @media (max-width: 480px) {
+      main { margin: 10px auto; padding: 12px 16px; }
+      h1 { font-size: 20px; }
+      .bonus-title { font-size: 17px; }
+      .cta-button { font-size: 15px; padding: 14px 20px; }
+      .xpo-notification-wrap { width: 260px; bottom: 70px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div style="display: inline-flex; align-items: center; justify-content: center; gap: 8px;">
+      <svg width="30" height="30" viewBox="0 0 39 39" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M19.5 0C8.73 0 0 8.73 0 19.5C0 23.08 0.96 26.54 2.76 29.56L0.21 38.79L9.67 36.32C12.57 37.95 15.93 38.89 19.5 38.89C30.27 38.89 39 30.16 39 19.5C39 8.73 30.27 0 19.5 0ZM32.32 27.67C31.81 29.11 29.8 30.24 28.27 30.56C27.23 30.77 25.87 30.93 21.28 29.03C15.42 26.61 11.64 20.67 11.35 20.28C11.06 19.89 8.97 17.11 8.97 14.23C8.97 11.35 10.43 9.94 11.02 9.34C11.5 8.85 12.28 8.64 13.06 8.64C13.31 8.64 13.53 8.65 13.72 8.66C14.29 8.69 14.58 8.72 14.95 9.61C15.42 10.74 16.56 13.53 16.7 13.82C16.84 14.11 16.98 14.5 16.79 14.89C16.6 15.28 16.46 15.44 16.17 15.78C15.88 16.12 15.6 16.35 15.31 16.7C15.05 16.99 14.76 17.31 15.09 17.88C15.42 18.44 16.56 20.31 18.24 21.81C20.41 23.74 22.17 24.36 22.8 24.62C23.27 24.82 23.83 24.77 24.17 24.41C24.6 23.94 25.13 23.17 25.67 22.42C26.05 21.89 26.54 21.82 27.02 22.01C27.51 22.19 30.13 23.49 30.67 23.76C31.2 24.03 31.56 24.16 31.69 24.39C31.81 24.62 31.81 25.75 32.32 27.67Z" fill="#25D366"/>
+      </svg>
+      <span style="font-size: 20px; font-weight: 700; color: #ffffff; letter-spacing: -0.5px;">Atención Oficial WhatsApp</span>
+    </div>
+  </header>
+
+  <main>
+    <div class="logo-circle">
+      <img src="https://i.imgur.com/GCxNjBq.jpeg" alt="TroyaLuck Oficial" />
+    </div>
+
+    <div class="badge-status">
+      <span class="dot"></span> Cajero Online 24/7 Disponible
+    </div>
+
+    <h1>🔥 Creá tu Usuario Oficial y <span>Duplicá tu Carga</span></h1>
+    <p class="subheadline">Plataforma habilitada • Pagos y retiros automáticos</p>
+
+    <!-- Tarjeta de Bono -->
+    <div class="bonus-card">
+      <div class="tag-top">⚡ PROMOCIÓN EXCLUSIVA ⚡</div>
+      <div class="bonus-title">+100% EXTRA EN TU PRIMERA CARGA 🎰</div>
+      <div class="bonus-desc">Cargás $2.000 ➔ Jugás con $4.000 (Válido hoy vía WhatsApp)</div>
+    </div>
+
+    <!-- Grid de Beneficios -->
+    <div class="features-grid">
+      <div class="feature-item">
+        <div class="feature-icon">⚡</div>
+        <div class="feature-text">
+          <strong>Retiros en 5 min</strong>
+          <span>Por Transferencia / Alias</span>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">🔒</div>
+        <div class="feature-text">
+          <strong>100% Confiable</strong>
+          <span>Atención 24hs en vivo</span>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">🎰</div>
+        <div class="feature-text">
+          <strong>+1.500 Juegos</strong>
+          <span>Slots, Ruleta y En Vivo</span>
+        </div>
+      </div>
+      <div class="feature-item">
+        <div class="feature-icon">📲</div>
+        <div class="feature-text">
+          <strong>Sin Apps Raras</strong>
+          <span>Jugás desde el navegador</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pasos Simples -->
+    <div class="steps-container">
+      <div class="steps-title">¿Cómo empezar en 1 minuto?</div>
+      <div class="steps-list">
+        <div class="step-item">
+          <div class="step-num">1</div>
+          <div>Pedí usuario en WhatsApp</div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">2</div>
+          <div>Recibí tu Bono 100%</div>
+        </div>
+        <div class="step-item">
+          <div class="step-num">3</div>
+          <div>Retirá directo a tu cuenta</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Botón Principal RedTrack -->
+    <a href="https://trk.accbloom.online/click" 
+       id="whatsapp-btn"  
+       class="cta-button"
+       onclick="if(typeof fbq === 'function') { fbq('track', 'Contact'); fbq('track', 'Lead'); }">
+       👉 ¡QUIERO MI USUARIO Y BONO! 👈
+    </a>
+
+    <div class="micro-urgency">⚡ Atención inmediata • Respuesta en menos de 1 minuto</div>
+
+    <!-- Métodos de Pago -->
+    <div class="payment-methods">
+      <div class="payment-title">Medios de Pago y Cobro Aceptados</div>
+      <div class="payment-chips">
+        <span class="payment-chip">💳 Transferencia Bancaria</span>
+        <span class="payment-chip">📲 Mercado Pago</span>
+        <span class="payment-chip">🏦 Cuenta DNI / Ualá</span>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    © 2025 Plataforma Oficial. Servicio para mayores de 18 años. Juega con responsabilidad.
+  </footer>
+
+  <!-- Barra Fija Inferior RedTrack -->
+  <a href="https://trk.accbloom.online/click" 
+     class="bono-bar"
+     onclick="if(typeof fbq === 'function') { fbq('track', 'Contact'); fbq('track', 'Lead'); }">
+    🎁 BONO 100% ACTIVO - ¡Tocá acá para pedirlo por WhatsApp!
+  </a>
+
+  <!-- Notificaciones de Premios y Retiros Acreditados -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const config = {
+        intervalo: 5,
+        duracion: 3.5,
+        productImage: "https://imgfz.com/i/gG8bTM6.jpeg"
+      };
+
+      const retiros = [
+        { nombre: "Gonzalo R.", monto: "$45.000", ciudad: "Córdoba" },
+        { nombre: "Mariano B.", monto: "$80.000", ciudad: "Buenos Aires" },
+        { nombre: "Lucas T.", monto: "$120.000", ciudad: "Rosario" },
+        { nombre: "Camila V.", monto: "$35.000", ciudad: "Mendoza" },
+        { nombre: "Facundo S.", monto: "$62.000", ciudad: "Santa Fe" },
+        { nombre: "Esteban M.", monto: "$95.000", ciudad: "Tucumán" }
+      ];
+
+      function getRandom(arr) {
+        return arr[Math.floor(Math.random() * arr.length)];
+      }
+
+      function getTimeAgo() {
+        const m = Math.max(1, Math.floor(Math.random() * 45));
+        return `hace ${m} min`;
+      }
+
+      function showNotification() {
+        const existing = document.querySelector(".xpo-notification-wrap");
+        if (existing) existing.remove();
+
+        const item = getRandom(retiros);
+        const tiempo = getTimeAgo();
+
+        const noti = document.createElement("div");
+        noti.className = "xpo-notification-wrap";
+        noti.innerHTML = `
+          <div class="xpo-img-wrap">
+            <img src="${config.productImage}" alt="Premio" onerror="this.src='https://i.imgur.com/GCxNjBq.jpeg'">
+          </div>
+          <div class="xpo-col">
+            <div class="xpo-notification-name">${item.nombre}</div>
+            <div class="xpo-notification-product">💸 Retiro ${item.monto} PAGADO</div>
+            <div class="xpo-location">📍 ${item.ciudad} • ${tiempo}</div>
+          </div>
+        `;
+        document.body.appendChild(noti);
+        
+        requestAnimationFrame(() => {
+          setTimeout(() => noti.classList.add("show"), 50);
+        });
+
+        setTimeout(() => {
+          noti.classList.remove("show");
+          setTimeout(() => noti.remove(), 600);
+        }, config.duracion * 1000);
+      }
+
+      setTimeout(showNotification, 1200);
+      setInterval(showNotification, config.intervalo * 1000);
+    });
+  </script>
+
+</body>
+</html>
