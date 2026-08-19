@@ -1,244 +1,402 @@
 # 📘 Guía Maestra de Implementación: Atribución Server-Side & Meta CAPI
-## Manual de Operaciones Estándar (SOP) para Agencias y Media Buyers
-### Cobertura: E-Commerce (Shopify/WooCommerce), Generación de Leads (Formularios/CRM) y WhatsApp
+## Manual de Operaciones Estándar (SOP) Técnico Paso a Paso
+### Cobertura Completa: Shopify E-commerce, WooCommerce, Formularios Lead Gen y WhatsApp CRM
 
-Este documento detalla el **paso a paso técnico y operativo universal** para implementar un sistema de rastreo de primera persona (*1st Party Data*), atribución multicanal y envío de conversiones por servidor (*Server-Side Conversions API - CAPI*) hacia Meta Ads, Google Ads y TikTok Ads para cualquier tipo de negocio.
-
----
-
-## 🏗️ 1. Arquitectura Universal del Flujo de Datos
-
-```mermaid
-flowchart TD
-    subgraph TRAFICO [1. Captura de Tráfico Publicitario]
-        A1[Meta Ads / Google / TikTok] -->|URL con fbclid, gclid, UTMs| B[Landing / Web / E-commerce]
-        B -->|Universal JS Script / 1st Party Cookie| C[Almacenamiento Local de Sesión: {click_id, fbp, fbc, IP, UA, UTMs}]
-    end
-
-    subgraph CANALES_CONVERSION [2. Tipos de Conversión]
-        C -->|Caso A: E-commerce| D1[Shopify / WooCommerce: Compra Web]
-        C -->|Caso B: Formulario Web| D2[Landing / Typeform / HubSpot: Enviar Lead]
-        C -->|Caso C: WhatsApp / CRM| D3[Kommo / CRM: Cierre Offline por Asesor]
-    end
-
-    subgraph PROCESAMIENTO [3. Servidor de Atribución / sGTM / Router]
-        D1 -->|Webhook de Pedido con Session ID| E[Servidor de Atribución / Webhook Engine]
-        D2 -->|API / Webhook con Session ID| E
-        D3 -->|Postback de CRM con {clickid}| E
-    end
-
-    subgraph CAPI_DISPATCHER [4. Retroalimentación a Plataformas de Anuncios]
-        E -->|Meta Graph API v20.0 CAPI| F1[Meta Ads Manager: ROAS & CPA Real]
-        E -->|Enhanced Conversions API| F2[Google Ads]
-        E -->|Events API| F3[TikTok Ads]
-    end
-```
+Este documento es una **guía técnica de ejecución paso a paso (Runbook)** sin ambigüedades. Cada sección contiene las instrucciones exactas, configuración de servidores, código para copiar y pegar, variables de servidor y protocolos de prueba para entregar un sistema de rastreo de 1ª persona con **Event Match Quality (EMQ) de 8.5 a 10/10** en Meta Ads y Google Ads.
 
 ---
 
-## 🌐 2. Infraestructura Base Requerida
-
-| Componente | Opción Estándar (sGTM) | Opción Serverless / Código Propio |
-| :--- | :--- | :--- |
-| **Servidor de Rastreo** | Stape.io o Google Cloud Platform (sGTM) | Cloudflare Worker / Vercel Edge Function |
-| **Subdominio de 1ª Parte** | `trk.tudominio.com` o `data.tudominio.com` | `api-trk.tudominio.com` |
-| **Registro DNS** | `CNAME` apuntando al endpoint del servidor | `CNAME` apuntando a Cloudflare / Vercel |
-| **Persistencia de Sesión** | Cookies de 1ª parte (`HttpOnly`, `SameSite=Lax`) | LocalStorage + Cookie `_track_cid` (Duración 90-180 días) |
-
----
-
-## 📋 3. Implementación por Tipo de Negocio (Paso a Paso)
+## 📑 Índice de Módulos
+1. [Infraestructura Base: Creación del Servidor sGTM y Subdominio de 1ª Persona](#-módulo-0-infraestructura-del-servidor-sgtm-y-dns)
+2. [Módulo 1: Implementación Exhaustiva en SHOPIFY (Customer Events + Webhooks)](#-módulo-1-implementación-paso-a-paso-en-shopify)
+3. [Módulo 2: Implementación Exhaustiva en WOOCOMMERCE](#-módulo-2-implementación-paso-a-paso-en-woocommerce)
+4. [Módulo 3: Implementación en LEAD GEN (Formularios Embebidos / Landings)](#-módulo-3-implementación-en-lead-gen-formularios-y-landings)
+5. [Módulo 4: Implementación en WHATSAPP & CRM (Kommo / HubSpot)](#-módulo-4-implementación-en-whatsapp--crm)
+6. [Protocolo de Validación, Deduplicación y Diagnóstico](#-módulo-5-protocolo-de-validación-y-testing)
 
 ---
 
-### 🛍️ CASO 1: E-Commerce (Shopify y WooCommerce)
+## 🌐 MÓDULO 0: Infraestructura del Servidor sGTM y DNS
 
-El objetivo es capturar el 100% de las compras reales, incluyendo compras con métodos de pago externos (Mercado Pago, Stripe, PayPal, Transferencia) y pagos contra entrega.
+Para que las cookies no sean bloqueadas por iOS 14+ y Safari ITP, todo el rastreo debe pasar por un **subdominio propio** del cliente (ej: `trk.tutienda.com` o `data.tutienda.com`).
 
-#### Paso 1.1: Captura de Parámetros en el Frontend
-Colocar en el `<head>` del tema (o mediante GTM Web):
-```html
-<script>
-  (function() {
-    const params = new URLSearchParams(window.location.search);
-    const fbclid = params.get('fbclid');
-    const gclid = params.get('gclid');
-    const ttclid = params.get('ttclid');
-    
-    // Generar ID único de sesión si no existe
-    let clickId = localStorage.getItem('_trk_cid');
-    if (!clickId || fbclid) {
-      clickId = 'cid_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
-      localStorage.setItem('_trk_cid', clickId);
-      document.cookie = "_trk_cid=" + clickId + "; path=/; max-age=15552000; SameSite=Lax";
-    }
+### Paso 0.1: Crear el Contenedor Server en Google Tag Manager
+1. Entra a [tagmanager.google.com](https://tagmanager.google.com).
+2. Haz clic en **Crear cuenta** (o dentro de una cuenta existente, clic en **Crear contenedor**).
+3. Nombre del contenedor: `[Cliente] - Server Side`.
+4. Plataforma de destino: Selecciona **Servidor** (*Server*).
+5. En la ventana emergente, selecciona **Aprovisionar automáticamente el servidor de etiquetas** (puedes usar Google Cloud o vincular con [Stape.io](https://stape.io) para ahorrar costos: $10-20 USD/mes).
 
-    if (fbclid) localStorage.setItem('_trk_fbclid', fbclid);
-    if (gclid) localStorage.setItem('_trk_gclid', gclid);
-  })();
-</script>
-```
-
-#### Paso 1.2: Inyección de Metadatos en el Carrito / Pedido
-- **En Shopify:** Inyectar el `_trk_cid` en los `attributes` del checkout mediante cart attributes:
-  ```javascript
-  fetch('/cart/update.js', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      attributes: {
-        'tracking_click_id': localStorage.getItem('_trk_cid'),
-        'fbclid': localStorage.getItem('_trk_fbclid')
-      }
-    })
-  });
-  ```
-- **En WooCommerce:** Guardar el `_trk_cid` como metadato del pedido (`order_meta`) en un campo oculto del checkout.
-
-#### Paso 1.3: Webhook de Pedido Creado / Pagado
-1. Configurar un Webhook en Shopify (`orders/paid`) o WooCommerce (`woocommerce_order_status_completed`).
-2. Enviar el payload al Servidor de Atribución.
-3. **El Servidor extrae:**
-   - `event_name`: `"Purchase"`
-   - `event_id`: Número de Orden (para deduplicación con el navegador)
-   - `value`: Total pagado (ej: `49.99`)
-   - `currency`: `"USD"`, `"ARS"`, `"COP"`, etc.
-   - `user_data`: Email (hasheado SHA256), Teléfono (hasheado SHA256), IP del cliente y User Agent.
-   - `custom_data`: Contenido de la orden, IDs de productos.
+### Paso 0.2: Configurar el Subdominio Propio (DNS)
+1. Ve al proveedor de dominio del cliente (GoDaddy, Cloudflare, Namecheap, etc.).
+2. Agrega un nuevo registro DNS:
+   - **Tipo:** `CNAME`
+   - **Nombre / Host:** `data` (o `trk`) ➔ Esto crea `data.tutienda.com`.
+   - **Destino / Valor:** La URL que te da Stape o GCP (ej: `xxxx.eu.stape.io` o `appengine.google.com`).
+   - **TTL:** Automático o 3600.
+3. En el panel de Stape o GTM Server, agrega el dominio personalizado `https://data.tutienda.com` y espera que el certificado SSL se emita en verde (tarda de 5 a 15 minutos).
 
 ---
 
-### 📝 CASO 2: Generación de Leads (Formularios Web / Landings / Typeform)
+## 🛍️ MÓDULO 1: Implementación Paso a Paso en SHOPIFY
 
-Para servicios, B2B, inmobiliarias, clínicas, academias o cursos con formularios embebidos.
+Shopify eliminó el acceso directo al `checkout.liquid` en la mayoría de planes. La forma oficial y moderna para rastreo sin fallas combina **Shopify Web Pixels (Customer Events API)** + **GTM Web / Server** + **Webhooks de Servidor**.
 
-#### Paso 2.1: Campos Ocultos en el Formulario (Hidden Fields)
-En cualquier formulario (Elementor Forms, HubSpot, Typeform, Gravity Forms, etc.), añadir 4 campos ocultos:
-- `click_id`
-- `fbclid`
-- `utm_source`
-- `utm_campaign`
+---
 
-#### Paso 2.2: Relleno Automático de Campos Ocultos
-Añadir este script en la landing page para autocompletar los campos antes de enviar:
+### Paso 1.1: Configurar Shopify Customer Events (Web Pixel)
+
+1. En el panel de Shopify, ve a **Configuración (Settings)** ➔ **Eventos de clientes (Customer events)**.
+2. Haz clic en el botón verde **Agregar píxel personalizado (Add custom pixel)**.
+3. Nombre del píxel: `Meta CAPI & GTM Server Pixel`.
+4. En la configuración de permisos:
+   - **Privacidad del cliente (Permission):** *Not required* (o según políticas del país).
+   - **Venta de datos (Data sale):** *Data collected does not qualify as data sale*.
+5. Pega el siguiente código en el editor del Web Pixel:
+
 ```javascript
-document.addEventListener("DOMContentLoaded", function() {
-  const clickId = localStorage.getItem('_trk_cid') || '';
-  const fbclid = localStorage.getItem('_trk_fbclid') || '';
-
-  const inputClickId = document.querySelector('input[name="click_id"], input[name="tracking_id"]');
-  if (inputClickId) inputClickId.value = clickId;
-
-  const inputFbclid = document.querySelector('input[name="fbclid"]');
-  if (inputFbclid) inputFbclid.value = fbclid;
+// Inicializar escucha de eventos del cliente en Shopify
+analytics.subscribe('page_viewed', async (event) => {
+  sendToTrackingServer('page_view', {
+    page_location: event.context.document.location.href,
+    page_title: event.context.document.title,
+    client_id: event.clientId
+  }, event);
 });
-```
 
-#### Paso 2.3: Disparo Dual (Navegador + Servidor)
-1. **Frontend:** El formulario dispara el evento estándar de Meta Pixel `fbq('track', 'Lead', {}, {eventID: clickId})`.
-2. **Backend:** El CRM o el Webhook del formulario envía el evento `Lead` al servidor con el mismo `event_id = clickId`.
-3. **Resultado:** Meta deduplica el evento y sube la puntuación de calidad de coincidencia (*Event Quality Score*) a 9.0+/10.
+analytics.subscribe('product_viewed', async (event) => {
+  sendToTrackingServer('view_item', {
+    currency: event.data.productVariant.price.currencyCode,
+    value: event.data.productVariant.price.amount,
+    items: [{
+      item_id: event.data.productVariant.id,
+      item_name: event.data.productVariant.title,
+      price: event.data.productVariant.price.amount
+    }]
+  }, event);
+});
+
+analytics.subscribe('product_added_to_cart', async (event) => {
+  sendToTrackingServer('add_to_cart', {
+    currency: event.data.cartLine.cost.totalAmount.currencyCode,
+    value: event.data.cartLine.cost.totalAmount.amount,
+    items: [{
+      item_id: event.data.cartLine.merchandise.id,
+      item_name: event.data.cartLine.merchandise.title,
+      price: event.data.cartLine.cost.totalAmount.amount,
+      quantity: event.data.cartLine.quantity
+    }]
+  }, event);
+});
+
+analytics.subscribe('checkout_started', async (event) => {
+  sendToTrackingServer('begin_checkout', {
+    currency: event.data.checkout.totalPrice.currencyCode,
+    value: event.data.checkout.totalPrice.amount,
+    email: event.data.checkout.email || '',
+    phone: event.data.checkout.phone || '',
+    items: event.data.checkout.lineItems.map(item => ({
+      item_id: item.variant.id,
+      item_name: item.title,
+      price: item.finalPrice.amount,
+      quantity: item.quantity
+    }))
+  }, event);
+});
+
+analytics.subscribe('checkout_completed', async (event) => {
+  sendToTrackingServer('purchase', {
+    transaction_id: event.data.checkout.order.id || event.data.checkout.token,
+    currency: event.data.checkout.totalPrice.currencyCode,
+    value: event.data.checkout.totalPrice.amount,
+    email: event.data.checkout.email,
+    phone: event.data.checkout.phone,
+    first_name: event.data.checkout.shippingAddress?.firstName || '',
+    last_name: event.data.checkout.shippingAddress?.lastName || '',
+    city: event.data.checkout.shippingAddress?.city || '',
+    country: event.data.checkout.shippingAddress?.countryCode || '',
+    zip: event.data.checkout.shippingAddress?.zip || '',
+    items: event.data.checkout.lineItems.map(item => ({
+      item_id: item.variant.id,
+      item_name: item.title,
+      price: item.finalPrice.amount,
+      quantity: item.quantity
+    }))
+  }, event);
+});
+
+// Función de despacho hacia tu servidor sGTM
+function sendToTrackingServer(eventName, eventData, rawEvent) {
+  const payload = {
+    event_name: eventName,
+    event_id: rawEvent.id || ('evt_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9)),
+    event_time: Math.floor(Date.now() / 1000),
+    user_data: {
+      client_id: rawEvent.clientId,
+      email: eventData.email || '',
+      phone: eventData.phone || '',
+      first_name: eventData.first_name || '',
+      last_name: eventData.last_name || '',
+      city: eventData.city || '',
+      country: eventData.country || '',
+      zip: eventData.zip || ''
+    },
+    custom_data: eventData
+  };
+
+  fetch('https://data.tutienda.com/shopify-event', {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  }).catch(() => {});
+}
+```
+6. Haz clic en **Guardar** y luego en **Conectar (Connect)**.
 
 ---
 
-### 💬 CASO 3: Ventas por WhatsApp & CRM (Kommo, HubSpot, Zoho, ActiveCampaign)
+### Paso 1.2: Configurar el Webhook de Backup en Shopify (`orders/paid`)
+Para capturar compras si el cliente cierra la pestaña antes de la página de agradecimiento:
 
-Para negocios de iGaming, afiliados, servicios de ticket alto o ventas consultivas donde el cierre ocurre por chat.
-
-#### Paso 3.1: Enrutador del Botón de WhatsApp
-El enlace de WhatsApp no debe ser directo a `wa.me`, sino pasar por la función generadora de Click ID:
-```html
-<a href="#" id="cta-whatsapp" class="btn-whatsapp">Contactar por WhatsApp</a>
-
-<script>
-  document.getElementById("cta-whatsapp").addEventListener("click", function(e) {
-    e.preventDefault();
-    const clickId = localStorage.getItem('_trk_cid');
-    const mensaje = encodeURIComponent("Hola, quiero información " + clickId);
-    const telefono = "595991596221"; // Número oficial
-    
-    // Disparar evento de clic en navegador
-    if (typeof fbq === 'function') {
-      fbq('track', 'Contact', {}, {eventID: clickId});
-    }
-    
-    // Redirigir a WhatsApp
-    window.location.href = `https://wa.me/${telefono}?text=${mensaje}`;
-  });
-</script>
-```
-
-#### Paso 3.2: Captura en el CRM (Kommo / HubSpot)
-1. Al recibir el primer mensaje, el Salesbot o la integración extrae el código alfanumérico al final del texto y lo guarda en el campo del Lead: `clickId`.
-2. **Importante:** Asegurar que ningún bot posterior sobreescriba o limpie este campo.
-
-#### Paso 3.3: Webhooks por Etapa del Embudo (Pipeline)
-Configurar los Webhooks en cada columna del CRM:
-- **Etapa 1 (Lead Calificado):**
-  `https://tu-servidor.com/postback?clickid={{lead.clickId}}&type=Lead`
-- **Etapa 2 (Propuesta / CBU / Pago Iniciado):**
-  `https://tu-servidor.com/postback?clickid={{lead.clickId}}&type=InitiateCheckout`
-- **Etapa 3 (Venta Ganada / Depósito Confirmado):**
-  `https://tu-servidor.com/postback?clickid={{lead.clickId}}&sum={{lead.price}}&type=Purchase`
+1. Ve a **Configuración** ➔ **Notificaciones** ➔ Baja hasta **Webhooks**.
+2. Clic en **Crear webhook**:
+   - **Evento:** `Creación de pedido (Order creation)` o `Pedido pagado (Order payment)`.
+   - **Formato:** `JSON`.
+   - **URL:** `https://data.tutienda.com/webhook/shopify-order`.
+   - **Versión de la API:** La más reciente (ej: `2024-07` o superior).
+3. Haz clic en **Guardar**.
 
 ---
 
-## 🛡️ 4. Formato de Envío a Meta Conversions API (CAPI)
+### Paso 1.3: Configuración del Contenedor Server en GTM (Para Shopify)
 
-Cuando el servidor recibe el Webhook o Postback, ejecuta la llamada oficial a Meta Graph API:
+1. En tu contenedor **GTM Server**:
+2. En **Plantillas (Templates)** ➔ Busca e instala la plantilla oficial:
+   - **Meta Conversions API (by Meta)** o **Facebook Incubator CAPI**.
+3. En **Etiquetas (Tags)** ➔ **Nueva etiqueta**:
+   - **Tipo de etiqueta:** *Meta Conversions API*.
+   - **Pixel ID:** Pega el ID del Píxel de Meta del cliente.
+   - **API Access Token:** Pega el token generado en Meta Events Manager.
+   - **Event Name Setup:** `Inherit from client` (heredar nombre del evento).
+   - **Server Event Data Override:** Activar *Generate event_id if missing* para deduplicación.
+4. En **Activadores (Triggers)**:
+   - **Tipo:** Personalizado.
+   - **Condición:** Se activa en todas las solicitudes (`Client Name equals Data Client` o `Path equals /shopify-event`).
+5. Publica el contenedor de GTM Server.
 
-**Endpoint:**
-`POST https://graph.facebook.com/v20.0/{PIXEL_ID}/events?access_token={API_ACCESS_TOKEN}`
+---
 
-**Payload JSON Estándar (Máxima Calidad de Coincidencia):**
-```json
-{
-  "data": [
-    {
-      "event_name": "Purchase",
-      "event_time": 1724075400,
-      "event_id": "cid_1724075400_abc123",
-      "action_source": "website",
-      "user_data": {
-        "client_ip_address": "191.127.216.249",
-        "client_user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)...",
-        "fbc": "fb.1.1724075400.IwAR2...",
-        "fbp": "fb.1.1724075400.123456789",
-        "em": ["4f729227c8a32a68cfb93db0a46cb32087eb41935c13fe68c92a95c960309e3a"],
-        "ph": ["99b114d48f76e3381a1795c65cd094a974ea9ba7a1758c0dfae62e92c21966a2"]
-      },
-      "custom_data": {
-        "currency": "USD",
-        "value": 45.00
-      }
-    }
-  ]
+## 🛒 MÓDULO 2: Implementación Paso a Paso en WOOCOMMERCE
+
+### Paso 2.1: Instalación del Plugin de Captura de 1ª Parte
+En WordPress / WooCommerce, la vía más robusta y sin plugins pesados es usar el snippet en `functions.php` (o mediante el plugin *Code Snippets*):
+
+```php
+<?php
+// Capturar y persistir fbclid y generar ClickID en WooCommerce
+add_action('wp_head', 'omnitrack_capture_script');
+function omnitrack_capture_script() {
+    ?>
+    <script>
+    (function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const fbclid = urlParams.get('fbclid');
+        if (fbclid) {
+            document.cookie = "_omni_fbclid=" + fbclid + "; path=/; max-age=15552000; SameSite=Lax";
+        }
+        let clickId = localStorage.getItem('_omni_cid');
+        if (!clickId || fbclid) {
+            clickId = 'wc_' + Date.now() + '_' + Math.random().toString(36).substr(2, 8);
+            localStorage.setItem('_omni_cid', clickId);
+            document.cookie = "_omni_cid=" + clickId + "; path=/; max-age=15552000; SameSite=Lax";
+        }
+    })();
+    </script>
+    <?php
+}
+
+// Enviar Webhook automático al completar la orden en WooCommerce
+add_action('woocommerce_payment_complete', 'omnitrack_send_purchase_capi');
+add_action('woocommerce_order_status_completed', 'omnitrack_send_purchase_capi');
+
+function omnitrack_send_purchase_capi($order_id) {
+    if (!$order_id) return;
+    $order = wc_get_order($order_id);
+    
+    // Evitar envíos duplicados
+    if (get_post_meta($order_id, '_omnitrack_sent', true)) return;
+
+    $click_id = isset($_COOKIE['_omni_cid']) ? sanitize_text_field($_COOKIE['_omni_cid']) : ('wc_ord_' . $order_id);
+    $fbclid = isset($_COOKIE['_omni_fbclid']) ? sanitize_text_field($_COOKIE['_omni_fbclid']) : '';
+
+    $body = array(
+        'event_name' => 'Purchase',
+        'event_id'   => 'wc_order_' . $order_id,
+        'event_time' => time(),
+        'user_data'  => array(
+            'email'      => hash('sha256', strtolower(trim($order->get_billing_email()))),
+            'phone'      => hash('sha256', preg_replace('/[^0-9]/', '', $order->get_billing_phone())),
+            'first_name' => hash('sha256', strtolower(trim($order->get_billing_first_name()))),
+            'last_name'  => hash('sha256', strtolower(trim($order->get_billing_last_name()))),
+            'city'       => hash('sha256', strtolower(trim($order->get_billing_city()))),
+            'client_ip'  => $order->get_customer_ip_address(),
+            'user_agent' => $order->get_customer_user_agent(),
+            'fbc'        => $fbclid ? ('fb.1.' . time() . '.' . $fbclid) : ''
+        ),
+        'custom_data' => array(
+            'currency' => $order->get_currency(),
+            'value'    => (float) $order->get_total(),
+            'order_id' => $order_id
+        )
+    );
+
+    wp_remote_post('https://data.tutienda.com/webhook/woocommerce', array(
+        'method'  => 'POST',
+        'headers' => array('Content-Type' => 'application/json'),
+        'body'    => json_encode($body),
+        'timeout' => 10
+    ));
+
+    update_post_meta($order_id, '_omnitrack_sent', true);
 }
 ```
 
 ---
 
-## 🧪 5. Protocolo de Verificación y Diagnóstico
+## 📝 MÓDULO 3: Implementación en LEAD GEN (Formularios y Landings)
 
-1. **En Meta Events Manager (Administrador de Eventos):**
-   - Ve a **Historial del Píxel** ➔ Pestaña **Probar Eventos (Test Events)**.
-   - Pega tu código `TESTXXXXX` en el payload del servidor para ver los eventos llegar en vivo en la consola de Meta.
-2. **Puntuación de Calidad (Event Match Quality - EMQ):**
-   - Meta evaluará la calidad de tus eventos del 1 al 10.
-   - Con `fbc`, `fbp`, IP y User-Agent tu puntuación estará en **7.0 - 8.5/10**.
-   - Si agregas Email y Teléfono hasheados (SHA-256), la puntuación alcanzará **8.5 - 9.5/10**.
-3. **Deduplicación:**
-   - Verifica que Meta indique: *"Evento recibido del navegador y del servidor - Deduplicado correctamente"*.
+Para capturar leads en Elementor, Typeform, Webflow o HubSpot sin perder el anuncio de origen:
+
+### Paso 3.1: Configurar los Campos Ocultos en el Formulario
+En el constructor de formularios, agrega 4 campos ocultos:
+- `tracking_click_id`
+- `fbclid`
+- `utm_source`
+- `utm_campaign`
+
+### Paso 3.2: Inyector Universal en la Landing Page
+Pega este script en el `<head>` o antes de `</body>`:
+```html
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const fbclid = urlParams.get('fbclid') || localStorage.getItem('_trk_fbclid') || '';
+  const utmSource = urlParams.get('utm_source') || '';
+  const utmCampaign = urlParams.get('utm_campaign') || '';
+
+  // Generar o recuperar ID
+  let clickId = localStorage.getItem('_trk_cid');
+  if (!clickId || urlParams.get('fbclid')) {
+    clickId = 'lead_' + Date.now() + '_' + Math.random().toString(36).substr(2, 8);
+    localStorage.setItem('_trk_cid', clickId);
+  }
+  if (fbclid) localStorage.setItem('_trk_fbclid', fbclid);
+
+  // Rellenar campos en cualquier formulario de la página
+  function fillFields() {
+    const inputs = {
+      'tracking_click_id': clickId,
+      'click_id': clickId,
+      'fbclid': fbclid,
+      'utm_source': utmSource,
+      'utm_campaign': utmCampaign
+    };
+
+    for (const [name, val] of Object.entries(inputs)) {
+      document.querySelectorAll(`input[name="${name}"], input[name*="${name}"]`).forEach(input => {
+        input.value = val;
+      });
+    }
+  }
+
+  fillFields();
+  setTimeout(fillFields, 1000); // Reintento para formularios dinámicos (Typeform/HubSpot)
+
+  // Escuchar el submit para disparar el evento en el navegador
+  document.querySelectorAll('form').forEach(form => {
+    form.addEventListener('submit', function() {
+      if (typeof fbq === 'function') {
+        fbq('track', 'Lead', {
+          content_name: document.title
+        }, { eventID: clickId });
+      }
+    });
+  });
+});
+</script>
+```
 
 ---
 
-## 💼 6. Cómo Vender este Servicio como Agencia / Media Buyer
+## 💬 MÓDULO 4: Implementación en WHATSAPP & CRM
 
-### Paquetes Sugeridos:
+### Paso 4.1: Script del Botón de WhatsApp
+En la landing page, el botón de WhatsApp no va directo a `wa.me`, sino que llama a esta función:
+```html
+<a href="#" class="cta-whatsapp-btn" onclick="goToWhatsApp(event)">Pedir Información por WhatsApp</a>
 
-| Nivel de Servicio | Alcance | Precio Recomendado |
+<script>
+function goToWhatsApp(e) {
+  e.preventDefault();
+  let clickId = localStorage.getItem('_trk_cid');
+  if (!clickId) {
+    clickId = 'wa_' + Date.now() + '_' + Math.random().toString(36).substr(2, 8);
+    localStorage.setItem('_trk_cid', clickId);
+  }
+
+  // 1. Disparar evento de navegador con eventID para deduplicación
+  if (typeof fbq === 'function') {
+    fbq('track', 'Contact', {}, { eventID: clickId });
+    fbq('track', 'Lead', {}, { eventID: clickId });
+  }
+
+  // 2. Redirigir con el ClickID inyectado al final
+  const telefono = "595991596221"; // Número del asesor
+  const texto = encodeURIComponent("Hola, quiero información sobre el servicio " + clickId);
+  window.location.href = `https://wa.me/${telefono}?text=${texto}`;
+}
+</script>
+```
+
+### Paso 4.2: Webhooks en el CRM (Kommo / HubSpot / ActiveCampaign)
+Configura en el embudo los Webhooks en cada etapa hacia tu servidor o RedTrack:
+
+| Columna del CRM | Parámetro `type=` | URL del Webhook |
 | :--- | :--- | :--- |
-| **Setup CAPI Básico (Lead Gen)** | 1 Dominio + Formularios Web + Meta CAPI | $350 - $600 USD (Único) |
-| **Setup CAPI E-commerce Pro** | Shopify / WooCommerce + Recuperación de Carrito + CAPI | $600 - $1,200 USD (Único) |
-| **Setup Omnicanal CRM + WhatsApp** | CRM (Kommo/HubSpot) + WhatsApp + Split Testing + CAPI | $800 - $1,800 USD (Único) |
-| **Retainer de Atribución & Data** | Auditoría continua, ROAS real, calibración EMQ | $150 - $350 USD / mes |
+| **Lead Recibido** | `Lead` | `https://data.tutienda.com/postback?clickid={{lead.custom_fields.clickId}}&type=Lead` |
+| **CBU / Presupuesto Enviado** | `InitiateCheckout` | `https://data.tutienda.com/postback?clickid={{lead.custom_fields.clickId}}&type=InitiateCheckout` |
+| **Venta Ganada / Depósito** | `Purchase` | `https://data.tutienda.com/postback?clickid={{lead.custom_fields.clickId}}&sum={{lead.price}}&type=Purchase` |
+
+---
+
+## 🧪 MÓDULO 5: Protocolo de Validación y Testing
+
+Ejecuta este protocolo antes de encender campañas publicitarias:
+
+```
+[1. Abrir con UTMs & fbclid] ➔ [2. Verificar Cookies y LocalStorage] ➔ [3. Ejecutar Conversión] ➔ [4. Meta Events Manager Test Tool] ➔ [5. Validar Deduplicación]
+```
+
+### Paso 5.1: Prueba con el "Test Code" de Meta
+1. Ve a **Meta Events Manager** ➔ Selecciona el Píxel ➔ Pestaña **Probar eventos (Test Events)**.
+2. Copia el código de prueba (ej: `TEST12345`).
+3. En tu llamada de servidor o sGTM, añade el parámetro `"test_event_code": "TEST12345"`.
+4. Ejecuta una compra o completa un lead de prueba.
+
+### Paso 5.2: Qué debes ver en la pantalla de Meta:
+- **Evento Navegador:** Aparece con el ícono del globo terráqueo 🌐.
+- **Evento Servidor:** Aparece con el ícono del servidor 🖥️.
+- **Estado de Deduplicación:** *"Deduplicado (Recibido vía Navegador y Servidor con mismo ID)"*.
+- **Puntuación de Coincidencia (EMQ):** Debe figurar en **Verde (8.0 a 9.5 / 10)**.
+
+---
+
+## 💰 Resumen de Tiempos y Cobro del Servicio
+
+| Tipo de Proyecto | Tiempo de Implementación | Precio de Venta Recomendado |
+| :--- | :--- | :--- |
+| **Shopify / E-commerce CAPI** | 2 a 3 horas | **$500 - $900 USD** |
+| **Lead Gen (Forms + CRM)** | 2 a 4 horas | **$600 - $1,200 USD** |
+| **WhatsApp + CRM + Split Testing** | 3 a 5 horas | **$800 - $1,800 USD** |
+| **Mantenimiento Mensual (Retainer)** | 1 hora/mes de auditoría | **$150 - $350 USD / mes** |
