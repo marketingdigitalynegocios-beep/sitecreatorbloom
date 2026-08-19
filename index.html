@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Plataforma Verificada | TroyaLuck</title>
+  <link rel="icon" type="image/png" href="https://imgfz.com/i/gG8bTM6.jpeg" />
+
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '3319413524888816');
+  fbq('track', 'PageView');
+  </script>
+  <noscript>
+    <img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=3319413524888816&ev=PageView&noscript=1" />
+  </noscript>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background-color: #ffffff;
+      color: #111b21;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      padding: 18px 20px;
+      text-align: center;
+      border-bottom: 1px solid #e0e0e0;
+      background-color: #ffffff;
+    }
+
+    header img {
+      height: 38px;
+      width: auto;
+    }
+
+    main {
+      max-width: 480px;
+      width: 100%;
+      margin: 30px auto;
+      padding: 20px;
+      text-align: center;
+      flex: 1;
+    }
+
+    .logo-circle {
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 18px;
+      border-radius: 50%;
+      overflow: hidden;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+      border: 3px solid #25d366;
+    }
+
+    .logo-circle img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    h1 {
+      font-size: 24px;
+      margin-bottom: 8px;
+      color: #111b21;
+    }
+
+    h2 {
+      color: #25d366;
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 18px;
+    }
+
+    .cta-box {
+      background-color: #eef6f3;
+      padding: 14px 18px;
+      border-radius: 12px;
+      margin-bottom: 18px;
+      font-size: 15px;
+      font-weight: 600;
+      color: #0f5132;
+      border: 1px solid #c3e6cb;
+    }
+
+    .cta-button {
+      background-color: #25d366;
+      color: #ffffff;
+      padding: 16px 32px;
+      font-size: 17px;
+      font-weight: bold;
+      border: none;
+      border-radius: 30px;
+      text-decoration: none;
+      display: inline-block;
+      width: 100%;
+      max-width: 320px;
+      margin: 10px auto;
+      box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+      animation: pulse 1.6s infinite ease-in-out;
+      cursor: pointer;
+      transition: transform 0.2s, background-color 0.2s;
+    }
+
+    .cta-button:hover, .cta-button:active {
+      background-color: #20ba59;
+      transform: scale(1.02);
+      color: #ffffff;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.04); }
+      100% { transform: scale(1); }
+    }
+
+    .happy-customers {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-image: linear-gradient(45deg, #1cbcc3, #4abf8f 80%);
+      border-radius: 50px;
+      padding: 8px 16px;
+      margin-top: 22px;
+      font-size: 12px;
+      color: white;
+      font-weight: bold;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .avatars {
+      display: flex;
+      margin-right: 10px;
+    }
+
+    .avatar {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 1.5px solid white;
+      margin-left: -6px;
+      object-fit: cover;
+    }
+
+    .avatar:first-child {
+      margin-left: 0;
+    }
+
+    .trustpilot-container {
+      display: flex;
+      align-items: center;
+      background-color: #e9fff9;
+      border: 1px dashed #898686;
+      border-radius: 10px;
+      padding: 8px 14px;
+      margin-top: 20px;
+      gap: 8px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .trustpilot-image { width: 65px; height: auto; }
+    .trustpilot-logo { width: 75px; height: auto; }
+    .trustpilot-text {
+      font-size: 13px;
+      font-weight: 700;
+      color: #000000;
+    }
+    .trustpilot-rating {
+      font-size: 11px;
+      font-weight: 500;
+      color: #333333;
+    }
+
+    /* 🔥 Barra Fija con Bono Activo */
+    .bono-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: linear-gradient(90deg, #16a34a, #25d366);
+      color: #ffffff;
+      text-align: center;
+      padding: 12px 10px;
+      font-weight: bold;
+      font-size: 14px;
+      text-decoration: none;
+      display: block;
+      z-index: 999;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.15);
+      animation: flash 2.5s infinite;
+      cursor: pointer;
+    }
+
+    @keyframes flash {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.85; }
+    }
+
+    footer {
+      text-align: center;
+      font-size: 12px;
+      color: #888;
+      margin-top: 30px;
+      padding-bottom: 75px;
+    }
+
+    /* 🔔 Notificaciones Flotantes */
+    .xpo-notification-wrap {
+      position: fixed;
+      background: rgba(30, 30, 30, 0.95);
+      color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.35);
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      width: 290px;
+      z-index: 9999;
+      border: 1px solid #444;
+      backdrop-filter: blur(8px);
+      opacity: 0;
+      left: -320px;
+      bottom: 75px;
+      transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .xpo-notification-wrap.show {
+      left: 15px;
+      opacity: 1;
+    }
+
+    .xpo-img-wrap img {
+      width: 44px;
+      height: 44px;
+      border-radius: 8px;
+      object-fit: cover;
+      border: 1px solid #555;
+      display: block;
+    }
+
+    .xpo-col {
+      margin-left: 12px;
+      text-align: left;
+    }
+
+    .xpo-notification-name {
+      font-weight: bold;
+      font-size: 13px;
+      color: #ffffff;
+    }
+
+    .xpo-notification-product {
+      font-size: 12px;
+      color: #22d3ee;
+      font-weight: 600;
+      margin: 1px 0;
+    }
+
+    .xpo-location {
+      font-size: 11px;
+      color: #cbd5e1;
+    }
+
+    @media (max-width: 480px) {
+      main { margin: 15px auto; padding: 15px; }
+      h1 { font-size: 21px; }
+      h2 { font-size: 16px; }
+      .cta-button { font-size: 16px; padding: 14px 24px; }
+      .xpo-notification-wrap { width: 260px; bottom: 70px; }
+    }
+  </style>
+
+  <!-- Script de Tracking Adveri -->
+  <script>
+    (function(w,d,s,u,t){
+        w.AdveriConfig = {
+            tracking_key: 'ADVERI_51_META_1762890830163_jenvcm',
+            whatsapp_number: '541140377780',
+            whatsapp_message: '¡Hola! Quiero mi Usuari0! \n\nMi código de promoción es {codigo_tci}\n\n'
+        };
+        t = d.createElement(s);
+        t.async = true;
+        t.src = u;
+        d.head.appendChild(t);
+    })(window, document, 'script', 'https://adveri-tracker-script.pages.dev/tracker.min.js');
+  </script>
+</head>
+<body>
+
+  <header>
+    <img src="https://static.whatsapp.net/rsrc.php/yZ/r/JvsnINJ2CZv.svg" alt="WhatsApp" />
+  </header>
+
+  <main>
+    <div class="logo-circle">
+      <img src="https://i.imgur.com/GCxNjBq.jpeg" alt="TroyaLuck" />
+    </div>
+
+    <h1>✅ Plataforma Verificada ✅</h1>
+    <h2>Casino de Confianza</h2>
+
+    <div class="cta-box">
+      💸 B0NUS EXTRA ACTIVO — PEDILO EN WHATSAPP 🎰
+    </div>
+
+    <a href="https://wa.me/541140377780?text=%C2%A1Hola!%20Quiero%20mi%20Usuari0!" 
+       id="whatsapp-btn"  
+       class="cta-button"
+       onclick="if(typeof fbq === 'function') { fbq('track', 'Contact'); fbq('track', 'Lead'); }">
+       Ir a WhatsApp Ahora
+    </a>
+
+    <div id="happy-customers-container"></div>
+
+    <div class="trustpilot-container">
+      <div class="trustpilot-text">"Excelente"</div>
+      <img class="trustpilot-image" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqwTrpqlDxrYZ0pXL4aXXL4azowSSvjMZM2g&s" alt="Estrellas 5 de 5">
+      <div class="trustpilot-rating">Calificación 4.9/5 en</div>
+      <img class="trustpilot-logo" src="https://cdn.shopify.com/s/files/1/0798/4267/2987/files/trustpilot-logo-sml_bf402230-0d05-4609-a750-c310e4720da2.png?v=1733179329" alt="Trustpilot">
+    </div>
+  </main>
+
+  <footer>
+    © 2025 TANGOWI. Todos los derechos reservados.
+  </footer>
+
+  <!-- ✅ Barra fija clicable hacia WhatsApp -->
+  <a href="https://wa.me/541140377780?text=%C2%A1Hola!%20Quiero%20mi%20Usuari0!" 
+     class="bono-bar"
+     onclick="if(typeof fbq === 'function') { fbq('track', 'Contact'); fbq('track', 'Lead'); }">
+    🎁 BONUS EXTRA ACTIVO - ¡Solicitalo ahora por WhatsApp!
+  </a>
+
+  <!-- Clientes Felices Dinámico -->
+  <script>
+    const happyCustomersConfig = {
+      text: "+8.372 CLIENTES GANANDO todos los días",
+      avatars: [
+        { url: "https://img.freepik.com/free-photo/stylish-african-american-woman-smiling_23-2148770405.jpg", alt: "Cliente 1" },
+        { url: "https://thumbs.dreamstime.com/b/beautiful-african-american-woman-relaxing-outside-happy-middle-aged-smiling-46298787.jpg", alt: "Cliente 2" },
+        { url: "https://media.istockphoto.com/id/1320651997/photo/young-woman-close-up-isolated-studio-portrait.jpg?s=612x612", alt: "Cliente 3" }
+      ]
+    };
+
+    function generateHappyCustomers() {
+      const avatarsHtml = happyCustomersConfig.avatars
+        .map(a => `<img decoding="async" src="${a.url}" alt="${a.alt}" class="avatar">`)
+        .join('');
+      return `<div class="happy-customers"><div class="avatars">${avatarsHtml}</div><span class="text">${happyCustomersConfig.text}</span></div>`;
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const container = document.getElementById('happy-customers-container');
+      if (container) container.innerHTML = generateHappyCustomers();
+    });
+  </script>
+
+  <!-- Notificaciones "Premios Pagados" -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const config = {
+        intervalo: 5,     // Cada 5 segundos aparece una notificación
+        duracion: 3.5,    // Permanece visible 3.5 segundos
+        productName: "🎁 Premio PAGADO$",
+        productImage: "https://imgfz.com/i/gG8bTM6.jpeg"
+      };
+
+      const nombres = ["Juan Gómez", "María López", "Carlos Pérez", "Laura Castro", "Exe Bosch", "Matías Silva", "Sofía Fernández"];
+      const ciudades = ["Jujuy", "Córdoba", "Tucumán", "Rosario", "Buenos Aires", "Mendoza", "Salta"];
+
+      function getRandom(arr) {
+        return arr[Math.floor(Math.random() * arr.length)];
+      }
+
+      function getTimeAgo() {
+        const h = Math.floor(Math.random() * 2);
+        const m = Math.max(1, Math.floor(Math.random() * 55));
+        return h === 0 ? `hace ${m} minutos` : `hace ${h} hora`;
+      }
+
+      function showNotification() {
+        const existing = document.querySelector(".xpo-notification-wrap");
+        if (existing) existing.remove();
+
+        const nombre = getRandom(nombres);
+        const ciudad = getRandom(ciudades);
+        const tiempo = getTimeAgo();
+
+        const noti = document.createElement("div");
+        noti.className = "xpo-notification-wrap";
+        noti.innerHTML = `
+          <div class="xpo-img-wrap">
+            <img src="${config.productImage}" alt="Premio" onerror="this.src='https://i.imgur.com/GCxNjBq.jpeg'">
+          </div>
+          <div class="xpo-col">
+            <div class="xpo-notification-name">${nombre}</div>
+            <div class="xpo-notification-product">${config.productName}</div>
+            <div class="xpo-location">📍 Desde ${ciudad} • ${tiempo}</div>
+          </div>
+        `;
+        document.body.appendChild(noti);
+        
+        requestAnimationFrame(() => {
+          setTimeout(() => noti.classList.add("show"), 50);
+        });
+
+        setTimeout(() => {
+          noti.classList.remove("show");
+          setTimeout(() => noti.remove(), 600);
+        }, config.duracion * 1000);
+      }
+
+      setTimeout(showNotification, 1500);
+      setInterval(showNotification, config.intervalo * 1000);
+    });
+  </script>
+
+</body>
+</html>
