@@ -1,7 +1,15 @@
-// Vercel Serverless Function: Limpiador de ClickID para Kommo CRM -> RedTrack + Logger
-const logs = []; // Memoria temporal para registrar peticiones recibidas
+// Vercel Serverless Function: Limpiador + Registro de Eventos Kommo -> RedTrack
+let recentLogs = []; // Almacenamiento en memoria para inspección rápida
 
 export default async function handler(req, res) {
+  // Si la petición es GET a /api/logs o /api/postback?action=logs, retornar los registros guardados
+  if (req.query.action === 'logs' || req.method === 'GET' && !req.query.clickid) {
+    return res.status(200).json({
+      total_logs: recentLogs.length,
+      logs: recentLogs
+    });
+  }
+
   try {
     const rawClickId = req.query.clickid || req.body?.clickid || req.body?.['lead[custom_fields][clickId]'] || '';
     const type = req.query.type || req.body?.type || 'Lead';
@@ -14,39 +22,42 @@ export default async function handler(req, res) {
 
     const timestamp = new Date().toISOString();
 
-    console.log(`[POSTBACK] ${timestamp} | Type: ${type} | Raw: "${rawClickId}" | Clean: "${cleanClickId}" | Sum: "${sum}"`);
-
-    if (!cleanClickId || cleanClickId.length < 15) {
-      const errorLog = {
-        timestamp,
-        status: 'FAILED_INVALID_CLICKID',
-        raw_clickid: rawClickId,
-        type,
-        sum
-      };
-      return res.status(400).json(errorLog);
-    }
-
     // Construir la URL limpia hacia RedTrack
     let redtrackUrl = `https://trk.accbloom.online/postback?clickid=${cleanClickId}&type=${type}`;
     if (sum) redtrackUrl += `&sum=${encodeURIComponent(sum)}`;
     if (currency) redtrackUrl += `&currency=${encodeURIComponent(currency)}`;
 
-    // Despachar a RedTrack
-    const response = await fetch(redtrackUrl);
-    const redtrackData = await response.json();
+    let redtrackData = null;
+    let status = 'SUCCESS';
 
-    const successLog = {
+    if (cleanClickId && cleanClickId.length >= 15) {
+      try {
+        const response = await fetch(redtrackUrl);
+        redtrackData = await response.json();
+      } catch (err) {
+        status = 'REDTRACK_FETCH_ERROR';
+        redtrackData = { error: err.message };
+      }
+    } else {
+      status = 'INVALID_CLICKID';
+    }
+
+    const logEntry = {
+      id: recentLogs.length + 1,
       timestamp,
-      status: 'SUCCESS',
-      clean_clickid: cleanClickId,
+      status,
+      raw_clickid_from_kommo: rawClickId,
+      clean_clickid_extracted: cleanClickId,
       type,
       sum,
-      redtrack_url: redtrackUrl,
       redtrack_response: redtrackData
     };
 
-    return res.status(200).json(successLog);
+    // Guardar los últimos 30 registros
+    recentLogs.unshift(logEntry);
+    if (recentLogs.length > 30) recentLogs.pop();
+
+    return res.status(200).json(logEntry);
   } catch (error) {
     return res.status(500).json({
       timestamp: new Date().toISOString(),
