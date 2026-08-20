@@ -1,63 +1,67 @@
-// Vercel Serverless Function: Limpiador + Registro de Eventos Kommo -> RedTrack
-let recentLogs = []; // Almacenamiento en memoria para inspección rápida
-
+// Vercel Serverless Function: Parser Automático de Webhooks Nativos de Kommo CRM -> RedTrack
 export default async function handler(req, res) {
-  // Si la petición es GET a /api/logs o /api/postback?action=logs, retornar los registros guardados
-  if (req.query.action === 'logs' || req.method === 'GET' && !req.query.clickid) {
-    return res.status(200).json({
-      total_logs: recentLogs.length,
-      logs: recentLogs
-    });
+  // Inspección de logs si se solicita ?action=logs
+  if (req.query.action === 'logs' || (req.method === 'GET' && !req.query.clickid && !req.query.type)) {
+    return res.status(200).json({ message: 'Logger en activo' });
   }
 
   try {
-    const rawClickId = req.query.clickid || req.body?.clickid || req.body?.['lead[custom_fields][clickId]'] || '';
-    const type = req.query.type || req.body?.type || 'Lead';
-    const sum = req.query.sum || req.body?.sum || req.body?.['lead[price]'] || '';
-    const currency = req.query.currency || req.body?.currency || 'USD';
-
-    // Extraer exactamente los 24 caracteres hexadecimales del Click ID
-    const match = String(rawClickId).match(/[a-f0-9]{24}/i);
-    const cleanClickId = match ? match[0] : String(rawClickId).trim();
-
     const timestamp = new Date().toISOString();
+    const type = req.query.type || req.body?.type || 'Lead';
+    const rawBodyString = typeof req.body === 'string' ? req.body : JSON.stringify(req.body || {});
+    const queryClickId = req.query.clickid || '';
+
+    // 1. Buscar en la URL primero
+    let rawClickId = queryClickId;
+
+    // 2. Si no viene en la URL o viene como etiqueta {{...}}, buscar en todo el payload POST de Kommo
+    if (!rawClickId || rawClickId.includes('{{')) {
+      rawClickId = rawBodyString;
+    }
+
+    // Extraer cualquier secuencia de 24 caracteres hexadecimales (Click ID de RedTrack)
+    const match = String(rawClickId).match(/[a-f0-9]{24}/i);
+    const cleanClickId = match ? match[0] : '';
+
+    // Intentar extraer el precio/monto si es una compra
+    let sum = req.query.sum || '';
+    if (!sum && req.body) {
+      // Buscar campo 'price' de Kommo
+      const priceMatch = rawBodyString.match(/"price":\s*"?(\d+(\.\d+)?)"?/i);
+      if (priceMatch) sum = priceMatch[1];
+    }
+
+    console.log(`[KOMMO WEBHOOK] ${timestamp} | Type: ${type} | Clean ClickID: "${cleanClickId}" | Sum: "${sum}"`);
+
+    if (!cleanClickId) {
+      return res.status(200).json({
+        timestamp,
+        status: 'SKIPPED_NO_CLICKID_FOUND',
+        message: 'Kommo webhook received but no 24-char clickid was found in payload',
+        received_query: req.query
+      });
+    }
 
     // Construir la URL limpia hacia RedTrack
     let redtrackUrl = `https://trk.accbloom.online/postback?clickid=${cleanClickId}&type=${type}`;
     if (sum) redtrackUrl += `&sum=${encodeURIComponent(sum)}`;
-    if (currency) redtrackUrl += `&currency=${encodeURIComponent(currency)}`;
+    redtrackUrl += `&currency=USD`;
 
-    let redtrackData = null;
-    let status = 'SUCCESS';
+    // Despachar a RedTrack
+    const response = await fetch(redtrackUrl);
+    const redtrackData = await response.json();
 
-    if (cleanClickId && cleanClickId.length >= 15) {
-      try {
-        const response = await fetch(redtrackUrl);
-        redtrackData = await response.json();
-      } catch (err) {
-        status = 'REDTRACK_FETCH_ERROR';
-        redtrackData = { error: err.message };
-      }
-    } else {
-      status = 'INVALID_CLICKID';
-    }
-
-    const logEntry = {
-      id: recentLogs.length + 1,
+    const result = {
       timestamp,
-      status,
-      raw_clickid_from_kommo: rawClickId,
-      clean_clickid_extracted: cleanClickId,
+      status: 'SUCCESS',
+      clean_clickid: cleanClickId,
       type,
       sum,
+      redtrack_url: redtrackUrl,
       redtrack_response: redtrackData
     };
 
-    // Guardar los últimos 30 registros
-    recentLogs.unshift(logEntry);
-    if (recentLogs.length > 30) recentLogs.pop();
-
-    return res.status(200).json(logEntry);
+    return res.status(200).json(result);
   } catch (error) {
     return res.status(500).json({
       timestamp: new Date().toISOString(),
