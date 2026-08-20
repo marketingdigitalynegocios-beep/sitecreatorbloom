@@ -11,24 +11,23 @@ export default async function handler(req, res) {
     const rawBodyString = typeof req.body === 'string' ? req.body : JSON.stringify(req.body || {});
     const queryClickId = req.query.clickid || '';
 
-    // 1. Buscar en la URL primero
+    // 1. Extraer Click ID (24 caracteres hexadecimales) de la URL o del cuerpo de Kommo
     let rawClickId = queryClickId;
-
-    // 2. Si no viene en la URL o viene como etiqueta {{...}}, buscar en todo el payload POST de Kommo
     if (!rawClickId || rawClickId.includes('{{')) {
       rawClickId = rawBodyString;
     }
 
-    // Extraer cualquier secuencia de 24 caracteres hexadecimales (Click ID de RedTrack)
     const match = String(rawClickId).match(/[a-f0-9]{24}/i);
     const cleanClickId = match ? match[0] : '';
 
-    // Intentar extraer el precio/monto si es una compra
+    // 2. Extraer el Precio / Presupuesto (en formato JSON o Form-encoded de Kommo)
     let sum = req.query.sum || '';
-    if (!sum && req.body) {
-      // Buscar campo 'price' de Kommo
-      const priceMatch = rawBodyString.match(/"price":\s*"?(\d+(\.\d+)?)"?/i);
-      if (priceMatch) sum = priceMatch[1];
+    if (!sum || sum.includes('{{')) {
+      // Expresión regular robusta para capturar price o sum en JSON o form-url-encoded de Kommo
+      const priceMatch = rawBodyString.match(/(?:price|sum)["\]=:\s]+(\d+(\.\d+)?)/i);
+      if (priceMatch && priceMatch[1]) {
+        sum = priceMatch[1];
+      }
     }
 
     console.log(`[KOMMO WEBHOOK] ${timestamp} | Type: ${type} | Clean ClickID: "${cleanClickId}" | Sum: "${sum}"`);
@@ -44,7 +43,9 @@ export default async function handler(req, res) {
 
     // Construir la URL limpia hacia RedTrack
     let redtrackUrl = `https://trk.accbloom.online/postback?clickid=${cleanClickId}&type=${type}`;
-    if (sum) redtrackUrl += `&sum=${encodeURIComponent(sum)}`;
+    if (sum && parseFloat(sum) > 0) {
+      redtrackUrl += `&sum=${encodeURIComponent(sum)}`;
+    }
     redtrackUrl += `&currency=USD`;
 
     // Despachar a RedTrack
@@ -56,7 +57,7 @@ export default async function handler(req, res) {
       status: 'SUCCESS',
       clean_clickid: cleanClickId,
       type,
-      sum,
+      sum: sum || '0',
       redtrack_url: redtrackUrl,
       redtrack_response: redtrackData
     };
