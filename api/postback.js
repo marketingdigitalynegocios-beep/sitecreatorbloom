@@ -1,13 +1,6 @@
-// Vercel Serverless Function: Parser Universales Kommo CRM -> RedTrack (Con Debug Log Completo)
+// Vercel Serverless Function: Parser Universales Kommo CRM -> RedTrack (Ultra Robusto)
 export default async function handler(req, res) {
   const timestamp = new Date().toISOString();
-  
-  // Loguear todos los detalles de la petición en la consola de Vercel
-  console.log(`=== INCOMING REQUEST [${timestamp}] ===`);
-  console.log(`Method: ${req.method}`);
-  console.log(`Headers:`, JSON.stringify(req.headers));
-  console.log(`Query:`, JSON.stringify(req.query));
-  console.log(`Body:`, typeof req.body === 'object' ? JSON.stringify(req.body) : String(req.body));
 
   if (req.query.action === 'logs' || (req.method === 'GET' && !req.query.clickid && !req.query.type)) {
     return res.status(200).json({ status: 'ACTIVE', message: 'Logger en activo' });
@@ -18,14 +11,21 @@ export default async function handler(req, res) {
     const rawBodyString = typeof req.body === 'object' ? JSON.stringify(req.body) : String(req.body || '');
     const queryClickId = req.query.clickid || '';
 
-    // 1. Extraer Click ID (24 caracteres hexadecimales) de la URL o del cuerpo de Kommo
-    let rawClickId = queryClickId;
-    if (!rawClickId || rawClickId.includes('{{')) {
-      rawClickId = rawBodyString;
+    // 1. Sanitizar el texto eliminando barras /, guiones, espacios y dos puntos que puedan romper la secuencia hex de 24 caracteres
+    let searchString = queryClickId;
+    if (!searchString || searchString.includes('{{')) {
+      searchString = rawBodyString;
     }
 
-    // Buscar cualquier secuencia de 24 caracteres hexadecimales
-    const match = String(rawClickId).match(/[a-f0-9]{24}/i);
+    // Buscar coincidencia directa de 24 caracteres hex
+    let match = String(searchString).match(/[a-f0-9]{24}/i);
+
+    // Si no encuentra por tener barras // o guiones interpuestos, limpiar simbolos y reintentar
+    if (!match) {
+      const sanitizedString = String(searchString).replace(/[\/\s:\-\\]/g, '');
+      match = sanitizedString.match(/[a-f0-9]{24}/i);
+    }
+
     const cleanClickId = match ? match[0] : '';
 
     // 2. Extraer el Precio / Presupuesto
@@ -37,13 +37,13 @@ export default async function handler(req, res) {
       }
     }
 
+    console.log(`[KOMMO WEBHOOK] ${timestamp} | Type: ${type} | Clean ClickID: "${cleanClickId}" | Sum: "${sum}"`);
+
     if (!cleanClickId) {
-      console.log(`[SKIPPED] No 24-char clickid found in request. RawBody length: ${rawBodyString.length}`);
       return res.status(200).json({
         timestamp,
         status: 'SKIPPED_NO_CLICKID_FOUND',
         message: 'No 24-char hex clickid found in request body',
-        received_headers: req.headers,
         received_query: req.query
       });
     }
@@ -55,13 +55,9 @@ export default async function handler(req, res) {
     }
     redtrackUrl += `&currency=USD`;
 
-    console.log(`[FORWARDING TO REDTRACK] ${redtrackUrl}`);
-
     // Despachar a RedTrack
     const response = await fetch(redtrackUrl);
     const redtrackData = await response.json();
-
-    console.log(`[REDTRACK RESPONSE]`, JSON.stringify(redtrackData));
 
     const result = {
       timestamp,
@@ -75,7 +71,6 @@ export default async function handler(req, res) {
 
     return res.status(200).json(result);
   } catch (error) {
-    console.error(`[ERROR]`, error.message);
     return res.status(500).json({
       timestamp: new Date().toISOString(),
       status: 'ERROR',
