@@ -56,7 +56,26 @@ flowchart TD
 - **Status:** 100% Validado (`Lead`, `InitiateCheckout`, `Purchase`).
 
 ### 👤 Cliente 2: Favio
-- **Landing:** `https://sitecreatorbloom.vercel.app/landing_fa_v2.html`
+- **Landings:**
+  - Versión 1: `https://sitecreatorbloom.vercel.app/landing_fa.html`
+  - Versión 2: `https://sitecreatorbloom.vercel.app/landing_fa_v2.html`
 - **RedTrack Campaign ID:** `6a850eede10af64050c0ae2d`
 - **Kommo Account:** `suportecassino365.kommo.com`
 - **Status:** 100% Validado (`Lead`, `InitiateCheckout`, `Purchase`).
+
+---
+
+## 🎯 4. Regla Estándar de Tracking: Meta Pixel Frontend vs. S2S CAPI Backend
+
+### 🚨 Regla Obligatoria para Evitar Disparidad de Conversiones
+1. **Frontend (Navegador / HTML):**
+   - En el evento `onclick` de los botones de WhatsApp (tanto principal como barra flotante), **ÚNICAMENTE** se debe disparar el evento `Contact`:
+     ```html
+     onclick="if(typeof fbq === 'function') { fbq('track', 'Contact'); }"
+     ```
+   - **NUNCA** incluir `fbq('track', 'Lead')` en el frontend, ya que esto cuenta cada clic en la web como un lead, generando falsos positivos cuando el usuario no envía el mensaje en WhatsApp.
+
+2. **Backend (Server-Side / S2S CAPI):**
+   - El evento `Lead` real es gestionado **exclusivamente por Server-Side CAPI** vía RedTrack cuando Kommo CRM recibe el primer mensaje de WhatsApp del cliente y envía el webhook a `api/postback.js`.
+   - De esta forma, el conteo en Meta Ads reflejará exactamente los leads reales registrados en el CRM.
+

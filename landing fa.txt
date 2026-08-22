@@ -326,7 +326,7 @@
     <a href="https://wa.me/541140377780?text=%C2%A1Hola!%20Quiero%20mi%20Usuari0!" 
        id="whatsapp-btn"  
        class="cta-button"
-       onclick="if(typeof fbq === 'function') { fbq('track', 'Contact'); fbq('track', 'Lead'); }">
+       onclick="if(typeof fbq === 'function') { fbq('track', 'Contact'); }">
        Ir a WhatsApp Ahora
     </a>
 
@@ -347,7 +347,7 @@
   <!-- ✅ Barra fija clicable hacia WhatsApp -->
   <a href="https://wa.me/541140377780?text=%C2%A1Hola!%20Quiero%20mi%20Usuari0!" 
      class="bono-bar"
-     onclick="if(typeof fbq === 'function') { fbq('track', 'Contact'); fbq('track', 'Lead'); }">
+     onclick="if(typeof fbq === 'function') { fbq('track', 'Contact'); }">
     🎁 BONUS EXTRA ACTIVO - ¡Solicitalo ahora por WhatsApp!
   </a>
 
