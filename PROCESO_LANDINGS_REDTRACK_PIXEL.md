@@ -79,3 +79,28 @@ flowchart TD
    - El evento `Lead` real es gestionado **exclusivamente por Server-Side CAPI** vía RedTrack cuando Kommo CRM recibe el primer mensaje de WhatsApp del cliente y envía el webhook a `api/postback.js`.
    - De esta forma, el conteo en Meta Ads reflejará exactamente los leads reales registrados en el CRM.
 
+---
+
+## 🔗 5. Configuración de Meta Conversions API (CAPI) en RedTrack
+
+Para que RedTrack reenvíe automáticamente las conversiones reales enviadas desde Kommo CRM hacia Meta Ads sin depender del navegador del usuario, se debe configurar la integración CAPI en RedTrack:
+
+### 🛠️ 1. Obtener Token de CAPI en Meta Business Manager:
+1. Ir a **Meta Events Manager (Administrador de Eventos)** ➔ Seleccionar el Pixel del cliente.
+2. Ir a la pestaña **Configuración (Settings)** y desplazarse hasta **API de Conversiones (Conversions API)**.
+3. En la sección *Configurar conexión directa*, hacer clic en **Generar Token de Acceso (Generate Access Token)**.
+4. Copiar y guardar el token alfanumérico largo generado.
+
+### ⚙️ 2. Activar la Integración CAPI en RedTrack:
+1. En RedTrack, ir a **Traffic Channels** ➔ Seleccionar o editar **Facebook / Meta Ads**.
+2. Ir a la sección **API Integration / Meta CAPI Settings**.
+3. **Pixel ID:** Ingresar el ID del Pixel de Meta del cliente.
+4. **Access Token:** Pegar el Token de Acceso copiado desde Meta.
+5. **Mapeo de Eventos (Event Mapping):**
+   - RedTrack `Lead` ➔ Meta Event `Lead`
+   - RedTrack `InitiateCheckout` ➔ Meta Event `InitiateCheckout`
+   - RedTrack `Purchase` ➔ Meta Event `Purchase`
+   - *(Opcional)* RedTrack `CompleteRegistration` ➔ Meta Event `CompleteRegistration`
+6. Activar el switch **Send Conversions via CAPI** y guardar los cambios.
+
+
