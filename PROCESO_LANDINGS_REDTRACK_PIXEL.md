@@ -110,18 +110,16 @@ Para que RedTrack reenvíe automáticamente las conversiones reales enviadas des
 3. En la sección *Configurar conexión directa*, hacer clic en **Generar Token de Acceso (Generate Access Token)**.
 4. Copiar y guardar el token alfanumérico largo generado.
 
-### ⚙️ 2. Activar la Integración CAPI en RedTrack:
-1. **¿Dónde se configura CAPI?** La integración CAPI **NO se asocia a la Oferta (Offer)**. Se asocia a nivel de **Traffic Channel (Canal de Tráfico)** o **Campaign (Campaña)**.
-   * La **Oferta (Offer)** únicamente debe llevar el texto de WhatsApp con la macro `ref:{clickid}`.
-2. En RedTrack, ir a **Traffic Channels** ➔ Seleccionar o crear un canal específico por cliente (ejemplo: `Meta Ads - Favio` y `Meta Ads - Fabri`).
-3. Ir a la sección **API Integration / Meta CAPI Settings**.
-4. **Pixel ID:** Ingresar el ID del Pixel de Meta del cliente.
-5. **Access Token:** Pegar el Token de Acceso copiado desde Meta.
-6. **Mapeo de Eventos (Event Mapping):**
-   - RedTrack `Lead` ➔ Meta Event `Lead`
-   - RedTrack `InitiateCheckout` ➔ Meta Event `InitiateCheckout`
-   - RedTrack `Purchase` ➔ Meta Event `Purchase`
-7. Activar el switch **Send Conversions via CAPI** y guardar los cambios.
+### ⚙️ 2. Activar la Integración CAPI en RedTrack (Mapeo Pixel ➔ Ofertas):
+En la versión de RedTrack (Affiliate / Media Buyer Account Type), el mapeo de CAPI se realiza en **CAPI Integrations ➔ Meta Pixels ➔ OFFERS**:
+
+1. Ir a **CAPI Integrations** (Menú lateral izquierdo) ➔ **Meta Pixels**.
+2. Crear o ingresar a la configuración del Pixel del cliente (ejemplo: `Pixel details Capi Fabri` o `Pixel details Capi Favio`).
+3. Ir a la pestaña **OFFERS** (Ofertas).
+4. Hacer clic en el botón azul **`+ Add new`**:
+   * Para **Fabri / Jessia** (Pixel `3319413524888816`): Vincular la oferta `Landing/WhatsApp Fabri` y `WhatsApp Direct - Jessia`.
+   * Para **Favio** (Pixel `1279024090875797`): Crear la entrada `Pixel details Capi Favio` y vincular únicamente la oferta `Landing/WhatsApp Favio`.
+5. Guardar los cambios. RedTrack ahora sabe exactamente qué Pixel de Meta usar cuando llega una conversión para cada Oferta de WhatsApp.
 
 ---
 
