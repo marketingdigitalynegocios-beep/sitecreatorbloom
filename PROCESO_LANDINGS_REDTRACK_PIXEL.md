@@ -50,18 +50,37 @@ flowchart TD
 ## 📊 3. Clientes Configurados y Validados en Producción
 
 ### 👤 Cliente 1: Fabri
-- **Landing:** `https://sitecreatorbloom.vercel.app/landing_fabri.html`
+- **Landings:**
+  - Versión 1 (Clara): `https://sitecreatorbloom.vercel.app/landing_fabri.html`
+  - Versión 2 (Oscura - Bono 20%): `https://sitecreatorbloom.vercel.app/landing_fabri_v2.html`
+- **Meta Pixel ID:** `3319413524888816`
 - **RedTrack Campaign ID:** `6a86230a706cfa38ad712954`
 - **Kommo Account:** `suzydiazrojas.kommo.com`
+- **Oferta:** +20% Extra en carga
 - **Status:** 100% Validado (`Lead`, `InitiateCheckout`, `Purchase`).
 
 ### 👤 Cliente 2: Favio
 - **Landings:**
-  - Versión 1: `https://sitecreatorbloom.vercel.app/landing_fa.html`
-  - Versión 2: `https://sitecreatorbloom.vercel.app/landing_fa_v2.html`
+  - Versión 1 (Clara): `https://sitecreatorbloom.vercel.app/landing_fa.html`
+  - Versión 2 (Oscura - Bono 100%): `https://sitecreatorbloom.vercel.app/landing_fa_v2.html`
+- **Meta Pixel ID:** `1279024090875797`
 - **RedTrack Campaign ID:** `6a850eede10af64050c0ae2d`
 - **Kommo Account:** `suportecassino365.kommo.com`
+- **Oferta:** +100% Extra en carga
 - **Status:** 100% Validado (`Lead`, `InitiateCheckout`, `Purchase`).
+
+### 👤 Cliente 3: Jessia
+- **Landing:** `https://sitecreatorbloom.vercel.app/landing_jessia.html`
+- **Meta Pixel ID:** `3319413524888816` (Mismo Pixel de Fabri)
+- **Status:** Requiere validación de Webhook en Kommo CRM y plantilla de mensaje RedTrack.
+
+---
+
+### ⚠️ Regla Obligatoria de Validación de Pixel en Creación de Clientes:
+> **IMPORTANTE:** Al crear o duplicar una landing para un nuevo cliente:
+> 1. Confirmar explícitamente el **Meta Pixel ID** propio del cliente.
+> 2. Comparar el Pixel ID recibido contra la lista de clientes activos para verificar si coincide con alguno existente o si es completamente nuevo.
+> 3. NUNCA arrastrar el Pixel ID de otro cliente por defecto en la plantilla HTML ni en el script CAPI.
 
 ---
 
