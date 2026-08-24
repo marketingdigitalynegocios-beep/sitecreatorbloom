@@ -71,16 +71,27 @@ flowchart TD
 
 ### 👤 Cliente 3: Jessia
 - **Landing:** `https://sitecreatorbloom.vercel.app/landing_jessia.html`
-- **Meta Pixel ID:** `3319413524888816` (Mismo Pixel de Fabri)
+- **Meta Pixel ID:** `3470105516489683`
 - **Status:** Requiere validación de Webhook en Kommo CRM y plantilla de mensaje RedTrack.
 
 ---
 
-### ⚠️ Regla Obligatoria de Validación de Pixel en Creación de Clientes:
+### ⚠️ Regla Obligatoria de Validación de Pixel y Tracking Base en Creación de Clientes:
 > **IMPORTANTE:** Al crear o duplicar una landing para un nuevo cliente:
 > 1. Confirmar explícitamente el **Meta Pixel ID** propio del cliente.
 > 2. Comparar el Pixel ID recibido contra la lista de clientes activos para verificar si coincide con alguno existente o si es completamente nuevo.
 > 3. NUNCA arrastrar el Pixel ID de otro cliente por defecto en la plantilla HTML ni en el script CAPI.
+> 4. **Microsoft Clarity:** Toda landing debe incluir el script base de Microsoft Clarity (`y7haktxy1r`) en la etiqueta `<head>`:
+>    ```html
+>    <!-- Microsoft Clarity -->
+>    <script type="text/javascript">
+>        (function(c,l,a,r,i,t,y){
+>            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+>            t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+>            y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+>        })(window, document, "clarity", "script", "y7haktxy1r");
+>    </script>
+>    ```
 
 ---
 
@@ -118,7 +129,8 @@ RedTrack permite gestionar múltiples clientes con un solo Traffic Channel media
    * Mediante el botón **`+ Add Pixel`**, se pueden agregar múltiples píxeles en el mismo canal (ej. Pixel `Favio` y Pixel `Capi Fabri`).
 3. Al hacer clic en editar cada Pixel (icono de lápiz ✏️ ➔ pestaña **OFFERS**):
    * **Pixel Favio** (`1279024090875797`): Vincular la oferta `Landing/WhatsApp Favio`.
-   * **Pixel Capi Fabri** (`3319413524888816`): Vincular las ofertas `Landing/WhatsApp Fabri` y `WhatsApp Direct - Jessia`.
+   * **Pixel Capi Fabri** (`3319413524888816`): Vincular la oferta `Landing/WhatsApp Fabri`.
+   * **Pixel Jessia** (`3470105516489683`): Vincular la oferta `WhatsApp Direct - Jessia`.
 4. Hacer clic en **SAVE CHANGES** en el canal.
 5. De esta manera, RedTrack gestiona todos los clientes en un solo canal centralizado sin cruzar datos.
 
