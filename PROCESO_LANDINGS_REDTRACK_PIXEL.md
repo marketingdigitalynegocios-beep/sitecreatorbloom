@@ -111,15 +111,12 @@ Para que RedTrack reenvíe automáticamente las conversiones reales enviadas des
 4. Copiar y guardar el token alfanumérico largo generado.
 
 ### ⚙️ 2. Activar la Integración CAPI en RedTrack (Mapeo Pixel ➔ Ofertas):
-En la versión de RedTrack (Affiliate / Media Buyer Account Type), el mapeo de CAPI se realiza en **CAPI Integrations ➔ Meta Pixels ➔ OFFERS**:
+En RedTrack, el mapeo de CAPI se realiza en **CAPI Integrations ➔ Meta Pixels ➔ OFFERS**. **No es necesario crear Traffic Channels independientes por cliente**, se puede mantener un solo Traffic Channel ("Meta Ads"):
 
-1. Ir a **CAPI Integrations** (Menú lateral izquierdo) ➔ **Meta Pixels**.
-2. Crear o ingresar a la configuración del Pixel del cliente (ejemplo: `Pixel details Capi Fabri` o `Pixel details Capi Favio`).
-3. Ir a la pestaña **OFFERS** (Ofertas).
-4. Hacer clic en el botón azul **`+ Add new`**:
-   * Para **Fabri / Jessia** (Pixel `3319413524888816`): Vincular la oferta `Landing/WhatsApp Fabri` y `WhatsApp Direct - Jessia`.
-   * Para **Favio** (Pixel `1279024090875797`): Crear la entrada `Pixel details Capi Favio` y vincular únicamente la oferta `Landing/WhatsApp Favio`.
-5. Guardar los cambios. RedTrack ahora sabe exactamente qué Pixel de Meta usar cuando llega una conversión para cada Oferta de WhatsApp.
+1. Ir a **CAPI Integrations** ➔ **Meta Pixels**.
+2. **Pixel Fabri / Jessia** (`3319413524888816`): En la pestaña **OFFERS**, asociar `Landing/WhatsApp Fabri` y `WhatsApp Direct - Jessia`.
+3. **Pixel Favio** (`1279024090875797`): En la pestaña **OFFERS**, asociar únicamente `Landing/WhatsApp Favio`.
+4. Al recibir la conversión de Kommo, RedTrack identifica la Oferta y envía el evento CAPI al Pixel correspondiente automáticamente.
 
 ---
 
