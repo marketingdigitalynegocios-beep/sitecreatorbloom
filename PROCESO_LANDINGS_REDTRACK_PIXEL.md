@@ -111,15 +111,39 @@ Para que RedTrack reenvíe automáticamente las conversiones reales enviadas des
 4. Copiar y guardar el token alfanumérico largo generado.
 
 ### ⚙️ 2. Activar la Integración CAPI en RedTrack:
-1. En RedTrack, ir a **Traffic Channels** ➔ Seleccionar o editar **Facebook / Meta Ads**.
-2. Ir a la sección **API Integration / Meta CAPI Settings**.
-3. **Pixel ID:** Ingresar el ID del Pixel de Meta del cliente.
-4. **Access Token:** Pegar el Token de Acceso copiado desde Meta.
-5. **Mapeo de Eventos (Event Mapping):**
+1. **¿Dónde se configura CAPI?** La integración CAPI **NO se asocia a la Oferta (Offer)**. Se asocia a nivel de **Traffic Channel (Canal de Tráfico)** o **Campaign (Campaña)**.
+   * La **Oferta (Offer)** únicamente debe llevar el texto de WhatsApp con la macro `ref:{clickid}`.
+2. En RedTrack, ir a **Traffic Channels** ➔ Seleccionar o crear un canal específico por cliente (ejemplo: `Meta Ads - Favio` y `Meta Ads - Fabri`).
+3. Ir a la sección **API Integration / Meta CAPI Settings**.
+4. **Pixel ID:** Ingresar el ID del Pixel de Meta del cliente.
+5. **Access Token:** Pegar el Token de Acceso copiado desde Meta.
+6. **Mapeo de Eventos (Event Mapping):**
    - RedTrack `Lead` ➔ Meta Event `Lead`
    - RedTrack `InitiateCheckout` ➔ Meta Event `InitiateCheckout`
    - RedTrack `Purchase` ➔ Meta Event `Purchase`
-   - *(Opcional)* RedTrack `CompleteRegistration` ➔ Meta Event `CompleteRegistration`
-6. Activar el switch **Send Conversions via CAPI** y guardar los cambios.
+7. Activar el switch **Send Conversions via CAPI** y guardar los cambios.
+
+---
+
+## 📌 Flujo Completo de Asociación CAPI en RedTrack:
+
+```
+Webhook Kommo CRM (al enviar mensaje de WhatsApp)
+       │
+       ▼
+api/postback.js en Vercel (extrae ClickID de 24 chars)
+       │
+       ▼
+Postback S2S a RedTrack (trk.accbloom.online/postback?clickid=...)
+       │
+       ▼
+RedTrack identifica a qué CAMPAÑA pertenece ese ClickID
+       │
+       ▼
+RedTrack toma el CANAL DE TRÁFICO de esa campaña (ej. "Meta Ads - Favio")
+       │
+       ▼
+RedTrack envía el evento CAPI a Meta usando el Pixel ID y Token de ese Canal
+```
 
 
