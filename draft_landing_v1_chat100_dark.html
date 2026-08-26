@@ -136,6 +136,55 @@
       gap: 16px;
     }
 
+    /* Banner de Bono 100% Extra */
+    .bonus-tag-banner {
+      background: #111b21;
+      border: 1.5px solid #00a884;
+      border-radius: 12px;
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 4px 15px rgba(0, 168, 132, 0.2);
+    }
+
+    .bonus-tag-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .bonus-tag-icon {
+      font-size: 26px;
+    }
+
+    .bonus-tag-text strong {
+      display: block;
+      font-size: 14px;
+      color: #00e676;
+      font-weight: 800;
+    }
+
+    .bonus-tag-text span {
+      font-size: 11px;
+      color: #8696a0;
+    }
+
+    .bonus-pill {
+      background: #00a884;
+      color: #0b141a;
+      font-size: 12px;
+      font-weight: 900;
+      padding: 8px 16px;
+      border-radius: 25px;
+      text-transform: uppercase;
+      white-space: nowrap;
+      flex-shrink: 0;
+      letter-spacing: 0.5px;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0, 168, 132, 0.4);
+    }
+
     /* Burbuja de Mensaje de Chat Entrante */
     .chat-bubble-container {
       background-color: #202c33;
@@ -376,6 +425,17 @@
   </header>
 
   <main>
+    <!-- Banner de Bono 100% Extra -->
+    <div class="bonus-tag-banner">
+      <div class="bonus-tag-left">
+        <div class="bonus-tag-icon">⚡</div>
+        <div class="bonus-tag-text">
+          <strong>BONO +100% EXTRA DUPLICADO</strong>
+          <span>Cargás $2.000 ➔ Jugás con $4.000</span>
+        </div>
+      </div>
+      <div class="bonus-pill">+100% EXTRA</div>
+    </div>
     <!-- Burbuja 1: Bienvenida e Inmediatez -->
     <div class="chat-bubble-container">
       <div class="chat-bubble-header">⚡ PROMOCIÓN EXCLUSIVA DISPONIBLE</div>
