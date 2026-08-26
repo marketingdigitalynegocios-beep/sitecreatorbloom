@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Cajero Oficial | WhatsApp Chat Virtual 24/7</title>
+  <link rel="icon" type="image/png" href="https://imgfz.com/i/gG8bTM6.jpeg" />
+
+  <!-- Microsoft Clarity -->
+  <script type="text/javascript">
+      (function(c,l,a,r,i,t,y){
+          c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+      })(window, document, "clarity", "script", "y7haktxy1r");
+  </script>
+
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1279024090875797');
+  fbq('track', 'PageView');
+  </script>
+
+  <!-- RedTrack Universal Tracking Script -->
+  <script type="text/javascript" src="https://trk.accbloom.online/track.js"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background-color: #0b141a;
+      color: #e9edef;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* Header Oficial WhatsApp App */
+    header {
+      background-color: #111b21;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #222d34;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+      z-index: 10;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .back-btn {
+      color: #8696a0;
+      font-size: 20px;
+      margin-right: 2px;
+    }
+
+    .avatar-wrap {
+      position: relative;
+      width: 42px;
+      height: 42px;
+    }
+
+    .avatar-wrap img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #00a884;
+    }
+
+    .online-dot {
+      position: absolute;
+      bottom: 1px;
+      right: 1px;
+      width: 11px;
+      height: 11px;
+      background-color: #00a884;
+      border-radius: 50%;
+      border: 2px solid #111b21;
+    }
+
+    .header-info h2 {
+      font-size: 15px;
+      font-weight: 700;
+      color: #e9edef;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .verified-badge {
+      width: 15px;
+      height: 15px;
+      fill: #00a884;
+    }
+
+    .header-info p {
+      font-size: 12px;
+      color: #00a884;
+      font-weight: 500;
+    }
+
+    .header-info p.typing {
+      color: #00e676;
+      font-weight: 700;
+      animation: pulseText 1.2s infinite;
+    }
+
+    @keyframes pulseText {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    .header-right {
+      display: flex;
+      gap: 16px;
+      color: #8696a0;
+    }
+
+    /* Fondo de Chat WhatsApp con Patrón */
+    .chat-container {
+      flex: 1;
+      background-color: #0b141a;
+      background-image: radial-gradient(#1f2c34 1px, transparent 1px);
+      background-size: 20px 20px;
+      padding: 14px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      scroll-behavior: smooth;
+    }
+
+    /* Encriptación Notice */
+    .encryption-notice {
+      background-color: #182229;
+      color: #f7c750;
+      font-size: 11px;
+      text-align: center;
+      padding: 6px 12px;
+      border-radius: 8px;
+      max-width: 90%;
+      margin: 4px auto 8px;
+      line-height: 1.3;
+      border: 1px solid #222d34;
+    }
+
+    /* Mensajes de Chat */
+    .message {
+      max-width: 85%;
+      padding: 10px 12px;
+      font-size: 14px;
+      line-height: 1.4;
+      position: relative;
+      animation: popIn 0.3s ease-out;
+    }
+
+    @keyframes popIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .message.received {
+      background-color: #202c33;
+      color: #e9edef;
+      align-self: flex-start;
+      border-radius: 0px 12px 12px 12px;
+      border: 1px solid #2a3942;
+    }
+
+    .message.sent {
+      background-color: #005c4b;
+      color: #e9edef;
+      align-self: flex-end;
+      border-radius: 12px 0px 12px 12px;
+    }
+
+    .message-time {
+      font-size: 10px;
+      color: #8696a0;
+      text-align: right;
+      margin-top: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 3px;
+    }
+
+    .message.sent .message-time {
+      color: #53bdeb;
+    }
+
+    /* Opciones Interactivas de Elección Rápidas */
+    .quick-options {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 8px;
+      align-self: flex-start;
+      width: 100%;
+      max-width: 320px;
+    }
+
+    .option-btn {
+      background: linear-gradient(135deg, #1f2c34 0%, #111b21 100%);
+      border: 1.5px solid #00a884;
+      color: #ffffff;
+      padding: 12px 14px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 700;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: all 0.2s;
+    }
+
+    .option-btn:hover, .option-btn:active {
+      background: #00a884;
+      color: #0b141a;
+    }
+
+    .option-btn .badge-tag {
+      background: #f7c750;
+      color: #000;
+      font-size: 10px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: 800;
+    }
+
+    /* Indicador Escribiendo (Typing Indicator Bubbles) */
+    .typing-indicator {
+      background-color: #202c33;
+      padding: 10px 16px;
+      border-radius: 0px 12px 12px 12px;
+      align-self: flex-start;
+      display: none;
+      gap: 4px;
+      align-items: center;
+      border: 1px solid #2a3942;
+    }
+
+    .typing-dot {
+      width: 6px;
+      height: 6px;
+      background-color: #8696a0;
+      border-radius: 50%;
+      animation: bounce 1.4s infinite ease-in-out;
+    }
+
+    .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+    .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes bounce {
+      0%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(-6px); }
+    }
+
+    /* Barra Inferior de Entrada estilo WhatsApp */
+    .chat-input-bar {
+      background-color: #111b21;
+      padding: 8px 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-top: 1px solid #222d34;
+    }
+
+    .input-wrap {
+      flex: 1;
+      background-color: #2a3942;
+      border-radius: 20px;
+      padding: 8px 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .input-wrap input {
+      width: 100%;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: #e9edef;
+      font-size: 14px;
+    }
+
+    .input-wrap input::placeholder {
+      color: #8696a0;
+    }
+
+    .send-btn {
+      width: 40px;
+      height: 40px;
+      background-color: #00a884;
+      border-radius: 50%;
+      border: none;
+      color: #0b141a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .send-btn:active {
+      transform: scale(0.92);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header WhatsApp Virtual -->
+  <header>
+    <div class="header-left">
+      <span class="back-btn">‹</span>
+      <div class="avatar-wrap">
+        <img src="https://i.imgur.com/GCxNjBq.jpeg" alt="Cajero Oficial" />
+        <div class="online-dot"></div>
+      </div>
+      <div class="header-info">
+        <h2>
+          Cajero Oficial
+          <svg class="verified-badge" viewBox="0 0 24 24">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+          </svg>
+        </h2>
+        <p id="status-text">🟢 En línea</p>
+      </div>
+    </div>
+    <div class="header-right">
+      <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4z"/></svg>
+      <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
+    </div>
+  </header>
+
+  <!-- Contenedor Principal de Mensajes -->
+  <div class="chat-container" id="chat-container">
+    <div class="encryption-notice">
+      🔒 Las conversaciones de este Cajero Oficial están cifradas de extremo a extremo. Cargas y retiros automáticos 24/7.
+    </div>
+
+    <!-- Mensaje 1 del Bot -->
+    <div class="message received">
+      ¡Hola! 👋 Te doy la bienvenida al <b>Cajero Oficial 24/7</b>.
+      <br><br>
+      🎁 <b>PROMOCIÓN EXCLUSIVA:</b> Tenés un <b>+100% EXTRA</b> asignado en tu primera carga.
+      <br><br>
+      Selecciona con cuánto deseas empezar hoy:
+      <div class="message-time">10:00 AM</div>
+    </div>
+
+    <!-- Opciones de Respuesta Rápidas -->
+    <div class="quick-options" id="quick-options">
+      <button class="option-btn" onclick="selectOption('$2.000', '$4.000')">
+        <span>🎯 Cargar $2.000 ➔ Jugar con $4.000</span>
+      </button>
+      <button class="option-btn" onclick="selectOption('$5.000', '$10.000')">
+        <span>🔥 Cargar $5.000 ➔ Jugar con $10.000</span>
+        <span class="badge-tag">MÁS ELEGIDO</span>
+      </button>
+      <button class="option-btn" onclick="selectOption('$10.000', '$20.000')">
+        <span>🚀 Cargar $10.000 ➔ Jugar con $20.000</span>
+      </button>
+    </div>
+
+    <!-- Indicador Escribiendo -->
+    <div class="typing-indicator" id="typing-indicator">
+      <div class="typing-dot"></div>
+      <div class="typing-dot"></div>
+      <div class="typing-dot"></div>
+    </div>
+  </div>
+
+  <!-- Input Bar Inferior -->
+  <div class="chat-input-bar">
+    <div class="input-wrap">
+      <input type="text" id="user-input" placeholder="Escribe tu mensaje o respuesta..." onkeypress="handleKeyPress(event)" />
+    </div>
+    <button class="send-btn" onclick="sendMessage()">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+      </svg>
+    </button>
+  </div>
+
+  <script>
+    let step = 1;
+    let selectedAmount = "$5.000";
+    let selectedPlay = "$10.000";
+    let userName = "";
+
+    function getCurrentTime() {
+      const now = new Date();
+      return now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    }
+
+    function scrollToBottom() {
+      const container = document.getElementById("chat-container");
+      container.scrollTop = container.scrollHeight;
+    }
+
+    function showTyping() {
+      const typing = document.getElementById("typing-indicator");
+      const statusText = document.getElementById("status-text");
+      typing.style.display = "flex";
+      statusText.textContent = "escribiendo...";
+      statusText.className = "typing";
+      scrollToBottom();
+    }
+
+    function hideTyping() {
+      const typing = document.getElementById("typing-indicator");
+      const statusText = document.getElementById("status-text");
+      typing.style.display = "none";
+      statusText.textContent = "🟢 En línea";
+      statusText.className = "";
+    }
+
+    function addSentMessage(text) {
+      const container = document.getElementById("chat-container");
+      const msg = document.createElement("div");
+      msg.className = "message sent";
+      msg.innerHTML = `
+        ${text}
+        <div class="message-time">${getCurrentTime()} ✓✓</div>
+      `;
+      container.appendChild(msg);
+      scrollToBottom();
+    }
+
+    function addReceivedMessage(htmlContent) {
+      const container = document.getElementById("chat-container");
+      const msg = document.createElement("div");
+      msg.className = "message received";
+      msg.innerHTML = `
+        ${htmlContent}
+        <div class="message-time">${getCurrentTime()}</div>
+      `;
+      container.appendChild(msg);
+      scrollToBottom();
+    }
+
+    async function registerLeadInKommoAndRedTrack(name, phone, amount) {
+      // Intentar obtener el clickid de RedTrack
+      let cleanClickId = '';
+      if (window.RedTrack && typeof window.RedTrack.getClickId === 'function') {
+        cleanClickId = window.RedTrack.getClickId();
+      }
+      
+      if (!cleanClickId) {
+        const match = document.cookie.match(/rtkClickID=([a-f0-9]{24})/i);
+        if (match) cleanClickId = match[1];
+      }
+
+      console.log('🚀 [VIRTUAL BOT] Trazabilidad ejecutada. ClickID RedTrack:', cleanClickId);
+
+      // Disparar evento Meta Pixel Contact / Lead
+      if (typeof fbq === 'function') {
+        fbq('track', 'Contact');
+      }
+
+      // Enviar Webhook a Vercel Cleaner -> RedTrack & Kommo CRM
+      try {
+        const payloadUrl = `/api/postback?type=Lead&clickid=${cleanClickId || 'virtual_chat_' + Date.now()}&sum=${encodeURIComponent(amount)}`;
+        await fetch(payloadUrl, { method: 'GET' });
+        console.log('✅ Lead registrado en Kommo/RedTrack exitosamente');
+      } catch (err) {
+        console.warn('⚠️ Webhook local enviado:', err.message);
+      }
+    }
+
+    function selectOption(amount, playAmount) {
+      selectedAmount = amount;
+      selectedPlay = playAmount;
+      
+      // Ocultar botones de opciones
+      document.getElementById("quick-options").style.display = "none";
+      
+      addSentMessage(`Quiero cargar ${amount} y jugar con ${playAmount} 🎰`);
+
+      showTyping();
+      setTimeout(() => {
+        hideTyping();
+        addReceivedMessage(`
+          ¡Excelente elección! 🎁 Tu bono de <b>${selectedPlay}</b> está reservado.
+          <br><br>
+          Para habilitarte la cuenta en 60 segundos, escribe tu <b>Nombre o Alias</b> abajo 👇:
+        `);
+        step = 2;
+      }, 1000);
+    }
+
+    function handleKeyPress(e) {
+      if (e.key === 'Enter') {
+        sendMessage();
+      }
+    }
+
+    function sendMessage() {
+      const input = document.getElementById("user-input");
+      const text = input.value.trim();
+      if (!text) return;
+
+      input.value = "";
+      addSentMessage(text);
+
+      if (step === 1) {
+        document.getElementById("quick-options").style.display = "none";
+        showTyping();
+        setTimeout(() => {
+          hideTyping();
+          addReceivedMessage(`
+            ¡Entendido! 🎁 Para reservar tu bono del +100% EXTRA, escribe tu <b>Nombre o Alias</b> abajo 👇:
+          `);
+          step = 2;
+        }, 1000);
+      } else if (step === 2) {
+        userName = text;
+        showTyping();
+        setTimeout(() => {
+          hideTyping();
+          addReceivedMessage(`
+            ¡Perfecto, <b>${userName}</b>! 🟢 Tu usuario oficial ha sido preparado.
+            <br><br>
+            Escribe tu <b>Número de WhatsApp o Teléfono</b> para enviarte la clave por SMS / WhatsApp:
+          `);
+          step = 3;
+        }, 1100);
+      } else if (step === 3) {
+        const phone = text;
+        showTyping();
+
+        // Registrar trazabilidad completa (Lead en Kommo y RedTrack)
+        registerLeadInKommoAndRedTrack(userName, phone, selectedAmount);
+
+        setTimeout(() => {
+          hideTyping();
+          addReceivedMessage(`
+            ✅ <b>¡CUENTA CREADA EXITOSAMENTE!</b>
+            <br><br>
+            👤 <b>Usuario:</b> <code>${userName.toLowerCase().replace(/\s+/g, '')}2026</code>
+            <br>
+            🎁 <b>Bono Registrado:</b> ${selectedPlay}
+            <br><br>
+            👉 <b>Alias CBU para Cargar:</b> <code>cajero.oficial.mp</code> (Mercado Pago / CBU)
+            <br><br>
+            <i>Una vez enviada la transferencia, el saldo con tu bono del 100% se acredita automáticamente.</i>
+          `);
+          step = 4;
+        }, 1400);
+      } else {
+        // Modo conversación o Gemini AI Fallback
+        showTyping();
+        setTimeout(() => {
+          hideTyping();
+          addReceivedMessage(`
+            Tu solicitud está siendo procesada por el cajero de turno 🟢. Si deseas hablar directamente en WhatsApp, puedes hacer clic aquí:
+            <br><br>
+            👉 <a href="https://trk.accbloom.online/click" target="_blank" style="color:#00e676; font-weight:bold;">Continuar en App de WhatsApp</a>
+          `);
+        }, 1000);
+      }
+    }
+  </script>
+</body>
+</html>

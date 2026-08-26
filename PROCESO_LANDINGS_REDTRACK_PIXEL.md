@@ -53,7 +53,8 @@ flowchart TD
 - **Landings:**
   - Versión 1 (Clara): `https://sitecreatorbloom.vercel.app/landing_fabri.html`
   - Versión 2 (Oscura - Bono 20%): `https://sitecreatorbloom.vercel.app/landing_fabri_v2.html`
-- **Meta Pixel ID:** `3319413524888816`
+- **Meta Pixel ID Principal:** `3319413524888816`
+- **Meta Pixel ID Adicional:** `2553053191822433`
 - **RedTrack Campaign ID:** `6a86230a706cfa38ad712954`
 - **Kommo Account:** `suzydiazrojas.kommo.com`
 - **Oferta:** +20% Extra en carga
