@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cajero Oficial | WhatsApp 24/7 (Carga Autónoma)</title>
+  <link rel="icon" type="image/png" href="https://imgfz.com/i/gG8bTM6.jpeg" />
+
+  <!-- Microsoft Clarity -->
+  <script type="text/javascript">
+      (function(c,l,a,r,i,t,y){
+          c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+      })(window, document, "clarity", "script", "y7haktxy1r");
+  </script>
+
+  <!-- Meta Pixel Code -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1279024090875797');
+  fbq('track', 'PageView');
+  </script>
+
+  <!-- RedTrack Universal Tracking Script -->
+  <script type="text/javascript" src="https://trk.accbloom.online/track.js"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background-color: #efeae2;
+      background-image: radial-gradient(#dbd3c7 1px, transparent 1px);
+      background-size: 20px 20px;
+      color: #111b21;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: background-color 0.3s;
+    }
+
+    /* Modo Oscuro */
+    body.dark-mode {
+      background-color: #0b141a;
+      background-image: radial-gradient(#1c2830 1px, transparent 1px);
+      color: #e9edef;
+    }
+
+    /* Header Oficial WhatsApp Light / Dark */
+    header {
+      width: 100%;
+      background-color: #008069;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+
+    body.dark-mode header {
+      background-color: #111b21;
+      border-bottom: 1px solid #222d34;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .avatar-wrap {
+      position: relative;
+      width: 44px;
+      height: 44px;
+    }
+
+    .avatar-wrap img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #ffffff;
+    }
+
+    body.dark-mode .avatar-wrap img {
+      border-color: #00a884;
+    }
+
+    .online-badge {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 12px;
+      height: 12px;
+      background-color: #25d366;
+      border-radius: 50%;
+      border: 2px solid #008069;
+    }
+
+    .header-info h2 {
+      font-size: 16px;
+      font-weight: 700;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .verified-icon {
+      width: 16px;
+      height: 16px;
+      fill: #ffffff;
+    }
+
+    body.dark-mode .verified-icon {
+      fill: #00a884;
+    }
+
+    .header-info p {
+      font-size: 12px;
+      color: #d1f4e0;
+      font-weight: 500;
+    }
+
+    body.dark-mode .header-info p {
+      color: #00a884;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .theme-toggle-btn {
+      background: rgba(255, 255, 255, 0.2);
+      border: none;
+      color: #ffffff;
+      font-size: 16px;
+      padding: 6px 12px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    /* Layout Principal Contenedor del Chat */
+    main {
+      max-width: 440px;
+      width: 100%;
+      padding: 16px 14px 100px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    /* Banner de Bono Extendido Horizontal */
+    .bonus-tag-banner {
+      background: #ffffff;
+      border: 1.5px solid #25d366;
+      border-radius: 12px;
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    }
+
+    body.dark-mode .bonus-tag-banner {
+      background: #111b21;
+      border-color: #00a884;
+    }
+
+    .bonus-tag-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .bonus-tag-icon {
+      font-size: 26px;
+    }
+
+    .bonus-tag-text strong {
+      display: block;
+      font-size: 14px;
+      color: #008069;
+      font-weight: 800;
+    }
+
+    body.dark-mode .bonus-tag-text strong {
+      color: #00e676;
+    }
+
+    .bonus-tag-text span {
+      font-size: 11px;
+      color: #667781;
+    }
+
+    body.dark-mode .bonus-tag-text span {
+      color: #8696a0;
+    }
+
+    .bonus-pill {
+      background: #25d366;
+      color: #ffffff;
+      font-size: 12px;
+      font-weight: 900;
+      padding: 8px 16px;
+      border-radius: 25px;
+      text-transform: uppercase;
+      white-space: nowrap;
+      flex-shrink: 0;
+      letter-spacing: 0.5px;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(37, 211, 102, 0.3);
+    }
+
+    body.dark-mode .bonus-pill {
+      background: #00a884;
+      color: #0b141a;
+    }
+
+    /* Burbujas de Chat Entrantes (Bot) */
+    .chat-bubble-bot {
+      background-color: #ffffff;
+      border-radius: 12px 12px 12px 0px;
+      padding: 14px 16px;
+      position: relative;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+      border: 1px solid #e9edef;
+      animation: fadeIn 0.4s ease-out;
+    }
+
+    body.dark-mode .chat-bubble-bot {
+      background-color: #202c33;
+      border-color: #2a3942;
+    }
+
+    .chat-bubble-header {
+      font-size: 11px;
+      color: #b58105;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+    }
+
+    body.dark-mode .chat-bubble-header {
+      color: #f7c750;
+    }
+
+    .chat-bubble-text {
+      font-size: 14.5px;
+      line-height: 1.45;
+      color: #111b21;
+      margin-bottom: 8px;
+    }
+
+    body.dark-mode .chat-bubble-text {
+      color: #e9edef;
+    }
+
+    .chat-bubble-highlight {
+      background: #e7fceb;
+      border-left: 3.5px solid #25d366;
+      padding: 8px 10px;
+      border-radius: 4px;
+      font-size: 13.5px;
+      color: #008069;
+      font-weight: 700;
+      margin: 8px 0;
+    }
+
+    body.dark-mode .chat-bubble-highlight {
+      background: rgba(0, 168, 132, 0.15);
+      border-left-color: #00a884;
+      color: #25d366;
+    }
+
+    .chat-time {
+      font-size: 10px;
+      color: #667781;
+      text-align: right;
+    }
+
+    body.dark-mode .chat-time {
+      color: #8696a0;
+    }
+
+    /* Formulario de Captura de Datos dentro del Chat */
+    .chat-form-card {
+      background: #ffffff;
+      border: 1.5px solid #008069;
+      border-radius: 12px;
+      padding: 14px;
+      margin-top: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    body.dark-mode .chat-form-card {
+      background: #111b21;
+      border-color: #00a884;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 20px;
+      border: 1px solid #ccd0d5;
+      font-size: 14px;
+      outline: none;
+    }
+
+    body.dark-mode .form-group input {
+      background: #202c33;
+      border-color: #2a3942;
+      color: #ffffff;
+    }
+
+    /* Opciones de Carga de Saldo */
+    .amount-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin: 10px 0;
+    }
+
+    .amount-btn {
+      background: #f0f2f5;
+      border: 1.5px solid #25d366;
+      border-radius: 20px;
+      padding: 10px 4px;
+      text-align: center;
+      cursor: pointer;
+      font-weight: 800;
+      color: #008069;
+      font-size: 13.5px;
+      transition: all 0.2s;
+    }
+
+    .amount-btn.active, .amount-btn:hover {
+      background: #25d366;
+      color: #ffffff;
+    }
+
+    body.dark-mode .amount-btn {
+      background: #202c33;
+      border-color: #00a884;
+      color: #25d366;
+    }
+
+    body.dark-mode .amount-btn.active {
+      background: #00a884;
+      color: #0b141a;
+    }
+
+    /* Botón Principal CTA */
+    .cta-submit-btn {
+      background: linear-gradient(180deg, #25d366 0%, #1da851 100%);
+      color: #ffffff;
+      font-size: 16px;
+      font-weight: 900;
+      text-transform: uppercase;
+      padding: 15px;
+      border-radius: 30px;
+      border: none;
+      width: 100%;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+    }
+
+    /* Tarjeta de Credenciales Entregadas en Pantalla */
+    .credentials-card {
+      background: #e7fceb;
+      border: 2px solid #25d366;
+      border-radius: 12px;
+      padding: 16px;
+      text-align: center;
+      animation: fadeIn 0.5s ease-out;
+    }
+
+    body.dark-mode .credentials-card {
+      background: rgba(0, 168, 132, 0.2);
+      border-color: #00a884;
+    }
+
+    .credentials-title {
+      font-size: 16px;
+      font-weight: 900;
+      color: #008069;
+      margin-bottom: 10px;
+    }
+
+    body.dark-mode .credentials-title {
+      color: #25d366;
+    }
+
+    .cred-row {
+      background: #ffffff;
+      padding: 10px 14px;
+      border-radius: 8px;
+      margin: 6px 0;
+      font-size: 15px;
+      display: flex;
+      justify-content: space-between;
+      font-weight: 700;
+    }
+
+    body.dark-mode .cred-row {
+      background: #111b21;
+      color: #ffffff;
+    }
+
+    .login-casino-btn {
+      display: block;
+      background: #008069;
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 900;
+      padding: 14px;
+      border-radius: 25px;
+      margin-top: 12px;
+      text-transform: uppercase;
+    }
+
+    /* Toast Notificación de Retiro */
+    .withdrawal-toast {
+      position: fixed;
+      bottom: 75px;
+      left: 14px;
+      right: 14px;
+      max-width: 412px;
+      margin: 0 auto;
+      background: #ffffff;
+      border: 1.5px solid #25d366;
+      border-radius: 10px;
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+      transform: translateY(120px);
+      opacity: 0;
+      transition: all 0.4s;
+      z-index: 99;
+    }
+
+    body.dark-mode .withdrawal-toast {
+      background: #111b21;
+      border-color: #00a884;
+    }
+
+    .withdrawal-toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header Oficial WhatsApp -->
+  <header>
+    <div class="header-left">
+      <div class="avatar-wrap">
+        <img src="https://i.imgur.com/GCxNjBq.jpeg" alt="Cajero Oficial" />
+        <div class="online-badge"></div>
+      </div>
+      <div class="header-info">
+        <h2>
+          Cajero Oficial VIP
+          <svg class="verified-icon" viewBox="0 0 24 24">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+          </svg>
+        </h2>
+        <p>🟢 En línea • Respuesta en < 1 min</p>
+      </div>
+    </div>
+    <div class="header-right">
+      <button class="theme-toggle-btn" id="theme-btn" onclick="toggleTheme()">🌙 Dark</button>
+    </div>
+  </header>
+
+  <main id="chat-container">
+    <!-- Banner de Bono Extendido Horizontal -->
+    <div class="bonus-tag-banner">
+      <div class="bonus-tag-left">
+        <div class="bonus-tag-icon">⚡</div>
+        <div class="bonus-tag-text">
+          <strong>BONO +100% EXTRA DUPLICADO</strong>
+          <span>Cargás $2.000 ➔ Jugás con $4.000</span>
+        </div>
+      </div>
+      <div class="bonus-pill">+100% EXTRA</div>
+    </div>
+
+    <!-- Mensaje 1 del Cajero -->
+    <div class="chat-bubble-bot">
+      <div class="chat-bubble-header">🎰 ASISTENTE CAJERO 24HS</div>
+      <div class="chat-bubble-text">¡Hola! 👋 Te damos la bienvenida a la plataforma oficial.</div>
+      <div class="chat-bubble-highlight">🎁 Tu Bono del +100% EXTRA está habilitado. Ingresa tus datos para generar tu cobro y usuario:</div>
+      <div class="chat-time">Enviado hoy • En línea</div>
+
+      <!-- Formulario Integrado dentro del Chat -->
+      <div class="chat-form-card" id="step-1-form">
+        <div class="form-group">
+          <input type="text" id="user-name" placeholder="Tu Nombre y Apellido" required />
+        </div>
+        <div class="form-group">
+          <input type="tel" id="user-phone" placeholder="Tu WhatsApp (Ej: 1123456789)" required />
+        </div>
+        <div style="font-size: 11px; color: #667781; text-align: center;">
+          Selecciona el monto a cargar:
+        </div>
+        <div class="amount-grid">
+          <button type="button" class="amount-btn" onclick="selectAmount(2000, this)">$2.000</button>
+          <button type="button" class="amount-btn active" onclick="selectAmount(5000, this)">$5.000</button>
+          <button type="button" class="amount-btn" onclick="selectAmount(10000, this)">$10.000</button>
+        </div>
+        <button type="button" class="cta-submit-btn" onclick="submitCheckout()">
+          ⚡ GENERAR COBRO Y RECIBIR BONO
+        </button>
+      </div>
+    </div>
+
+    <!-- Área donde se insertan los mensajes del estado actual -->
+    <div id="dynamic-chat-flow"></div>
+  </main>
+
+  <!-- Notificación Toast de Retiros -->
+  <div id="withdrawal-toast" class="withdrawal-toast">
+    <div style="display:flex; align-items:center; gap:10px;">
+      <div style="font-size:20px;">💸</div>
+      <div>
+        <strong id="toast-name" style="font-size:12px; display:block;">Gonzalo R.</strong>
+        <span id="toast-amount" style="font-size:11px; color:#008069; font-weight:700;">Retiro $45.000 PAGADO</span>
+      </div>
+    </div>
+    <div id="toast-time" style="font-size:10px; color:#667781;">Hace 2 min</div>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

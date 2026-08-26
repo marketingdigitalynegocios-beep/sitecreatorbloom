@@ -1,0 +1,23 @@
+{
+  "name": "agentweb-ai-cajero",
+  "version": "1.0.0",
+  "description": "Agente Web Autónomo Cajero 24/7 con Cloudflare D1, Mercado Pago API, Kommo CRM y RedTrack CAPI",
+  "main": "src/worker.js",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "d1:init": "wrangler d1 execute agentweb_db --file=./schema.sql"
+  },
+  "keywords": [
+    "cloudflare-workers",
+    "d1-database",
+    "mercadopago-api",
+    "kommo-crm",
+    "redtrack-capi"
+  ],
+  "author": "Antigravity Growth Tech Team",
+  "license": "MIT",
+  "devDependencies": {
+    "wrangler": "^3.100.0"
+  }
+}

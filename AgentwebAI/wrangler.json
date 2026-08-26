@@ -1,0 +1,21 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "agentweb-ai-cajero",
+  "main": "src/worker.js",
+  "compatibility_date": "2024-11-01",
+  "observability": {
+    "enabled": true
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "agentweb_db",
+      "database_id": "d1-agentweb-cajero-db-id"
+    }
+  ],
+  "vars": {
+    "ENVIRONMENT": "production",
+    "CASINO_PLATFORM_NAME": "Plataforma Oficial VIP",
+    "DEFAULT_BONUS_PERCENT": "100"
+  }
+}
