@@ -325,9 +325,9 @@
       💸 B0NUS EXTRA ACTIVO — PEDILO EN WHATSAPP 🎰
     </div>
 
-    <a href="https://trk.accbloom.online/click" 
+    <a href="https://wa.me/541140377780?text=Quiero%20mi%20cuenta%20de%20ingreso" 
        id="whatsapp-btn"  
-       class="cta-button"
+       class="cta-button wa-link"
        onclick="if(typeof fbq === 'function') { fbq('track', 'Contact'); }">
        Ir a WhatsApp Ahora
     </a>
@@ -347,8 +347,8 @@
   </footer>
 
   <!-- ✅ Barra fija clicable hacia WhatsApp -->
-  <a href="https://trk.accbloom.online/click" 
-     class="bono-bar"
+  <a href="https://wa.me/541140377780?text=Quiero%20mi%20cuenta%20de%20ingreso" 
+     class="bono-bar wa-link"
      onclick="if(typeof fbq === 'function') { fbq('track', 'Contact'); }">
     🎁 BONUS EXTRA ACTIVO - ¡Solicitalo ahora por WhatsApp!
   </a>
@@ -435,6 +435,39 @@
       setTimeout(showNotification, 1500);
       setInterval(showNotification, config.intervalo * 1000);
     });
+  </script>
+
+  <!-- ✅ INYECTOR DINÁMICO DE CLICKID PARA EVITAR BANEOS Y MANTENER TRACKING DE REDTRACK -->
+  <script>
+    (function() {
+      function injectClickId() {
+        var clickId = window.rtkClickID || "";
+        if (!clickId) {
+          var m = document.cookie.match(/(?:^|; )rtkclickid=([^;]*)/);
+          if (m) clickId = m[1];
+        }
+        if (!clickId) {
+          var p = new URLSearchParams(window.location.search);
+          clickId = p.get('rtkcid') || p.get('clickid') || "";
+        }
+
+        if (clickId) {
+          var waLinks = document.querySelectorAll('.wa-link, #whatsapp-btn, .bono-bar');
+          waLinks.forEach(function(link) {
+            var currentUrl = link.href;
+            if (currentUrl.indexOf('wa.me') !== -1 && currentUrl.indexOf(clickId) === -1) {
+              link.href = currentUrl + encodeURIComponent(' ' + clickId);
+            }
+          });
+        }
+      }
+
+      document.addEventListener("DOMContentLoaded", function() {
+        injectClickId();
+        setTimeout(injectClickId, 800);
+        setTimeout(injectClickId, 2000);
+      });
+    })();
   </script>
 
 </body>
