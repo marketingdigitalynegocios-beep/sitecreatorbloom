@@ -25,15 +25,12 @@
   t.src=v;s=b.getElementsByTagName(e)[0];
   s.parentNode.insertBefore(t,s)}(window, document,'script',
   'https://connect.facebook.net/en_US/fbevents.js');
-  fbq('init', '1075562438357565');
-  fbq('init', '1791766928909209');
+  fbq('init', '3267552680096266');
   fbq('track', 'PageView');
   </script>
   <noscript>
     <img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=1075562438357565&ev=PageView&noscript=1" />
-    <img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=1791766928909209&ev=PageView&noscript=1" />
+    src="https://www.facebook.com/tr?id=3267552680096266&ev=PageView&noscript=1" />
   </noscript>
 
   <!-- RedTrack Universal Tracking Script -->
@@ -507,10 +504,10 @@
       </div>
     </div>
 
-    <!-- Botón Principal RedTrack -->
-    <a href="https://trk.accbloom.online/click" 
+    <!-- Botón Principal WhatsApp -->
+    <a href="https://wa.me/5218114669803?text=Quiero%20mi%20cuenta%20de%20ingreso" 
        id="whatsapp-btn"  
-       class="cta-button"
+       class="cta-button wa-link"
        onclick="if(typeof fbq === 'function') { fbq('track', 'Contact'); }">
        👉 ¡QUIERO MI USUARIO Y BONO! 👈
     </a>
@@ -532,9 +529,9 @@
     © 2025 Plataforma Oficial. Servicio para mayores de 18 años. Juega con responsabilidad.
   </footer>
 
-  <!-- Barra Fija Inferior RedTrack -->
-  <a href="https://trk.accbloom.online/click" 
-     class="bono-bar"
+  <!-- Barra Fija Inferior WhatsApp -->
+  <a href="https://wa.me/5218114669803?text=Quiero%20mi%20cuenta%20de%20ingreso" 
+     class="bono-bar wa-link"
      onclick="if(typeof fbq === 'function') { fbq('track', 'Contact'); }">
     🎁 BONO 20% ACTIVO - ¡Tocá acá para pedirlo por WhatsApp!
   </a>
@@ -600,6 +597,41 @@
       setTimeout(showNotification, 1200);
       setInterval(showNotification, config.intervalo * 1000);
     });
+  </script>
+
+  <!-- ✅ INYECTOR DINÁMICO DE CLICKID PARA EVITAR BANEOS Y MANTENER TRACKING DE REDTRACK -->
+  <script>
+    (function() {
+      function injectClickId() {
+        // 1. Extraer ClickID de RedTrack o Cookie
+        var clickId = window.rtkClickID || "";
+        if (!clickId) {
+          var m = document.cookie.match(/(?:^|; )rtkclickid=([^;]*)/);
+          if (m) clickId = m[1];
+        }
+        if (!clickId) {
+          var p = new URLSearchParams(window.location.search);
+          clickId = p.get('rtkcid') || p.get('clickid') || "";
+        }
+
+        // 2. Inyectar el ClickId exacto al final del texto de WhatsApp
+        if (clickId) {
+          var waLinks = document.querySelectorAll('.wa-link, #whatsapp-btn, .bono-bar');
+          waLinks.forEach(function(link) {
+            var currentUrl = link.href;
+            if (currentUrl.indexOf('wa.me') !== -1 && currentUrl.indexOf(clickId) === -1) {
+              link.href = currentUrl + encodeURIComponent(' ' + clickId);
+            }
+          });
+        }
+      }
+
+      document.addEventListener("DOMContentLoaded", function() {
+        injectClickId();
+        setTimeout(injectClickId, 800);
+        setTimeout(injectClickId, 2000);
+      });
+    })();
   </script>
 
 </body>
