@@ -1,0 +1,13 @@
+{
+  "name": "sitecreator-agency-crm-agent",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Multi-Tenant Kommo CRM AI Agent + RedTrack S2S Engine for Agency",
+  "main": "api/kommo-agent.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.45.0"
+  }
+}

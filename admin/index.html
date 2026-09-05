@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Control Agencia | Agente IA Kommo CRM</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --card-dark: #1e293b;
+            --card-border: #334155;
+            --accent-gold: #f59e0b;
+            --accent-gold-hover: #d97706;
+            --green-success: #10b981;
+            --red-danger: #ef4444;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Navbar */
+        header {
+            background-color: var(--card-dark);
+            border-bottom: 1px solid var(--card-border);
+            padding: 16px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--accent-gold);
+        }
+
+        .badge {
+            background-color: rgba(245, 158, 11, 0.15);
+            color: var(--accent-gold);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .btn-logout {
+            background: transparent;
+            border: 1px solid var(--card-border);
+            color: var(--text-muted);
+            padding: 6px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+
+        .btn-logout:hover {
+            border-color: var(--red-danger);
+            color: var(--red-danger);
+        }
+
+        /* Container */
+        .main-container {
+            padding: 32px;
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            flex: 1;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .btn-gold {
+            background-color: var(--accent-gold);
+            color: #000;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-gold:hover {
+            background-color: var(--accent-gold-hover);
+        }
+
+        /* Grid Clientes */
+        .clients-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .client-card {
+            background-color: var(--card-dark);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            position: relative;
+        }
+
+        .client-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .client-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .status-pill {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .status-active {
+            background-color: rgba(16, 185, 129, 0.2);
+            color: var(--green-success);
+            border: 1px solid var(--green-success);
+        }
+
+        .status-inactive {
+            background-color: rgba(239, 68, 68, 0.2);
+            color: var(--red-danger);
+            border: 1px solid var(--red-danger);
+        }
+
+        .field-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .field-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .field-value {
+            font-size: 0.9rem;
+            word-break: break-all;
+            background-color: var(--bg-dark);
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: 1px solid var(--card-border);
+        }
+
+        textarea.field-value {
+            resize: vertical;
+            min-height: 90px;
+            color: var(--text-main);
+            width: 100%;
+        }
+
+        /* Pantalla de Login */
+        .login-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--bg-dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .login-card {
+            background-color: var(--card-dark);
+            border: 1px solid var(--card-border);
+            padding: 40px;
+            border-radius: 16px;
+            width: 100%;
+            max-width: 420px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .login-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-align: center;
+            color: var(--text-main);
+        }
+
+        .login-subtitle {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-align: center;
+            margin-top: -12px;
+        }
+
+        .input-text {
+            width: 100%;
+            padding: 12px 14px;
+            border-radius: 8px;
+            border: 1px solid var(--card-border);
+            background: var(--bg-dark);
+            color: var(--text-main);
+            font-size: 0.95rem;
+        }
+
+        .input-text:focus {
+            outline: none;
+            border-color: var(--accent-gold);
+        }
+
+        .error-msg {
+            color: var(--red-danger);
+            font-size: 0.85rem;
+            text-align: center;
+            display: none;
+        }
+
+        /* Modal Agregar */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.75);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+        }
+
+        .modal-box {
+            background: var(--card-dark);
+            border: 1px solid var(--card-border);
+            padding: 32px;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 500px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Pantalla de Login -->
+    <div class="login-overlay" id="login-overlay">
+        <div class="login-card">
+            <div class="logo" style="justify-content: center;">
+                ⚡ AGENCIA PERFORMANCE AI
+            </div>
+            <div class="login-title">Iniciar Sesión</div>
+            <div class="login-subtitle">Ingresa tus credenciales de administrador para gestionar los bots de Kommo CRM.</div>
+
+            <div class="error-msg" id="login-error">Credenciales incorrectas. Por favor verifica.</div>
+
+            <div class="field-group">
+                <label class="field-label">Correo Electrónico:</label>
+                <input type="email" id="login-email" class="input-text" placeholder="admin@agencia.com" value="brianjp53@gmail.com">
+            </div>
+
+            <div class="field-group">
+                <label class="field-label">Contraseña:</label>
+                <input type="password" id="login-password" class="input-text" placeholder="••••••••">
+            </div>
+
+            <button class="btn-gold" style="width: 100%; padding: 14px;" onclick="handleLogin()">Ingresar al Panel</button>
+        </div>
+    </div>
+
+    <!-- Header Dashboard -->
+    <header>
+        <div class="logo">
+            ⚡ AGENCIA PERFORMANCE AI
+            <span class="badge">Multi-Tenant CRM Engine</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 16px;">
+            <div id="user-email" style="font-size: 0.85rem; color: var(--text-muted);">
+                Cargando usuario...
+            </div>
+            <button class="btn-logout" onclick="handleLogout()">Cerrar Sesión</button>
+        </div>
+    </header>
+
+    <!-- Main Dashboard -->
+    <main class="main-container">
+
+        <div class="section-header">
+            <div>
+                <h2>Clientes & Agentes de Kommo CRM</h2>
+                <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 4px;">
+                    Gestiona la configuración del Agente IA y el enlace de RedTrack para cada cliente.
+                </p>
+            </div>
+            <button class="btn-gold" onclick="openAddModal()">➕ Agregar Cliente</button>
+        </div>
+
+        <div class="clients-grid" id="clients-grid">
+            <div style="color: var(--text-muted);">Cargando clientes de la agencia...</div>
+        </div>
+
+    </main>
+
+    <!-- Modal Agregar Cliente -->
+    <div class="modal-overlay" id="add-modal">
+        <div class="modal-box">
+            <h3>Agregar Nuevo Cliente Kommo</h3>
+            
+            <div class="field-group">
+                <label class="field-label">ID del Cliente (slug sin espacios):</label>
+                <input type="text" id="new-id" class="input-text" placeholder="ej: fabri">
+            </div>
+
+            <div class="field-group">
+                <label class="field-label">Nombre del Cliente / Empresa:</label>
+                <input type="text" id="new-name" class="input-text" placeholder="ej: Casino Fabri VIP">
+            </div>
+
+            <div class="field-group">
+                <label class="field-label">Subdominio de Kommo CRM:</label>
+                <input type="text" id="new-kommo" class="input-text" placeholder="ej: fabri.kommo.com">
+            </div>
+
+            <div class="field-group">
+                <label class="field-label">URL Oferta Casino (con {clickid}):</label>
+                <input type="text" id="new-url" class="input-text" placeholder="https://bettbit.com/?clickid={clickid}&id=JO8420">
+            </div>
+
+            <div class="field-group">
+                <label class="field-label">Prompt del Sistema para Gemini AI:</label>
+                <textarea id="new-prompt" class="input-text" rows="3" placeholder="Eres el asesor VIP del casino..."></textarea>
+            </div>
+
+            <div style="display: flex; gap: 12px; justify-content: flex-end; margin-top: 12px;">
+                <button class="input-text" style="width: auto; cursor: pointer;" onclick="closeAddModal()">Cancelar</button>
+                <button class="btn-gold" onclick="saveNewClient()">Guardar Cliente</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const SUPABASE_URL = 'https://tvikvqlbpolxgbkqfmup.supabase.co';
+        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InR2aWt2cWxicG9seGdia3FmbXVwIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc4NjcyMjkzOCwiZXhwIjoyMTAyMjk4OTM4fQ.3MnvotaSMBfjNkn_CA14CPzRB-7nt5l_t7XC7s_U7Wk';
+        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        // Verificar sesión activa
+        async function checkSession() {
+            const { data: { session } } = await supabaseClient.auth.getSession();
+            if (session) {
+                document.getElementById('login-overlay').style.display = 'none';
+                document.getElementById('user-email').innerText = session.user.email;
+                loadClients();
+            } else {
+                document.getElementById('login-overlay').style.display = 'flex';
+            }
+        }
+
+        async function handleLogin() {
+            const email = document.getElementById('login-email').value.trim();
+            const password = document.getElementById('login-password').value.trim();
+            const errorMsg = document.getElementById('login-error');
+
+            errorMsg.style.display = 'none';
+
+            const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
+
+            if (error || !data.session) {
+                errorMsg.style.display = 'block';
+                errorMsg.innerText = error ? error.message : 'Credenciales inválidas.';
+            } else {
+                document.getElementById('login-overlay').style.display = 'none';
+                document.getElementById('user-email').innerText = data.session.user.email;
+                loadClients();
+            }
+        }
+
+        async function handleLogout() {
+            await supabaseClient.auth.signOut();
+            document.getElementById('login-overlay').style.display = 'flex';
+        }
+
+        async function loadClients() {
+            const grid = document.getElementById('clients-grid');
+            const { data, error } = await supabaseClient.from('agency_crm_clients').select('*').order('created_at', { ascending: false });
+
+            if (error) {
+                grid.innerHTML = `<div style="color: var(--red-danger)">Error cargando clientes: ${error.message}</div>`;
+                return;
+            }
+
+            if (!data || data.length === 0) {
+                grid.innerHTML = `<div style="color: var(--text-muted)">No hay clientes registrados aún. Haz clic en "Agregar Cliente".</div>`;
+                return;
+            }
+
+            grid.innerHTML = data.map(c => `
+                <div class="client-card">
+                    <div class="client-header">
+                        <div class="client-name">${c.client_name} <span style="font-size:0.75rem; color:var(--text-muted)">(${c.client_id})</span></div>
+                        <div class="status-pill ${c.is_active ? 'status-active' : 'status-inactive'}" onclick="toggleStatus('${c.id}', ${c.is_active})">
+                            ${c.is_active ? '● ACTIVO' : '○ INACTIVO'}
+                        </div>
+                    </div>
+
+                    <div class="field-group">
+                        <div class="field-label">Kommo Subdominio:</div>
+                        <div class="field-value">${c.kommo_subdomain}</div>
+                    </div>
+
+                    <div class="field-group">
+                        <div class="field-label">URL Enlace Afiliado RedTrack:</div>
+                        <div class="field-value">${c.casino_offer_url}</div>
+                    </div>
+
+                    <div class="field-group">
+                        <div class="field-label">Prompt del Agente IA:</div>
+                        <textarea class="field-value" onchange="updatePrompt('${c.id}', this.value)">${c.system_prompt}</textarea>
+                    </div>
+
+                    <div style="font-size: 0.75rem; color: var(--text-muted); text-align: right;">
+                        Webhook Vercel: <code>/api/kommo-agent?client=${c.client_id}</code>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        async function toggleStatus(id, current) {
+            await supabaseClient.from('agency_crm_clients').update({ is_active: !current }).eq('id', id);
+            loadClients();
+        }
+
+        async function updatePrompt(id, newPrompt) {
+            await supabaseClient.from('agency_crm_clients').update({ system_prompt: newPrompt }).eq('id', id);
+            alert('¡Prompt actualizado exitosamente!');
+        }
+
+        function openAddModal() {
+            document.getElementById('add-modal').style.display = 'flex';
+        }
+
+        function closeAddModal() {
+            document.getElementById('add-modal').style.display = 'none';
+        }
+
+        async function saveNewClient() {
+            const client_id = document.getElementById('new-id').value.trim();
+            const client_name = document.getElementById('new-name').value.trim();
+            const kommo_subdomain = document.getElementById('new-kommo').value.trim();
+            const casino_offer_url = document.getElementById('new-url').value.trim();
+            const system_prompt = document.getElementById('new-prompt').value.trim();
+
+            if (!client_id || !client_name || !kommo_subdomain) {
+                alert('Por favor completa los campos obligatorios.');
+                return;
+            }
+
+            const { error } = await supabaseClient.from('agency_crm_clients').insert([{
+                client_id,
+                client_name,
+                kommo_subdomain,
+                kommo_api_token: 'PENDIENTE_TOKEN',
+                casino_offer_url,
+                system_prompt
+            }]);
+
+            if (error) {
+                alert('Error al guardar cliente: ' + error.message);
+            } else {
+                closeAddModal();
+                loadClients();
+            }
+        }
+
+        // Ejecutar verificación de sesión al cargar
+        checkSession();
+    </script>
+</body>
+</html>
