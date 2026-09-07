@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nexxora | Jugá y retirá al instante</title>
+<!-- SEO & Meta Tags -->
+<meta name="description" content="Nexxora - Plataforma oficial de juegos online. Registro en segundos, retiros instantáneos y soporte 24/7.">
+
+<!-- Microsoft Clarity -->
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "y7haktxy1r");
+</script>
+
+<!-- RedTrack Universal Tracking Script -->
+<script type="text/javascript" src="https://trk.accbloom.online/track.js"></script>
+
+<style>
+  :root{
+    --bg:#0d0a14;
+    --bg-alt:#161022;
+    --gold:#e8b64a;
+    --gold-soft:#f2d089;
+    --ember:#d9432e;
+    --ink:#f3ede0;
+    --ink-dim:#b9aec4;
+    --card:#1c1528;
+    --border:rgba(232,182,74,0.22);
+    --gold-glow: rgba(232, 182, 74, 0.35);
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background:radial-gradient(ellipse at top, #241838 0%, var(--bg) 60%);
+    color:var(--ink);
+    font-family:'Georgia', 'Times New Roman', serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+    min-height: 100vh;
+  }
+  .sans{font-family:-apple-system, 'Segoe UI', Roboto, sans-serif;}
+
+  header{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:18px 6vw;
+    border-bottom:1px solid var(--border);
+    background: rgba(13, 10, 20, 0.85);
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .logo{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size:1.6rem;
+    font-weight:700;
+    letter-spacing:0.02em;
+    color:var(--gold-soft);
+  }
+  .logo img{
+    height: 42px;
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 8px var(--gold-glow));
+  }
+  .logo span{color:var(--ember);}
+
+  /* Two Column Hero Header */
+  .hero{
+    padding: 60px 6vw 50px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .hero-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+  }
+  .hero-content{
+    text-align: left;
+  }
+  .hero .eyebrow{
+    font-family:inherit;
+    font-style:italic;
+    color:var(--gold-soft);
+    font-size:1.05rem;
+    margin-bottom:14px;
+    display: inline-block;
+    background: rgba(232, 182, 74, 0.1);
+    padding: 6px 16px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+  }
+  .hero h1{
+    font-size:clamp(2.2rem, 4.5vw, 3.4rem);
+    line-height:1.15;
+    color:var(--ink);
+    margin-bottom:20px;
+  }
+  .hero h1 em{
+    font-style:normal;
+    color:var(--gold);
+    text-shadow: 0 0 20px rgba(232,182,74,0.3);
+  }
+  .hero p.sub{
+    font-family:inherit;
+    color:var(--ink-dim);
+    font-size:1.15rem;
+    max-width:520px;
+    margin:0 0 32px;
+    line-height: 1.6;
+  }
+  .hero-image{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+  .hero-image::before {
+    content: '';
+    position: absolute;
+    width: 290px;
+    height: 290px;
+    background: radial-gradient(circle, rgba(232, 182, 74, 0.25) 0%, rgba(217, 67, 46, 0.15) 50%, transparent 70%);
+    border-radius: 50%;
+    z-index: 0;
+    animation: pulseGlow 4s infinite alternate;
+  }
+  .tiger-img{
+    position: relative;
+    z-index: 1;
+    max-width: 100%;
+    height: auto;
+    max-height: 420px;
+    object-fit: contain;
+    filter: drop-shadow(0 15px 30px rgba(0,0,0,0.6)) drop-shadow(0 0 20px rgba(232,182,74,0.3));
+    animation: floatAnimation 5s ease-in-out infinite;
+  }
+
+  @keyframes floatAnimation {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-12px) rotate(1deg); }
+  }
+  @keyframes pulseGlow {
+    0% { transform: scale(0.95); opacity: 0.7; }
+    100% { transform: scale(1.1); opacity: 1; }
+  }
+
+  .cta-btn{
+    display:inline-block;
+    background:linear-gradient(180deg, var(--gold-soft), var(--gold));
+    color:#241705;
+    font-family:inherit;
+    font-weight:700;
+    font-size:1.15rem;
+    padding:16px 40px;
+    border-radius:8px;
+    text-decoration:none;
+    box-shadow:0 8px 24px rgba(232,182,74,0.3);
+    transition:all 0.2s ease;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+  }
+  .cta-btn:hover{ 
+    transform:translateY(-3px); 
+    box-shadow:0 12px 30px rgba(232,182,74,0.5);
+    background:linear-gradient(180deg, #ffffff, var(--gold-soft));
+  }
+
+  .cta-note{
+    margin-top:14px;
+    font-size:0.85rem;
+    color:var(--ink-dim);
+  }
+
+  .trust{
+    display:flex;
+    gap:28px;
+    justify-content:center;
+    flex-wrap:wrap;
+    max-width:900px;
+    margin:40px auto 0;
+    padding:0 6vw;
+  }
+  .trust-item{
+    flex:1 1 180px;
+    max-width:210px;
+    text-align:center;
+    background: rgba(28, 21, 40, 0.6);
+    border: 1px solid var(--border);
+    padding: 20px 14px;
+    border-radius: 12px;
+    transition: transform 0.2s ease;
+  }
+  .trust-item:hover{
+    transform: translateY(-4px);
+    border-color: var(--gold);
+  }
+  .trust-item .mark{
+    font-size:1.8rem;
+    color:var(--gold);
+    display:block;
+    margin-bottom:8px;
+  }
+  .trust-item .label{
+    font-family:inherit;
+    color:var(--ink);
+    font-size:0.95rem;
+    font-weight: 500;
+  }
+
+  /* Games Grid */
+  .games{
+    max-width:1050px;
+    margin:65px auto 0;
+    padding:0 6vw;
+  }
+  .games h2{
+    text-align:center;
+    font-size:1.6rem;
+    color:var(--gold-soft);
+    font-weight:600;
+    margin-bottom:32px;
+    letter-spacing: 0.03em;
+  }
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:18px;
+  }
+  .tile{
+    aspect-ratio:1/1;
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:12px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  .tile-img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+  }
+  .tile-overlay{
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(13,10,20,0.05) 30%, rgba(13,10,20,0.92) 100%);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 14px 10px;
+    text-align: center;
+  }
+  .tile-label{
+    color: var(--ink);
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.9);
+    letter-spacing: 0.02em;
+    font-family: -apple-system, 'Segoe UI', Roboto, sans-serif;
+  }
+  .tile:hover{
+    transform: translateY(-6px);
+    border-color: var(--gold);
+    box-shadow: 0 10px 25px rgba(232, 182, 74, 0.3);
+  }
+  .tile:hover .tile-img{
+    transform: scale(1.08);
+  }
+
+  /* Responsiveness */
+  @media (max-width:850px){
+    .hero-container{
+      grid-template-columns: 1fr;
+      text-align: center;
+      gap: 30px;
+    }
+    .hero-content{
+      text-align: center;
+    }
+    .hero p.sub{
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .grid{grid-template-columns:repeat(2, 1fr);}
+  }
+  @media (max-width:480px){
+    .grid{grid-template-columns:repeat(2, 1fr); gap: 12px;}
+    .hero h1{ font-size: 2rem; }
+    .tiger-img{ max-height: 300px; }
+  }
+
+  .closer{
+    text-align:center;
+    padding:70px 6vw 50px;
+  }
+  .closer h3{
+    font-size:1.8rem;
+    margin-bottom:20px;
+    color: var(--ink);
+  }
+
+  footer{
+    border-top:1px solid var(--border);
+    padding:30px 6vw 40px;
+    text-align:center;
+    background: rgba(13, 10, 20, 0.95);
+  }
+  footer p{
+    font-family:inherit;
+    color:var(--ink-dim);
+    font-size:0.85rem;
+    max-width:600px;
+    margin:0 auto 10px;
+    line-height: 1.6;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <img src="/Imagen%20nexxora/VErsion%202/tigre.png" alt="Nexxora Tiger Logo">
+    Lucky<span>Bit</span>
+  </div>
+  <a href="https://trk.accbloom.online/6a960f2cccae1c8c0e4890fb" class="cta-btn sans" style="padding:10px 22px; font-size:0.95rem;">Ingresar</a>
+</header>
+
+<section class="hero">
+  <div class="hero-container">
+    <div class="hero-content">
+      <p class="eyebrow">Plataforma habilitada · pagos automáticos</p>
+      <h1>Cargá hoy y jugá con <em>20% extra</em></h1>
+      <p class="sub">Registro rápido, retiros directos a tu cuenta y soporte en vivo cuando lo necesités.</p>
+      <a href="https://trk.accbloom.online/6a960f2cccae1c8c0e4890fb" class="cta-btn">Quiero mi bono</a>
+      <p class="cta-note">Registro en menos de un minuto</p>
+    </div>
+    <div class="hero-image">
+      <img src="/Imagen%20nexxora/VErsion%202/tigre.png" alt="Nexxora Tiger Mascot" class="tiger-img">
+    </div>
+  </div>
+</section>
+
+<section class="trust">
+  <div class="trust-item">
+    <span class="mark">⏱</span>
+    <span class="label">Retiros en minutos</span>
+  </div>
+  <div class="trust-item">
+    <span class="mark">🔒</span>
+    <span class="label">Pagos verificados</span>
+  </div>
+  <div class="trust-item">
+    <span class="mark">💬</span>
+    <span class="label">Atención en vivo 24/7</span>
+  </div>
+</section>
+
+<section class="games">
+  <h2>Algunos de los juegos disponibles</h2>
+  <div class="grid">
+    <div class="tile">
+      <img src="/Imagen%20nexxora/VErsion%202/Ruleta%20en%20vivo.jpg" alt="Ruleta en vivo" class="tile-img" loading="lazy">
+      <div class="tile-overlay"><span class="tile-label">Ruleta en vivo</span></div>
+    </div>
+    <div class="tile">
+      <img src="/Imagen%20nexxora/VErsion%202/Slots%20cl%C3%A1sicos.jpg" alt="Slots clásicos" class="tile-img" loading="lazy">
+      <div class="tile-overlay"><span class="tile-label">Slots clásicos</span></div>
+    </div>
+    <div class="tile">
+      <img src="/Imagen%20nexxora/VErsion%202/Blackjack.jpg" alt="Blackjack" class="tile-img" loading="lazy">
+      <div class="tile-overlay"><span class="tile-label">Blackjack</span></div>
+    </div>
+    <div class="tile">
+      <img src="/Imagen%20nexxora/VErsion%202/Jackpot%20progresivo.jpg" alt="Jackpot progresivo" class="tile-img" loading="lazy">
+      <div class="tile-overlay"><span class="tile-label">Jackpot progresivo</span></div>
+    </div>
+    <div class="tile">
+      <img src="/Imagen%20nexxora/VErsion%202/Bingo.jpg" alt="Bingo" class="tile-img" loading="lazy">
+      <div class="tile-overlay"><span class="tile-label">Bingo</span></div>
+    </div>
+    <div class="tile">
+      <img src="/Imagen%20nexxora/VErsion%202/Cartas.jpg" alt="Cartas" class="tile-img" loading="lazy">
+      <div class="tile-overlay"><span class="tile-label">Cartas</span></div>
+    </div>
+    <div class="tile">
+      <img src="/Imagen%20nexxora/VErsion%202/Tragamonedas.jpg" alt="Tragamonedas" class="tile-img" loading="lazy">
+      <div class="tile-overlay"><span class="tile-label">Tragamonedas</span></div>
+    </div>
+    <div class="tile">
+      <img src="/Imagen%20nexxora/VErsion%202/Mesa%20en%20vivo.jpg" alt="Mesa en vivo" class="tile-img" loading="lazy">
+      <div class="tile-overlay"><span class="tile-label">Mesa en vivo</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="closer">
+  <h3>Tu cuenta te espera</h3>
+  <a href="https://trk.accbloom.online/6a960f2cccae1c8c0e4890fb" class="cta-btn">Crear mi usuario</a>
+</section>
+
+<footer>
+  <p>Servicio exclusivo para mayores de 18 años. Jugá con responsabilidad. Al continuar aceptás el tratamiento de tus datos para fines de registro, verificación y soporte.</p>
+  <p>© 2026 Nexxora / LuckyBit</p>
+</footer>
+
+</body>
+</html>
