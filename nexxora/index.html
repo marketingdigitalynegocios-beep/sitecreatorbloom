@@ -73,12 +73,12 @@
   /* Two Column Hero Header */
   .hero{
     padding: 60px 6vw 50px;
-    max-width: 1100px;
+    max-width: 1200px;
     margin: 0 auto;
   }
   .hero-container{
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1.15fr;
     gap: 40px;
     align-items: center;
   }
@@ -125,9 +125,9 @@
   .hero-image::before {
     content: '';
     position: absolute;
-    width: 290px;
-    height: 290px;
-    background: radial-gradient(circle, rgba(232, 182, 74, 0.25) 0%, rgba(217, 67, 46, 0.15) 50%, transparent 70%);
+    width: 420px;
+    height: 420px;
+    background: radial-gradient(circle, rgba(232, 182, 74, 0.28) 0%, rgba(217, 67, 46, 0.18) 50%, transparent 70%);
     border-radius: 50%;
     z-index: 0;
     animation: pulseGlow 4s infinite alternate;
@@ -135,11 +135,12 @@
   .tiger-img{
     position: relative;
     z-index: 1;
-    max-width: 100%;
+    width: 110%;
+    max-width: 580px;
     height: auto;
-    max-height: 420px;
+    max-height: 580px;
     object-fit: contain;
-    filter: drop-shadow(0 15px 30px rgba(0,0,0,0.6)) drop-shadow(0 0 20px rgba(232,182,74,0.3));
+    filter: drop-shadow(0 20px 35px rgba(0,0,0,0.65)) drop-shadow(0 0 25px rgba(232,182,74,0.35));
     animation: floatAnimation 5s ease-in-out infinite;
   }
 
@@ -292,12 +293,17 @@
       margin-left: auto;
       margin-right: auto;
     }
+    .tiger-img{ 
+      width: 100%;
+      max-width: 440px;
+      max-height: 440px;
+    }
     .grid{grid-template-columns:repeat(2, 1fr);}
   }
   @media (max-width:480px){
     .grid{grid-template-columns:repeat(2, 1fr); gap: 12px;}
     .hero h1{ font-size: 2rem; }
-    .tiger-img{ max-height: 300px; }
+    .tiger-img{ max-height: 360px; max-width: 360px; }
   }
 
   .closer{
