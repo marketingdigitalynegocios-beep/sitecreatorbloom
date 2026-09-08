@@ -90,37 +90,79 @@ src="https://www.facebook.net/tr?id=1018336844589721&ev=PageView&noscript=1"
   }
   .logo span{color:var(--ember);}
 
-  /* Full-Screen Clean Banner 8 Hero */
-  .hero-banner-section {
-    width: 100%;
-    max-width: 100%;
-    margin: 0;
-    padding: 0;
+  /* Two Column Hero Header with Banner 8 */
+  .hero{
+    padding: 50px 6vw 40px;
+    max-width: 1200px;
+    margin: 0 auto;
   }
-  .banner-container {
+  .hero-container{
+    display: grid;
+    grid-template-columns: 1fr 1.15fr;
+    gap: 40px;
+    align-items: center;
+  }
+  .hero-content{
+    text-align: left;
+  }
+  .hero .eyebrow{
+    font-family:inherit;
+    font-style:italic;
+    color:var(--gold-soft);
+    font-size:1.05rem;
+    margin-bottom:14px;
+    display: inline-block;
+    background: rgba(232, 182, 74, 0.1);
+    padding: 6px 16px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+  }
+  .hero h1{
+    font-size:clamp(2.2rem, 4.5vw, 3.4rem);
+    line-height:1.15;
+    color:var(--ink);
+    margin-bottom:20px;
+  }
+  .hero h1 em{
+    font-style:normal;
+    color:var(--gold);
+    text-shadow: 0 0 20px rgba(232,182,74,0.3);
+  }
+  .hero p.sub{
+    font-family:inherit;
+    color:var(--ink-dim);
+    font-size:1.15rem;
+    max-width:520px;
+    margin:0 0 32px;
+    line-height: 1.6;
+  }
+  .hero-image{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+  .hero-banner-card{
+    position: relative;
+    z-index: 1;
     width: 100%;
-    border-bottom: 2px solid var(--border);
-    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.7);
-    background: var(--card);
+    max-width: 580px;
+    height: auto;
+    border-radius: 18px;
+    border: 1px solid var(--border);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.65), 0 0 25px rgba(232,182,74,0.25);
     overflow: hidden;
+    transition: transform 0.3s ease;
   }
-  .banner-link {
-    display: block;
-    width: 100%;
-    text-decoration: none;
+  .hero-banner-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--gold);
   }
-  .hero-banner-img {
+  .hero-banner-card img{
     width: 100%;
     height: auto;
-    max-height: 620px;
-    object-fit: cover;
-    object-position: center;
     display: block;
-    filter: brightness(1) contrast(1.02);
-    transition: transform 0.5s ease;
-  }
-  .banner-link:hover .hero-banner-img {
-    transform: scale(1.015);
+    object-fit: cover;
   }
 
   .cta-btn{
@@ -141,6 +183,12 @@ src="https://www.facebook.net/tr?id=1018336844589721&ev=PageView&noscript=1"
     transform:translateY(-3px); 
     box-shadow:0 12px 30px rgba(232,182,74,0.5);
     background:linear-gradient(180deg, #ffffff, var(--gold-soft));
+  }
+
+  .cta-note{
+    margin-top:14px;
+    font-size:0.85rem;
+    color:var(--ink-dim);
   }
 
   .trust{
@@ -230,17 +278,29 @@ src="https://www.facebook.net/tr?id=1018336844589721&ev=PageView&noscript=1"
   }
 
   /* Enhanced Mobile Responsive Design */
+  @media (max-width:850px){
+    .hero-container{
+      grid-template-columns: 1fr;
+      text-align: center;
+      gap: 25px;
+    }
+    .hero-content{
+      text-align: center;
+    }
+    .hero p.sub{
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+
   @media (max-width:600px){
     header { padding: 12px 4vw; }
     .logo { font-size: 1.3rem; }
     .logo img { height: 36px; }
-    
-    .hero-banner-img {
-      aspect-ratio: 16/9;
-      height: auto;
-      object-fit: cover;
-    }
-
+    .hero { padding: 25px 4vw 20px; }
+    .hero .eyebrow { font-size: 0.9rem; padding: 4px 12px; }
+    .hero h1 { font-size: 1.85rem; line-height: 1.2; }
+    .hero p.sub { font-size: 1rem; margin-bottom: 22px; }
     .cta-btn { width: 100%; max-width: 320px; padding: 14px 20px; font-size: 1.05rem; }
     
     .trust { gap: 10px; padding: 0 3vw; }
@@ -263,12 +323,20 @@ src="https://www.facebook.net/tr?id=1018336844589721&ev=PageView&noscript=1"
   <a href="https://bettbit.com/?clickid=JO842086597750&id=JO8420" onclick="if(typeof fbq === 'function') { fbq('track', 'Contact'); }" class="cta-btn sans" style="padding:8px 18px; font-size:0.88rem;">Entrar</a>
 </header>
 
-<!-- Full-Screen Banner 8 Hero -->
-<section class="hero-banner-section">
-  <div class="banner-container">
-    <a href="https://bettbit.com/?clickid=JO842086597750&id=JO8420" onclick="if(typeof fbq === 'function') { fbq('track', 'Contact'); }" class="banner-link">
-      <img src="/banner%208.jpg" alt="B-bit Bônus 50%" class="hero-banner-img">
-    </a>
+<section class="hero">
+  <div class="hero-container">
+    <div class="hero-content">
+      <p class="eyebrow">🎁 Bônus de 1º Depósito · Liberação Instantânea</p>
+      <h1>Garanta <em>50% a mais</em> de saldo ao se cadastrar hoje</h1>
+      <p class="sub">Acesse a plataforma oficial B-bit. Saques descomplicados via PIX, suporte ao vivo 24h e jogos auditados com alta taxa de retorno.</p>
+      <a href="https://bettbit.com/?clickid=JO842086597750&id=JO8420" onclick="if(typeof fbq === 'function') { fbq('track', 'Contact'); }" class="cta-btn">Resgatar 50% de Bônus Agora</a>
+      <p class="cta-note">⚡ Promoção por tempo limitado · Ativação imediata</p>
+    </div>
+    <div class="hero-image">
+      <a href="https://bettbit.com/?clickid=JO842086597750&id=JO8420" onclick="if(typeof fbq === 'function') { fbq('track', 'Contact'); }" class="hero-banner-card">
+        <img src="/banner%208.jpg" alt="B-bit Promoção Banner 8">
+      </a>
+    </div>
   </div>
 </section>
 
