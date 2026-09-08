@@ -62,7 +62,7 @@ src="https://www.facebook.net/tr?id=1018336844589721&ev=PageView&noscript=1"
     line-height:1.5;
     -webkit-font-smoothing:antialiased;
     min-height: 100vh;
-    padding-bottom: 70px;
+    padding-bottom: 75px;
     overflow-x: hidden;
   }
 
@@ -479,14 +479,53 @@ src="https://www.facebook.net/tr?id=1018336844589721&ev=PageView&noscript=1"
   @media (max-width: 900px) {
     .trust-grid { grid-template-columns: repeat(2, 1fr); }
     .grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
-    .toast-container { left: 10px; right: 10px; bottom: 80px; }
-    .toast-card { max-width: 100%; }
   }
   @media (max-width: 600px) {
-    .carousel-btn { width: 38px; height: 38px; font-size: 1.1rem; }
-    .carousel-btn.prev { left: 10px; }
-    .carousel-btn.next { right: 10px; }
+    header { padding: 10px 4vw; }
+    .logo { font-size: 1.25rem; }
+    .logo img { height: 34px; }
+    .cta-btn-sm { padding: 8px 16px; font-size: 0.82rem; }
+
+    .slide-img {
+      aspect-ratio: 16/9;
+      height: auto;
+      object-fit: cover;
+    }
+
+    .carousel-btn { width: 36px; height: 36px; font-size: 1.1rem; }
+    .carousel-btn.prev { left: 8px; }
+    .carousel-btn.next { right: 8px; }
+    .carousel-dots { bottom: 12px; gap: 8px; }
+    .dot { width: 10px; height: 10px; }
+    .dot.active { width: 28px; }
+
+    .toast-container { left: 10px; right: 10px; bottom: 75px; }
+    .toast-card { max-width: 100%; padding: 10px 14px; gap: 10px; }
+    .toast-avatar { width: 36px; height: 36px; font-size: 1.1rem; }
+    .toast-user { font-size: 0.82rem; }
+    .toast-action { font-size: 0.78rem; }
+    .toast-time { font-size: 0.68rem; }
+
+    .trust-section { margin-top: 30px; padding: 0 4vw; }
+    .trust-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .trust-box { padding: 14px 10px; }
+    .trust-icon { font-size: 1.6rem; margin-bottom: 4px; }
+    .trust-title { font-size: 0.9rem; }
+    .trust-sub { font-size: 0.75rem; }
+
+    .games-section { margin-top: 35px; padding: 0 4vw; }
+    .section-title { font-size: 1.35rem; }
+    .section-subtitle { font-size: 0.9rem; margin-bottom: 20px; }
     .grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .tile-label { font-size: 0.85rem; }
+
+    .cta-final-section { margin: 40px auto 20px; padding: 30px 16px; }
+    .cta-final-title { font-size: 1.4rem; }
+    .cta-final-text { font-size: 0.92rem; margin-bottom: 20px; }
+    .cta-final-section .cta-btn { font-size: 1rem !important; padding: 14px 24px !important; width: 100%; }
+
+    .floating-bar { padding: 10px 14px; }
+    .floating-btn { font-size: 0.92rem; padding: 12px; }
   }
 </style>
 </head>
@@ -501,7 +540,7 @@ src="https://www.facebook.net/tr?id=1018336844589721&ev=PageView&noscript=1"
   <a href="https://bettbit.com/?clickid=JO842086597750&id=JO8420" onclick="if(typeof fbq === 'function') { fbq('track', 'Contact'); }" class="cta-btn cta-btn-sm">Entrar</a>
 </header>
 
-<!-- Main Full-Screen Clean Banner Carousel Hero -->
+<!-- Main Full-Screen Clean Banner Hero Carousel -->
 <section class="hero-slider-section">
   <div class="carousel-container">
     <div class="carousel-slides" id="carouselSlides">
