@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LuckyBit | Plataforma Oficial de Jogos Online & Bônus de 20%</title>
+<title>LuckyBit | Plataforma Oficial de Jogos Online & Bônus de 50%</title>
 <!-- SEO & Meta Tags -->
-<meta name="description" content="LuckyBit - Sua plataforma premium de jogos online. Cadastro em segundos, saques instantâneos via PIX e suporte ao vivo 24/7. Resgate seu bônus de 20%!">
+<meta name="description" content="LuckyBit - Sua plataforma premium de jogos online. Cadastro em segundos, saques instantâneos via PIX e suporte ao vivo 24/7. Resgate seu bônus de 50%!">
 
 <!-- Microsoft Clarity -->
 <script type="text/javascript">
@@ -63,16 +63,17 @@ src="https://www.facebook.net/tr?id=1018336844589721&ev=PageView&noscript=1"
     -webkit-font-smoothing:antialiased;
     min-height: 100vh;
     padding-bottom: 70px;
+    overflow-x: hidden;
   }
 
-  /* Header */
+  /* Clean Header without badges */
   header{
     display:flex; 
     justify-content:space-between; 
     align-items:center;
-    padding:16px 5vw;
+    padding:14px 5vw;
     border-bottom:1px solid var(--border);
-    background: rgba(10, 7, 18, 0.88);
+    background: rgba(10, 7, 18, 0.92);
     backdrop-filter: blur(14px);
     position: sticky;
     top: 0;
@@ -95,37 +96,6 @@ src="https://www.facebook.net/tr?id=1018336844589721&ev=PageView&noscript=1"
     filter: drop-shadow(0 2px 10px var(--gold-glow));
   }
   .logo span{color:var(--ember);}
-
-  .header-badges {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
-  .online-indicator {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: #34d399;
-    background: rgba(16, 185, 129, 0.12);
-    padding: 6px 14px;
-    border-radius: 20px;
-    border: 1px solid rgba(16, 185, 129, 0.25);
-  }
-  .online-dot {
-    width: 8px;
-    height: 8px;
-    background-color: #10b981;
-    border-radius: 50%;
-    box-shadow: 0 0 10px #10b981;
-    animation: blink 1.5s infinite;
-  }
-
-  @keyframes blink {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.4; transform: scale(0.8); }
-  }
 
   .cta-btn{
     display:inline-flex;
@@ -151,75 +121,42 @@ src="https://www.facebook.net/tr?id=1018336844589721&ev=PageView&noscript=1"
     background:linear-gradient(135deg, #ffffff 0%, var(--gold-soft) 100%);
   }
   .cta-btn-sm {
-    padding: 10px 20px;
+    padding: 10px 22px;
     font-size: 0.9rem;
   }
 
-  /* Winner Ticker Bar */
-  .ticker-wrap {
-    width: 100%;
-    background: rgba(25, 18, 40, 0.9);
-    border-bottom: 1px solid var(--border-soft);
-    overflow: hidden;
-    height: 40px;
-    display: flex;
-    align-items: center;
-  }
-  .ticker {
-    display: flex;
-    width: max-content;
-    animation: ticker 35s linear infinite;
-  }
-  .ticker-item {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    white-space: nowrap;
-    padding: 0 28px;
-    font-size: 0.88rem;
-    color: var(--ink-dim);
-  }
-  .ticker-item strong {
-    color: var(--gold-soft);
-  }
-  .ticker-item span.highlight {
-    color: var(--green-accent);
-    font-weight: 700;
-  }
-
-  @keyframes ticker {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
-  }
-
-  /* Banner Carousel Hero Section */
+  /* Edge-to-Edge Full-Screen Banner Hero Section */
   .hero-slider-section {
-    max-width: 1200px;
-    margin: 35px auto 20px;
-    padding: 0 5vw;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    position: relative;
   }
 
   .carousel-container {
     position: relative;
     width: 100%;
-    border-radius: 20px;
-    overflow: hidden;
-    border: 2px solid var(--border);
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(245, 184, 61, 0.2);
+    border-radius: 0;
+    border: none;
+    border-bottom: 2px solid var(--border);
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.7);
     background: var(--card-bg);
+    overflow: hidden;
   }
 
   .carousel-slides {
     display: flex;
-    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
     width: 100%;
   }
 
   .slide {
     min-width: 100%;
     position: relative;
-    aspect-ratio: 16/7;
-    max-height: 480px;
+    height: 75vh;
+    min-height: 460px;
+    max-height: 720px;
     overflow: hidden;
   }
 
@@ -229,25 +166,25 @@ src="https://www.facebook.net/tr?id=1018336844589721&ev=PageView&noscript=1"
     object-fit: cover;
     object-position: center;
     display: block;
-    filter: brightness(0.85) contrast(1.05);
+    filter: brightness(0.82) contrast(1.08);
     transition: transform 6s ease;
   }
 
   .slide.active .slide-img {
-    transform: scale(1.04);
+    transform: scale(1.05);
   }
 
   .slide-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(90deg, rgba(10, 7, 18, 0.92) 0%, rgba(10, 7, 18, 0.5) 55%, transparent 100%);
+    background: linear-gradient(90deg, rgba(10, 7, 18, 0.95) 0%, rgba(10, 7, 18, 0.65) 55%, transparent 100%);
     display: flex;
     align-items: center;
-    padding: 0 60px;
+    padding: 0 8vw;
   }
 
   .slide-content {
-    max-width: 520px;
+    max-width: 580px;
     z-index: 2;
   }
 
@@ -258,22 +195,22 @@ src="https://www.facebook.net/tr?id=1018336844589721&ev=PageView&noscript=1"
     background: rgba(245, 184, 61, 0.15);
     border: 1px solid var(--gold);
     color: var(--gold-soft);
-    padding: 6px 14px;
+    padding: 6px 16px;
     border-radius: 20px;
     font-size: 0.85rem;
     font-weight: 700;
-    margin-bottom: 14px;
+    margin-bottom: 16px;
     text-transform: uppercase;
     letter-spacing: 0.05em;
   }
 
   .slide-title {
-    font-size: clamp(1.8rem, 3.8vw, 2.8rem);
+    font-size: clamp(2rem, 4.5vw, 3.4rem);
     font-weight: 900;
-    line-height: 1.15;
+    line-height: 1.12;
     color: var(--ink);
-    margin-bottom: 12px;
-    text-shadow: 0 4px 12px rgba(0,0,0,0.8);
+    margin-bottom: 16px;
+    text-shadow: 0 4px 14px rgba(0,0,0,0.9);
   }
 
   .slide-title em {
@@ -285,9 +222,9 @@ src="https://www.facebook.net/tr?id=1018336844589721&ev=PageView&noscript=1"
   }
 
   .slide-desc {
-    font-size: clamp(0.95rem, 1.6vw, 1.15rem);
+    font-size: clamp(1rem, 1.8vw, 1.2rem);
     color: var(--ink-dim);
-    margin-bottom: 24px;
+    margin-bottom: 28px;
     line-height: 1.5;
   }
 
@@ -296,63 +233,125 @@ src="https://www.facebook.net/tr?id=1018336844589721&ev=PageView&noscript=1"
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    width: 48px;
-    height: 48px;
-    background: rgba(10, 7, 18, 0.7);
+    width: 52px;
+    height: 52px;
+    background: rgba(10, 7, 18, 0.75);
     border: 1px solid var(--border);
     color: var(--gold-soft);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     cursor: pointer;
     z-index: 10;
     transition: all 0.2s ease;
-    backdrop-filter: blur(4px);
+    backdrop-filter: blur(6px);
   }
   .carousel-btn:hover {
     background: var(--gold);
     color: #1a0f00;
     transform: translateY(-50%) scale(1.1);
   }
-  .carousel-btn.prev { left: 20px; }
-  .carousel-btn.next { right: 20px; }
+  .carousel-btn.prev { left: 25px; }
+  .carousel-btn.next { right: 25px; }
 
   .carousel-dots {
     position: absolute;
-    bottom: 20px;
+    bottom: 25px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
-    gap: 10px;
+    gap: 12px;
     z-index: 10;
   }
   .dot {
     width: 12px;
     height: 12px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.35);
     cursor: pointer;
     transition: all 0.3s ease;
-    border: 1px solid rgba(0,0,0,0.4);
+    border: 1px solid rgba(0,0,0,0.5);
   }
   .dot.active {
-    width: 32px;
+    width: 36px;
     border-radius: 12px;
     background: var(--gold);
-    box-shadow: 0 0 10px var(--gold-glow);
+    box-shadow: 0 0 12px var(--gold-glow);
+  }
+
+  /* Dynamic Toast Notification Popup */
+  .toast-container {
+    position: fixed;
+    bottom: 85px;
+    left: 20px;
+    z-index: 1000;
+    pointer-events: none;
+  }
+  .toast-card {
+    background: rgba(19, 14, 32, 0.95);
+    border: 1px solid var(--gold);
+    border-left: 4px solid var(--green-accent);
+    border-radius: 14px;
+    padding: 12px 18px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.65), 0 0 15px rgba(16, 185, 129, 0.25);
+    backdrop-filter: blur(14px);
+    transform: translateY(120px) scale(0.9);
+    opacity: 0;
+    transition: all 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    max-width: 380px;
+    pointer-events: auto;
+  }
+  .toast-card.show {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  .toast-avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(245, 184, 61, 0.25), rgba(16, 185, 129, 0.25));
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    flex-shrink: 0;
+  }
+  .toast-body {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .toast-user {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .toast-action {
+    font-size: 0.82rem;
+    color: var(--gold-soft);
+    font-weight: 600;
+  }
+  .toast-time {
+    font-size: 0.72rem;
+    color: var(--ink-dim);
+    margin-top: 2px;
   }
 
   /* Promo Banner Highlights Cards */
   .banner-cards-section {
     max-width: 1200px;
-    margin: 50px auto 0;
+    margin: 60px auto 0;
     padding: 0 5vw;
   }
   .section-title {
     text-align: center;
-    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    font-size: clamp(1.6rem, 3.2vw, 2.4rem);
     font-weight: 800;
     color: var(--ink);
     margin-bottom: 10px;
@@ -360,7 +359,7 @@ src="https://www.facebook.net/tr?id=1018336844589721&ev=PageView&noscript=1"
   .section-subtitle {
     text-align: center;
     color: var(--ink-dim);
-    font-size: 1rem;
+    font-size: 1.05rem;
     margin-bottom: 35px;
   }
 
@@ -627,55 +626,36 @@ src="https://www.facebook.net/tr?id=1018336844589721&ev=PageView&noscript=1"
 
   /* Responsive Rules */
   @media (max-width: 900px) {
-    .slide-overlay { padding: 0 30px; }
+    .slide { height: 60vh; min-height: 400px; }
+    .slide-overlay { padding: 0 5vw; }
     .banner-grid { grid-template-columns: 1fr; }
     .trust-grid { grid-template-columns: repeat(2, 1fr); }
     .grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
-    .header-badges { display: none; }
+    .toast-container { left: 10px; right: 10px; bottom: 80px; }
+    .toast-card { max-width: 100%; }
   }
   @media (max-width: 600px) {
-    .slide { aspect-ratio: 4/3; }
-    .slide-overlay { padding: 0 20px; }
-    .carousel-btn { width: 36px; height: 36px; font-size: 1rem; }
+    .slide { height: 55vh; min-height: 360px; }
+    .slide-overlay { padding: 0 4vw; }
+    .carousel-btn { width: 38px; height: 38px; font-size: 1.1rem; }
+    .carousel-btn.prev { left: 10px; }
+    .carousel-btn.next { right: 10px; }
     .grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
   }
 </style>
 </head>
 <body>
 
-<!-- Header Sticky -->
+<!-- Header Clean -->
 <header>
   <div class="logo">
     <img src="/Imagen%20nexxora/VErsion%202/tigre.png" alt="LuckyBit Mascot Logo">
     Lucky<span>Bit</span>
   </div>
-  <div class="header-badges">
-    <div class="online-indicator">
-      <div class="online-dot"></div>
-      1.482 Jogadores Online
-    </div>
-  </div>
   <a href="https://bettbit.com/?clickid=JO842086597750&id=JO8420" onclick="if(typeof fbq === 'function') { fbq('track', 'Contact'); }" class="cta-btn cta-btn-sm">Entrar</a>
 </header>
 
-<!-- Winner Ticker Bar -->
-<div class="ticker-wrap">
-  <div class="ticker">
-    <div class="ticker-item">🎉 <strong>Marcos A.</strong> sacou <span class="highlight">R$ 1.500,00 via PIX</span></div>
-    <div class="ticker-item">🔥 <strong>Luciana G.</strong> ganhou <span class="highlight">R$ 3.200,00 na Roleta ao Vivo</span></div>
-    <div class="ticker-item">⚡ <strong>Bruno S.</strong> sacou <span class="highlight">R$ 850,00 instantaneamente</span></div>
-    <div class="ticker-item">👑 <strong>Rodrigo M.</strong> ativou o <span class="highlight">Bônus VIP de 20% Extra</span></div>
-    <div class="ticker-item">🎉 <strong>Camila F.</strong> sacou <span class="highlight">R$ 2.450,00 no Blackjack</span></div>
-    <!-- Duplicado para scroll infinito sem saltos -->
-    <div class="ticker-item">🎉 <strong>Marcos A.</strong> sacou <span class="highlight">R$ 1.500,00 via PIX</span></div>
-    <div class="ticker-item">🔥 <strong>Luciana G.</strong> ganhou <span class="highlight">R$ 3.200,00 na Roleta ao Vivo</span></div>
-    <div class="ticker-item">⚡ <strong>Bruno S.</strong> sacou <span class="highlight">R$ 850,00 instantaneamente</span></div>
-    <div class="ticker-item">👑 <strong>Rodrigo M.</strong> ativou o <span class="highlight">Bônus VIP de 20% Extra</span></div>
-    <div class="ticker-item">🎉 <strong>Camila F.</strong> sacou <span class="highlight">R$ 2.450,00 no Blackjack</span></div>
-  </div>
-</div>
-
-<!-- Main Banner Carousel Hero -->
+<!-- Main Full-Screen Banner Carousel Hero -->
 <section class="hero-slider-section">
   <div class="carousel-container">
     <div class="carousel-slides" id="carouselSlides">
@@ -686,9 +666,9 @@ src="https://www.facebook.net/tr?id=1018336844589721&ev=PageView&noscript=1"
         <div class="slide-overlay">
           <div class="slide-content">
             <span class="slide-badge">🎁 Promoção Exclusiva</span>
-            <h1 class="slide-title">Deposite hoje e jogue com <em>20% Extra</em></h1>
-            <p class="slide-desc">Aproveite a melhor cotação e bônus direto no seu primeiro depósito. Cadastro em menos de 1 minuto!</p>
-            <a href="https://bettbit.com/?clickid=JO842086597750&id=JO8420" onclick="if(typeof fbq === 'function') { fbq('track', 'Contact'); }" class="cta-btn">Resgatar Meu Bônus</a>
+            <h1 class="slide-title">Deposite hoje e jogue com <em>50% Extra</em></h1>
+            <p class="slide-desc">Aproveite a melhor cotação e bônus de 50% direto no seu primeiro depósito. Cadastro em menos de 1 minuto!</p>
+            <a href="https://bettbit.com/?clickid=JO842086597750&id=JO8420" onclick="if(typeof fbq === 'function') { fbq('track', 'Contact'); }" class="cta-btn">Resgatar Bônus 50%</a>
           </div>
         </div>
       </div>
@@ -733,6 +713,18 @@ src="https://www.facebook.net/tr?id=1018336844589721&ev=PageView&noscript=1"
   </div>
 </section>
 
+<!-- Dynamic Toast Notification for New Users -->
+<div class="toast-container">
+  <div class="toast-card" id="toastCard">
+    <div class="toast-avatar" id="toastAvatar">👤</div>
+    <div class="toast-body">
+      <div class="toast-user" id="toastUser">Gabriel M. <span>• SP</span></div>
+      <div class="toast-action" id="toastAction">Acabou de se cadastrar e resgatou 50% de Bônus!</div>
+      <div class="toast-time" id="toastTime">agora mesmo</div>
+    </div>
+  </div>
+</div>
+
 <!-- Trust & Security Highlights -->
 <section class="trust-section">
   <div class="trust-grid">
@@ -753,8 +745,8 @@ src="https://www.facebook.net/tr?id=1018336844589721&ev=PageView&noscript=1"
     </div>
     <div class="trust-box">
       <span class="trust-icon">🎁</span>
-      <div class="trust-title">+20% de Bônus</div>
-      <div class="trust-sub">Crédito imediato</div>
+      <div class="trust-title">+50% de Bônus</div>
+      <div class="trust-sub">Crédito no 1º depósito</div>
     </div>
   </div>
 </section>
@@ -772,9 +764,9 @@ src="https://www.facebook.net/tr?id=1018336844589721&ev=PageView&noscript=1"
         <span class="banner-tag">🔥 Mais Popular</span>
       </div>
       <div class="banner-card-body">
-        <h3 class="banner-card-title">Bônus de Boas-Vindas +20%</h3>
-        <p class="banner-card-text">Faça o seu cadastro e ganhe saldo extra automaticamente no seu primeiro aporte para jogar onde quiser.</p>
-        <a href="https://bettbit.com/?clickid=JO842086597750&id=JO8420" onclick="if(typeof fbq === 'function') { fbq('track', 'Contact'); }" class="banner-card-btn">Quero Bônus 20%</a>
+        <h3 class="banner-card-title">Bônus de Boas-Vindas +50%</h3>
+        <p class="banner-card-text">Faça o seu cadastro e ganhe 50% de saldo extra automaticamente no seu primeiro aporte para jogar onde quiser.</p>
+        <a href="https://bettbit.com/?clickid=JO842086597750&id=JO8420" onclick="if(typeof fbq === 'function') { fbq('track', 'Contact'); }" class="banner-card-btn">Quero Bônus 50%</a>
       </div>
     </div>
 
@@ -797,7 +789,7 @@ src="https://www.facebook.net/tr?id=1018336844589721&ev=PageView&noscript=1"
       </div>
       <div class="banner-card-body">
         <h3 class="banner-card-title">Cassino Exclusivo ao Vivo</h3>
-        <p class="banner-card-text">Interaja em português nas mesas de Roleta, Blackjack y Game Shows com transmissões em HD.</p>
+        <p class="banner-card-text">Interaja em português nas mesas de Roleta, Blackjack e Game Shows com transmissões em HD.</p>
         <a href="https://bettbit.com/?clickid=JO842086597750&id=JO8420" onclick="if(typeof fbq === 'function') { fbq('track', 'Contact'); }" class="banner-card-btn">Jogar ao Vivo</a>
       </div>
     </div>
@@ -849,14 +841,14 @@ src="https://www.facebook.net/tr?id=1018336844589721&ev=PageView&noscript=1"
 <!-- Final CTA Section -->
 <section class="cta-final-section">
   <h2 class="cta-final-title">Sua Conta LuckyBit Está Esperando</h2>
-  <p class="cta-final-text">Cadastre-se agora mesmo, faça seu primeiro depósito e receba seu bônus exclusivo de 20% com saques ilimitados via PIX.</p>
+  <p class="cta-final-text">Cadastre-se agora mesmo, faça seu primeiro depósito e receba seu bônus exclusivo de 50% com saques ilimitados via PIX.</p>
   <a href="https://bettbit.com/?clickid=JO842086597750&id=JO8420" onclick="if(typeof fbq === 'function') { fbq('track', 'Contact'); }" class="cta-btn" style="padding: 16px 48px; font-size: 1.2rem;">Criar Minha Conta Agora</a>
 </section>
 
 <!-- Sticky Mobile Floating Bar -->
 <div class="floating-bar">
   <a href="https://bettbit.com/?clickid=JO842086597750&id=JO8420" onclick="if(typeof fbq === 'function') { fbq('track', 'Contact'); }" class="cta-btn floating-btn">
-    🟢 CADASTRAR E GANHAR 20% EXTRA
+    🟢 CADASTRAR E GANHAR 50% EXTRA
   </a>
 </div>
 
@@ -866,8 +858,9 @@ src="https://www.facebook.net/tr?id=1018336844589721&ev=PageView&noscript=1"
   <p>© 2026 LuckyBit - Todos os direitos reservados.</p>
 </footer>
 
-<!-- Interactive Carousel Script -->
+<!-- Interactive Carousel & Dynamic Toast Alerts Scripts -->
 <script>
+  // 1. Carousel Logic
   (function() {
     const slides = document.querySelectorAll('.slide');
     const dots = document.querySelectorAll('.dot');
@@ -930,12 +923,54 @@ src="https://www.facebook.net/tr?id=1018336844589721&ev=PageView&noscript=1"
       });
     });
 
-    // Pause on hover
     const carouselContainer = document.querySelector('.carousel-container');
     carouselContainer.addEventListener('mouseenter', stopAutoSlide);
     carouselContainer.addEventListener('mouseleave', startAutoSlide);
 
     startAutoSlide();
+  })();
+
+  // 2. Dynamic Real-Time New User Toast Alerts
+  (function() {
+    const alerts = [
+      { name: "Gabriel M.", location: "São Paulo - SP", action: "Acabou de se cadastrar e resgatou 50% de Bônus! 🎁", icon: "👤" },
+      { name: "Juliana R.", location: "Rio de Janeiro - RJ", action: "Fez 1º depósito via PIX e ativou +50% Extra! ⚡", icon: "⚡" },
+      { name: "Matheus S.", location: "Belo Horizonte - MG", action: "Acabou de criar uma conta na LuckyBit! 🚀", icon: "🎉" },
+      { name: "Beatriz C.", location: "Curitiba - PR", action: "Gantiu 50% de saldo extra no cadastro! 🎁", icon: "👑" },
+      { name: "Lucas F.", location: "Salvador - BA", action: "Cadastrou-se e solicitou o Bônus de 50%! 🎯", icon: "🔥" },
+      { name: "Camila T.", location: "Fortaleza - CE", action: "Acabou de se registrar na plataforma! 🌟", icon: "✨" },
+      { name: "Rafael D.", location: "Porto Alegre - RS", action: "Resgatou 50% de Bônus no primeiro depósito! 💰", icon: "💸" },
+      { name: "Vanessa A.", location: "Goiânia - GO", action: "Acabou de criar sua conta com sucesso! 🛡️", icon: "✅" }
+    ];
+
+    const toastCard = document.getElementById('toastCard');
+    const toastAvatar = document.getElementById('toastAvatar');
+    const toastUser = document.getElementById('toastUser');
+    const toastAction = document.getElementById('toastAction');
+    const toastTime = document.getElementById('toastTime');
+
+    let alertIndex = 0;
+
+    function showNextToast() {
+      const alert = alerts[alertIndex];
+      toastAvatar.textContent = alert.icon;
+      toastUser.innerHTML = `${alert.name} <span style="color:#34d399; font-weight:500;">• ${alert.location}</span>`;
+      toastAction.textContent = alert.action;
+      toastTime.textContent = `há ${Math.floor(Math.random() * 8) + 2} segundos`;
+
+      toastCard.classList.add('show');
+
+      setTimeout(() => {
+        toastCard.classList.remove('show');
+      }, 4200);
+
+      alertIndex = (alertIndex + 1) % alerts.length;
+    }
+
+    setTimeout(() => {
+      showNextToast();
+      setInterval(showNextToast, 7500);
+    }, 2000);
   })();
 </script>
 
