@@ -675,7 +675,7 @@ src="https://www.facebook.net/tr?id=1018336844589721&ev=PageView&noscript=1"
 
 <!-- Interactive Carousel & Dynamic Toast Alerts Scripts -->
 <script>
-  // 1. Carousel Logic
+  // 1. Snappy Automatic Banner Carousel Logic (3.5s interval + Touch Swipe)
   (function() {
     const slides = document.querySelectorAll('.slide');
     const dots = document.querySelectorAll('.dot');
@@ -683,7 +683,8 @@ src="https://www.facebook.net/tr?id=1018336844589721&ev=PageView&noscript=1"
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
     let currentIndex = 0;
-    let autoSlideInterval;
+    let autoSlideTimer = null;
+    const slideIntervalMs = 3500; // Auto-slides every 3.5 seconds
 
     function updateCarousel(index) {
       if (index < 0) index = slides.length - 1;
@@ -692,59 +693,91 @@ src="https://www.facebook.net/tr?id=1018336844589721&ev=PageView&noscript=1"
 
       slidesContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
 
-      slides.forEach((slide, i) => {
-        if (i === currentIndex) {
-          slide.classList.add('active');
-        } else {
-          slide.classList.remove('active');
-        }
+      slides.forEach(function(slide, i) {
+        slide.classList.toggle('active', i === currentIndex);
       });
 
-      dots.forEach((dot, i) => {
-        if (i === currentIndex) {
-          dot.classList.add('active');
-        } else {
-          dot.classList.remove('active');
-        }
+      dots.forEach(function(dot, i) {
+        dot.classList.toggle('active', i === currentIndex);
       });
+    }
+
+    function nextSlide() {
+      updateCarousel(currentIndex + 1);
     }
 
     function startAutoSlide() {
       stopAutoSlide();
-      autoSlideInterval = setInterval(() => {
-        updateCarousel(currentIndex + 1);
-      }, 5000);
+      autoSlideTimer = setInterval(nextSlide, slideIntervalMs);
     }
 
     function stopAutoSlide() {
-      if (autoSlideInterval) clearInterval(autoSlideInterval);
+      if (autoSlideTimer) {
+        clearInterval(autoSlideTimer);
+        autoSlideTimer = null;
+      }
     }
 
-    prevBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      updateCarousel(currentIndex - 1);
+    function resetAutoSlide() {
       startAutoSlide();
-    });
+    }
 
-    nextBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      updateCarousel(currentIndex + 1);
-      startAutoSlide();
-    });
-
-    dots.forEach((dot) => {
-      dot.addEventListener('click', (e) => {
+    if (prevBtn) {
+      prevBtn.addEventListener('click', function(e) {
+        e.preventDefault();
         e.stopPropagation();
-        const index = parseInt(e.target.getAttribute('data-index'));
+        updateCarousel(currentIndex - 1);
+        resetAutoSlide();
+      });
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        updateCarousel(currentIndex + 1);
+        resetAutoSlide();
+      });
+    }
+
+    dots.forEach(function(dot) {
+      dot.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        const index = parseInt(this.getAttribute('data-index'), 10);
         updateCarousel(index);
-        startAutoSlide();
+        resetAutoSlide();
       });
     });
 
+    // Touch Swipe Gesture Support for Mobile
+    let touchStartX = 0;
+    let touchEndX = 0;
     const carouselContainer = document.querySelector('.carousel-container');
-    carouselContainer.addEventListener('mouseenter', stopAutoSlide);
-    carouselContainer.addEventListener('mouseleave', startAutoSlide);
 
+    if (carouselContainer) {
+      carouselContainer.addEventListener('touchstart', function(e) {
+        touchStartX = e.changedTouches[0].screenX;
+      }, { passive: true });
+
+      carouselContainer.addEventListener('touchend', function(e) {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+      }, { passive: true });
+    }
+
+    function handleSwipe() {
+      const swipeDistance = touchEndX - touchStartX;
+      if (swipeDistance < -40) {
+        updateCarousel(currentIndex + 1);
+        resetAutoSlide();
+      } else if (swipeDistance > 40) {
+        updateCarousel(currentIndex - 1);
+        resetAutoSlide();
+      }
+    }
+
+    // Initialize snappy auto-slide
     startAutoSlide();
   })();
 
