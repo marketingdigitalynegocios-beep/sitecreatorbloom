@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LuckyBit | Plataforma Oficial de Jogos Online & Bônus de 20%</title>
+<!-- SEO & Meta Tags -->
+<meta name="description" content="LuckyBit - Sua plataforma premium de jogos online. Cadastro em segundos, saques instantâneos via PIX e suporte ao vivo 24/7. Resgate seu bônus de 20%!">
+
+<!-- Microsoft Clarity -->
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "y7haktxy1r");
+</script>
+
+<!-- RedTrack Universal Tracking Script -->
+<script type="text/javascript" src="https://trk.accbloom.online/track.js"></script>
+
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1018336844589721');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.net/tr?id=1018336844589721&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+
+<style>
+  :root{
+    --bg:#0a0712;
+    --bg-alt:#130e20;
+    --card-bg:#191228;
+    --gold:#f5b83d;
+    --gold-soft:#ffd97d;
+    --gold-glow: rgba(245, 184, 61, 0.4);
+    --ember:#e63946;
+    --green-accent:#10b981;
+    --ink:#f8fafc;
+    --ink-dim:#94a3b8;
+    --border:rgba(245, 184, 61, 0.25);
+    --border-soft:rgba(255, 255, 255, 0.1);
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  
+  body{
+    background: radial-gradient(circle at 50% 0%, #1e1333 0%, var(--bg) 70%);
+    color:var(--ink);
+    font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+    min-height: 100vh;
+    padding-bottom: 70px;
+  }
+
+  /* Header */
+  header{
+    display:flex; 
+    justify-content:space-between; 
+    align-items:center;
+    padding:16px 5vw;
+    border-bottom:1px solid var(--border);
+    background: rgba(10, 7, 18, 0.88);
+    backdrop-filter: blur(14px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .logo{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size:1.6rem;
+    font-weight:800;
+    letter-spacing:0.02em;
+    color:var(--gold-soft);
+    text-transform: uppercase;
+  }
+  .logo img{
+    height: 42px;
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 10px var(--gold-glow));
+  }
+  .logo span{color:var(--ember);}
+
+  .header-badges {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .online-indicator {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #34d399;
+    background: rgba(16, 185, 129, 0.12);
+    padding: 6px 14px;
+    border-radius: 20px;
+    border: 1px solid rgba(16, 185, 129, 0.25);
+  }
+  .online-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #10b981;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #10b981;
+    animation: blink 1.5s infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.8); }
+  }
+
+  .cta-btn{
+    display:inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--gold-soft) 0%, var(--gold) 100%);
+    color: #1a0f00;
+    font-weight:800;
+    font-size:1.05rem;
+    padding:14px 32px;
+    border-radius:10px;
+    text-decoration:none;
+    box-shadow: 0 6px 20px rgba(245, 184, 61, 0.35);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+  .cta-btn:hover{ 
+    transform:translateY(-3px) scale(1.02); 
+    box-shadow:0 10px 28px rgba(245, 184, 61, 0.55);
+    background:linear-gradient(135deg, #ffffff 0%, var(--gold-soft) 100%);
+  }
+  .cta-btn-sm {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+
+  /* Winner Ticker Bar */
+  .ticker-wrap {
+    width: 100%;
+    background: rgba(25, 18, 40, 0.9);
+    border-bottom: 1px solid var(--border-soft);
+    overflow: hidden;
+    height: 40px;
+    display: flex;
+    align-items: center;
+  }
+  .ticker {
+    display: flex;
+    width: max-content;
+    animation: ticker 35s linear infinite;
+  }
+  .ticker-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+    padding: 0 28px;
+    font-size: 0.88rem;
+    color: var(--ink-dim);
+  }
+  .ticker-item strong {
+    color: var(--gold-soft);
+  }
+  .ticker-item span.highlight {
+    color: var(--green-accent);
+    font-weight: 700;
+  }
+
+  @keyframes ticker {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* Banner Carousel Hero Section */
+  .hero-slider-section {
+    max-width: 1200px;
+    margin: 35px auto 20px;
+    padding: 0 5vw;
+  }
+
+  .carousel-container {
+    position: relative;
+    width: 100%;
+    border-radius: 20px;
+    overflow: hidden;
+    border: 2px solid var(--border);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(245, 184, 61, 0.2);
+    background: var(--card-bg);
+  }
+
+  .carousel-slides {
+    display: flex;
+    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    width: 100%;
+  }
+
+  .slide {
+    min-width: 100%;
+    position: relative;
+    aspect-ratio: 16/7;
+    max-height: 480px;
+    overflow: hidden;
+  }
+
+  .slide-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    filter: brightness(0.85) contrast(1.05);
+    transition: transform 6s ease;
+  }
+
+  .slide.active .slide-img {
+    transform: scale(1.04);
+  }
+
+  .slide-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(10, 7, 18, 0.92) 0%, rgba(10, 7, 18, 0.5) 55%, transparent 100%);
+    display: flex;
+    align-items: center;
+    padding: 0 60px;
+  }
+
+  .slide-content {
+    max-width: 520px;
+    z-index: 2;
+  }
+
+  .slide-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(245, 184, 61, 0.15);
+    border: 1px solid var(--gold);
+    color: var(--gold-soft);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin-bottom: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .slide-title {
+    font-size: clamp(1.8rem, 3.8vw, 2.8rem);
+    font-weight: 900;
+    line-height: 1.15;
+    color: var(--ink);
+    margin-bottom: 12px;
+    text-shadow: 0 4px 12px rgba(0,0,0,0.8);
+  }
+
+  .slide-title em {
+    font-style: normal;
+    color: var(--gold);
+    background: linear-gradient(135deg, var(--gold-soft), var(--gold));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .slide-desc {
+    font-size: clamp(0.95rem, 1.6vw, 1.15rem);
+    color: var(--ink-dim);
+    margin-bottom: 24px;
+    line-height: 1.5;
+  }
+
+  /* Carousel Navigation & Indicators */
+  .carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
+    background: rgba(10, 7, 18, 0.7);
+    border: 1px solid var(--border);
+    color: var(--gold-soft);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.2s ease;
+    backdrop-filter: blur(4px);
+  }
+  .carousel-btn:hover {
+    background: var(--gold);
+    color: #1a0f00;
+    transform: translateY(-50%) scale(1.1);
+  }
+  .carousel-btn.prev { left: 20px; }
+  .carousel-btn.next { right: 20px; }
+
+  .carousel-dots {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+    z-index: 10;
+  }
+  .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0,0,0,0.4);
+  }
+  .dot.active {
+    width: 32px;
+    border-radius: 12px;
+    background: var(--gold);
+    box-shadow: 0 0 10px var(--gold-glow);
+  }
+
+  /* Promo Banner Highlights Cards */
+  .banner-cards-section {
+    max-width: 1200px;
+    margin: 50px auto 0;
+    padding: 0 5vw;
+  }
+  .section-title {
+    text-align: center;
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    font-weight: 800;
+    color: var(--ink);
+    margin-bottom: 10px;
+  }
+  .section-subtitle {
+    text-align: center;
+    color: var(--ink-dim);
+    font-size: 1rem;
+    margin-bottom: 35px;
+  }
+
+  .banner-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .banner-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+  }
+  .banner-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--gold);
+    box-shadow: 0 15px 35px rgba(245, 184, 61, 0.25);
+  }
+  .banner-card-img-wrap {
+    position: relative;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+  }
+  .banner-card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+  .banner-card:hover .banner-card-img {
+    transform: scale(1.08);
+  }
+  .banner-tag {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    background: rgba(10, 7, 18, 0.85);
+    border: 1px solid var(--gold);
+    color: var(--gold-soft);
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    backdrop-filter: blur(4px);
+  }
+  .banner-card-body {
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+  .banner-card-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--gold-soft);
+    margin-bottom: 8px;
+  }
+  .banner-card-text {
+    font-size: 0.92rem;
+    color: var(--ink-dim);
+    margin-bottom: 20px;
+    flex-grow: 1;
+    line-height: 1.5;
+  }
+  .banner-card-btn {
+    align-self: flex-start;
+    background: rgba(245, 184, 61, 0.12);
+    color: var(--gold-soft);
+    border: 1px solid var(--border);
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    transition: all 0.2s ease;
+    width: 100%;
+    text-align: center;
+  }
+  .banner-card:hover .banner-card-btn {
+    background: var(--gold);
+    color: #1a0f00;
+  }
+
+  /* Trust Badges Bar */
+  .trust-section {
+    max-width: 1100px;
+    margin: 55px auto 0;
+    padding: 0 5vw;
+  }
+  .trust-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+  .trust-box {
+    background: rgba(25, 18, 40, 0.6);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 22px 16px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+  }
+  .trust-box:hover {
+    transform: translateY(-4px);
+    border-color: var(--gold);
+    background: rgba(25, 18, 40, 0.85);
+  }
+  .trust-icon {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    display: block;
+  }
+  .trust-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  .trust-sub {
+    font-size: 0.82rem;
+    color: var(--ink-dim);
+  }
+
+  /* Games Grid Section */
+  .games-section {
+    max-width: 1200px;
+    margin: 60px auto 0;
+    padding: 0 5vw;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+  .tile {
+    aspect-ratio: 1/1;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    text-decoration: none;
+    display: block;
+  }
+  .tile-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+  }
+  .tile-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(10,7,18,0.05) 30%, rgba(10,7,18,0.95) 100%);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 16px 12px;
+    text-align: center;
+  }
+  .tile-label {
+    color: var(--ink);
+    font-size: 1rem;
+    font-weight: 700;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.9);
+  }
+  .tile:hover {
+    transform: translateY(-6px);
+    border-color: var(--gold);
+    box-shadow: 0 12px 30px rgba(245, 184, 61, 0.35);
+  }
+  .tile:hover .tile-img {
+    transform: scale(1.1);
+  }
+
+  /* Call to Action Final Section */
+  .cta-final-section {
+    max-width: 900px;
+    margin: 70px auto 40px;
+    padding: 50px 30px;
+    background: linear-gradient(135deg, rgba(30, 19, 51, 0.9), rgba(19, 14, 32, 0.95));
+    border: 2px solid var(--border);
+    border-radius: 24px;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-final-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 400px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(245, 184, 61, 0.25) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .cta-final-title {
+    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    font-weight: 900;
+    color: var(--ink);
+    margin-bottom: 14px;
+  }
+  .cta-final-text {
+    font-size: 1.1rem;
+    color: var(--ink-dim);
+    max-width: 600px;
+    margin: 0 auto 30px;
+  }
+
+  /* Floating Bottom Bar for Mobile & Quick Action */
+  .floating-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(10, 7, 18, 0.95);
+    border-top: 1px solid var(--border);
+    padding: 12px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 -10px 30px rgba(0,0,0,0.5);
+  }
+  .floating-btn {
+    width: 100%;
+    max-width: 500px;
+    padding: 14px;
+    font-size: 1rem;
+    font-weight: 800;
+  }
+
+  /* Footer */
+  footer {
+    border-top: 1px solid var(--border-soft);
+    padding: 40px 5vw 80px;
+    text-align: center;
+    background: rgba(10, 7, 18, 0.98);
+  }
+  footer p {
+    color: var(--ink-dim);
+    font-size: 0.85rem;
+    max-width: 700px;
+    margin: 0 auto 12px;
+    line-height: 1.6;
+  }
+
+  /* Responsive Rules */
+  @media (max-width: 900px) {
+    .slide-overlay { padding: 0 30px; }
+    .banner-grid { grid-template-columns: 1fr; }
+    .trust-grid { grid-template-columns: repeat(2, 1fr); }
+    .grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    .header-badges { display: none; }
+  }
+  @media (max-width: 600px) {
+    .slide { aspect-ratio: 4/3; }
+    .slide-overlay { padding: 0 20px; }
+    .carousel-btn { width: 36px; height: 36px; font-size: 1rem; }
+    .grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Header Sticky -->
+<header>
+  <div class="logo">
+    <img src="/Imagen%20nexxora/VErsion%202/tigre.png" alt="LuckyBit Mascot Logo">
+    Lucky<span>Bit</span>
+  </div>
+  <div class="header-badges">
+    <div class="online-indicator">
+      <div class="online-dot"></div>
+      1.482 Jogadores Online
+    </div>
+  </div>
+  <a href="https://bettbit.com/?clickid=JO842086597750&id=JO8420" onclick="if(typeof fbq === 'function') { fbq('track', 'Contact'); }" class="cta-btn cta-btn-sm">Entrar</a>
+</header>
+
+<!-- Winner Ticker Bar -->
+<div class="ticker-wrap">
+  <div class="ticker">
+    <div class="ticker-item">🎉 <strong>Marcos A.</strong> sacou <span class="highlight">R$ 1.500,00 via PIX</span></div>
+    <div class="ticker-item">🔥 <strong>Luciana G.</strong> ganhou <span class="highlight">R$ 3.200,00 na Roleta ao Vivo</span></div>
+    <div class="ticker-item">⚡ <strong>Bruno S.</strong> sacou <span class="highlight">R$ 850,00 instantaneamente</span></div>
+    <div class="ticker-item">👑 <strong>Rodrigo M.</strong> ativou o <span class="highlight">Bônus VIP de 20% Extra</span></div>
+    <div class="ticker-item">🎉 <strong>Camila F.</strong> sacou <span class="highlight">R$ 2.450,00 no Blackjack</span></div>
+    <!-- Duplicado para scroll infinito sem saltos -->
+    <div class="ticker-item">🎉 <strong>Marcos A.</strong> sacou <span class="highlight">R$ 1.500,00 via PIX</span></div>
+    <div class="ticker-item">🔥 <strong>Luciana G.</strong> ganhou <span class="highlight">R$ 3.200,00 na Roleta ao Vivo</span></div>
+    <div class="ticker-item">⚡ <strong>Bruno S.</strong> sacou <span class="highlight">R$ 850,00 instantaneamente</span></div>
+    <div class="ticker-item">👑 <strong>Rodrigo M.</strong> ativou o <span class="highlight">Bônus VIP de 20% Extra</span></div>
+    <div class="ticker-item">🎉 <strong>Camila F.</strong> sacou <span class="highlight">R$ 2.450,00 no Blackjack</span></div>
+  </div>
+</div>
+
+<!-- Main Banner Carousel Hero -->
+<section class="hero-slider-section">
+  <div class="carousel-container">
+    <div class="carousel-slides" id="carouselSlides">
+      
+      <!-- Slide 1 -->
+      <div class="slide active">
+        <img src="/banner%201.jpg" alt="Bônus de Boas-Vindas LuckyBit" class="slide-img">
+        <div class="slide-overlay">
+          <div class="slide-content">
+            <span class="slide-badge">🎁 Promoção Exclusiva</span>
+            <h1 class="slide-title">Deposite hoje e jogue com <em>20% Extra</em></h1>
+            <p class="slide-desc">Aproveite a melhor cotação e bônus direto no seu primeiro depósito. Cadastro em menos de 1 minuto!</p>
+            <a href="https://bettbit.com/?clickid=JO842086597750&id=JO8420" onclick="if(typeof fbq === 'function') { fbq('track', 'Contact'); }" class="cta-btn">Resgatar Meu Bônus</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 2 -->
+      <div class="slide">
+        <img src="/banner%202.jpg" alt="Saques Instantâneos via PIX" class="slide-img">
+        <div class="slide-overlay">
+          <div class="slide-content">
+            <span class="slide-badge">⚡ Pagamento em Minutos</span>
+            <h2 class="slide-title">Saques Automáticos <em>via PIX 24/7</em></h2>
+            <p class="slide-desc">Ganhou? Receba seus prêmios na sua conta bancária sem burocracia e com total segurança.</p>
+            <a href="https://bettbit.com/?clickid=JO842086597750&id=JO8420" onclick="if(typeof fbq === 'function') { fbq('track', 'Contact'); }" class="cta-btn">Jogar Agora</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 3 -->
+      <div class="slide">
+        <img src="/banner%203.jpg" alt="Cassino e Mesas ao Vivo LuckyBit" class="slide-img">
+        <div class="slide-overlay">
+          <div class="slide-content">
+            <span class="slide-badge">🎰 Cassino ao Vivo</span>
+            <h2 class="slide-title">As Melhores Mesas &amp; <em>Roleta ao Vivo</em></h2>
+            <p class="slide-desc">Sinta a emoção de jogar com crupiês ao vivo e prêmios multiplicadores a qualquer hora do dia.</p>
+            <a href="https://bettbit.com/?clickid=JO842086597750&id=JO8420" onclick="if(typeof fbq === 'function') { fbq('track', 'Contact'); }" class="cta-btn">Entrar nas Mesas</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Controles -->
+    <button class="carousel-btn prev" id="prevBtn" aria-label="Slide anterior">❮</button>
+    <button class="carousel-btn next" id="nextBtn" aria-label="Próximo slide">❯</button>
+
+    <div class="carousel-dots" id="carouselDots">
+      <div class="dot active" data-index="0"></div>
+      <div class="dot" data-index="1"></div>
+      <div class="dot" data-index="2"></div>
+    </div>
+  </div>
+</section>
+
+<!-- Trust & Security Highlights -->
+<section class="trust-section">
+  <div class="trust-grid">
+    <div class="trust-box">
+      <span class="trust-icon">⚡</span>
+      <div class="trust-title">Saques via PIX</div>
+      <div class="trust-sub">Processados em minutos</div>
+    </div>
+    <div class="trust-box">
+      <span class="trust-icon">🔒</span>
+      <div class="trust-title">100% Protegido</div>
+      <div class="trust-sub">Criptografia bancária</div>
+    </div>
+    <div class="trust-box">
+      <span class="trust-icon">💬</span>
+      <div class="trust-title">Suporte 24/7</div>
+      <div class="trust-sub">Atendimento ao vivo</div>
+    </div>
+    <div class="trust-box">
+      <span class="trust-icon">🎁</span>
+      <div class="trust-title">+20% de Bônus</div>
+      <div class="trust-sub">Crédito imediato</div>
+    </div>
+  </div>
+</section>
+
+<!-- Visual Banner Grid Highlights Section -->
+<section class="banner-cards-section">
+  <h2 class="section-title">Destaques da Semana</h2>
+  <p class="section-subtitle">Escolha sua promoção favorita e comece a jogar com vantagem</p>
+
+  <div class="banner-grid">
+    
+    <div class="banner-card">
+      <div class="banner-card-img-wrap">
+        <img src="/banner%201.jpg" alt="Bônus de Boas Vindas" class="banner-card-img">
+        <span class="banner-tag">🔥 Mais Popular</span>
+      </div>
+      <div class="banner-card-body">
+        <h3 class="banner-card-title">Bônus de Boas-Vindas +20%</h3>
+        <p class="banner-card-text">Faça o seu cadastro e ganhe saldo extra automaticamente no seu primeiro aporte para jogar onde quiser.</p>
+        <a href="https://bettbit.com/?clickid=JO842086597750&id=JO8420" onclick="if(typeof fbq === 'function') { fbq('track', 'Contact'); }" class="banner-card-btn">Quero Bônus 20%</a>
+      </div>
+    </div>
+
+    <div class="banner-card">
+      <div class="banner-card-img-wrap">
+        <img src="/banner%202.jpg" alt="Pagamento Rápido PIX" class="banner-card-img">
+        <span class="banner-tag">⚡ PIX Rápido</span>
+      </div>
+      <div class="banner-card-body">
+        <h3 class="banner-card-title">Sistema de Saque Expresso</h3>
+        <p class="banner-card-text">Sem complicação nem espera prolongada. Solicite seu pagamento e receba direto na sua chave PIX em instantes.</p>
+        <a href="https://bettbit.com/?clickid=JO842086597750&id=JO8420" onclick="if(typeof fbq === 'function') { fbq('track', 'Contact'); }" class="banner-card-btn">Cadastrar Agora</a>
+      </div>
+    </div>
+
+    <div class="banner-card">
+      <div class="banner-card-img-wrap">
+        <img src="/banner%203.jpg" alt="Salas VIP de Cassino" class="banner-card-img">
+        <span class="banner-tag">🏆 Salas VIP</span>
+      </div>
+      <div class="banner-card-body">
+        <h3 class="banner-card-title">Cassino Exclusivo ao Vivo</h3>
+        <p class="banner-card-text">Interaja em português nas mesas de Roleta, Blackjack y Game Shows com transmissões em HD.</p>
+        <a href="https://bettbit.com/?clickid=JO842086597750&id=JO8420" onclick="if(typeof fbq === 'function') { fbq('track', 'Contact'); }" class="banner-card-btn">Jogar ao Vivo</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Games Showcase Grid -->
+<section class="games-section">
+  <h2 class="section-title">Os Jogos Mais Jogados</h2>
+  <p class="section-subtitle">Escolha entre centenas de títulos verificados e com altos índices de premiação</p>
+
+  <div class="grid">
+    <a href="https://bettbit.com/?clickid=JO842086597750&id=JO8420" onclick="if(typeof fbq === 'function') { fbq('track', 'Contact'); }" class="tile">
+      <img src="/Imagen%20nexxora/VErsion%202/Ruleta%20en%20vivo.jpg" alt="Roleta ao vivo" class="tile-img" loading="lazy">
+      <div class="tile-overlay"><span class="tile-label">Roleta ao vivo</span></div>
+    </a>
+    <a href="https://bettbit.com/?clickid=JO842086597750&id=JO8420" onclick="if(typeof fbq === 'function') { fbq('track', 'Contact'); }" class="tile">
+      <img src="/Imagen%20nexxora/VErsion%202/Slots%20cl%C3%A1sicos.jpg" alt="Slots clássicos" class="tile-img" loading="lazy">
+      <div class="tile-overlay"><span class="tile-label">Slots clássicos</span></div>
+    </a>
+    <a href="https://bettbit.com/?clickid=JO842086597750&id=JO8420" onclick="if(typeof fbq === 'function') { fbq('track', 'Contact'); }" class="tile">
+      <img src="/Imagen%20nexxora/VErsion%202/Blackjack.jpg" alt="Blackjack" class="tile-img" loading="lazy">
+      <div class="tile-overlay"><span class="tile-label">Blackjack</span></div>
+    </a>
+    <a href="https://bettbit.com/?clickid=JO842086597750&id=JO8420" onclick="if(typeof fbq === 'function') { fbq('track', 'Contact'); }" class="tile">
+      <img src="/Imagen%20nexxora/VErsion%202/Jackpot%20progresivo.jpg" alt="Jackpot progressivo" class="tile-img" loading="lazy">
+      <div class="tile-overlay"><span class="tile-label">Jackpot progressivo</span></div>
+    </a>
+    <a href="https://bettbit.com/?clickid=JO842086597750&id=JO8420" onclick="if(typeof fbq === 'function') { fbq('track', 'Contact'); }" class="tile">
+      <img src="/Imagen%20nexxora/VErsion%202/Bingo.jpg" alt="Bingo" class="tile-img" loading="lazy">
+      <div class="tile-overlay"><span class="tile-label">Bingo</span></div>
+    </a>
+    <a href="https://bettbit.com/?clickid=JO842086597750&id=JO8420" onclick="if(typeof fbq === 'function') { fbq('track', 'Contact'); }" class="tile">
+      <img src="/Imagen%20nexxora/VErsion%202/Cartas.jpg" alt="Jogos de cartas" class="tile-img" loading="lazy">
+      <div class="tile-overlay"><span class="tile-label">Jogos de cartas</span></div>
+    </a>
+    <a href="https://bettbit.com/?clickid=JO842086597750&id=JO8420" onclick="if(typeof fbq === 'function') { fbq('track', 'Contact'); }" class="tile">
+      <img src="/Imagen%20nexxora/VErsion%202/Tragamonedas.jpg" alt="Caça-níqueis" class="tile-img" loading="lazy">
+      <div class="tile-overlay"><span class="tile-label">Caça-níqueis</span></div>
+    </a>
+    <a href="https://bettbit.com/?clickid=JO842086597750&id=JO8420" onclick="if(typeof fbq === 'function') { fbq('track', 'Contact'); }" class="tile">
+      <img src="/Imagen%20nexxora/VErsion%202/Mesa%20en%20vivo.jpg" alt="Mesa ao vivo" class="tile-img" loading="lazy">
+      <div class="tile-overlay"><span class="tile-label">Mesa ao vivo</span></div>
+    </a>
+  </div>
+</section>
+
+<!-- Final CTA Section -->
+<section class="cta-final-section">
+  <h2 class="cta-final-title">Sua Conta LuckyBit Está Esperando</h2>
+  <p class="cta-final-text">Cadastre-se agora mesmo, faça seu primeiro depósito e receba seu bônus exclusivo de 20% com saques ilimitados via PIX.</p>
+  <a href="https://bettbit.com/?clickid=JO842086597750&id=JO8420" onclick="if(typeof fbq === 'function') { fbq('track', 'Contact'); }" class="cta-btn" style="padding: 16px 48px; font-size: 1.2rem;">Criar Minha Conta Agora</a>
+</section>
+
+<!-- Sticky Mobile Floating Bar -->
+<div class="floating-bar">
+  <a href="https://bettbit.com/?clickid=JO842086597750&id=JO8420" onclick="if(typeof fbq === 'function') { fbq('track', 'Contact'); }" class="cta-btn floating-btn">
+    🟢 CADASTRAR E GANHAR 20% EXTRA
+  </a>
+</div>
+
+<!-- Footer -->
+<footer>
+  <p>Serviço exclusivo para maiores de 18 anos. Jogue com responsabilidade. Ao continuar, você aceita os Termos de Serviço e o tratamento dos seus dados para fins de cadastro, verificação e suporte.</p>
+  <p>© 2026 LuckyBit - Todos os direitos reservados.</p>
+</footer>
+
+<!-- Interactive Carousel Script -->
+<script>
+  (function() {
+    const slides = document.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('.dot');
+    const slidesContainer = document.getElementById('carouselSlides');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    let currentIndex = 0;
+    let autoSlideInterval;
+
+    function updateCarousel(index) {
+      if (index < 0) index = slides.length - 1;
+      if (index >= slides.length) index = 0;
+      currentIndex = index;
+
+      slidesContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+      slides.forEach((slide, i) => {
+        if (i === currentIndex) {
+          slide.classList.add('active');
+        } else {
+          slide.classList.remove('active');
+        }
+      });
+
+      dots.forEach((dot, i) => {
+        if (i === currentIndex) {
+          dot.classList.add('active');
+        } else {
+          dot.classList.remove('active');
+        }
+      });
+    }
+
+    function startAutoSlide() {
+      stopAutoSlide();
+      autoSlideInterval = setInterval(() => {
+        updateCarousel(currentIndex + 1);
+      }, 5000);
+    }
+
+    function stopAutoSlide() {
+      if (autoSlideInterval) clearInterval(autoSlideInterval);
+    }
+
+    prevBtn.addEventListener('click', () => {
+      updateCarousel(currentIndex - 1);
+      startAutoSlide();
+    });
+
+    nextBtn.addEventListener('click', () => {
+      updateCarousel(currentIndex + 1);
+      startAutoSlide();
+    });
+
+    dots.forEach((dot) => {
+      dot.addEventListener('click', (e) => {
+        const index = parseInt(e.target.getAttribute('data-index'));
+        updateCarousel(index);
+        startAutoSlide();
+      });
+    });
+
+    // Pause on hover
+    const carouselContainer = document.querySelector('.carousel-container');
+    carouselContainer.addEventListener('mouseenter', stopAutoSlide);
+    carouselContainer.addEventListener('mouseleave', startAutoSlide);
+
+    startAutoSlide();
+  })();
+</script>
+
+</body>
+</html>
