@@ -124,7 +124,7 @@ src="https://www.facebook.net/tr?id=1018336844589721&ev=PageView&noscript=1"
     background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
   }
 
-  /* Hero Section: Banner 8 Background + Left Text Overlay (Unified Outfit Typography) */
+  /* Hero Section: Banner 8 Background + Left Text Overlay (WinGoat Inspired) */
   .hero-win-section {
     position: relative;
     width: 100%;
@@ -202,6 +202,16 @@ src="https://www.facebook.net/tr?id=1018336844589721&ev=PageView&noscript=1"
     margin-bottom: 32px;
     max-width: 540px;
     text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
+  }
+
+  /* Dedicated High-Res Floating Mascot Tiger Container for Mobile Screens */
+  .mobile-tiger-container {
+    display: none;
+  }
+
+  @keyframes floatAnimation {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-10px) rotate(1deg); }
   }
 
   .cta-btn {
@@ -327,15 +337,13 @@ src="https://www.facebook.net/tr?id=1018336844589721&ev=PageView&noscript=1"
   /* Mobile Responsive Design */
   @media (max-width: 900px) {
     .hero-win-section {
-      min-height: 520px;
-      padding: 50px 5vw;
-      background-position: center right 20%;
+      min-height: auto;
+      padding: 40px 5vw 35px;
+      background-image: none;
+      background: radial-gradient(circle at 50% 0%, #241738 0%, #0d0a14 70%);
     }
     .hero-win-backdrop {
-      background: linear-gradient(180deg, 
-        rgba(10, 7, 18, 0.92) 0%, 
-        rgba(10, 7, 18, 0.82) 60%, 
-        rgba(10, 7, 18, 0.96) 100%);
+      display: none;
     }
     .hero-win-container {
       max-width: 100%;
@@ -345,7 +353,40 @@ src="https://www.facebook.net/tr?id=1018336844589721&ev=PageView&noscript=1"
     .hero-subtext {
       margin-left: auto;
       margin-right: auto;
+      margin-bottom: 20px;
     }
+
+    /* Display Tiger Mascot on Mobile */
+    .mobile-tiger-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 10px auto 26px;
+      position: relative;
+      width: 100%;
+    }
+
+    .mobile-tiger-container::before {
+      content: '';
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      background: radial-gradient(circle, rgba(245, 184, 61, 0.3) 0%, rgba(230, 57, 70, 0.15) 50%, transparent 70%);
+      border-radius: 50%;
+      z-index: 0;
+    }
+
+    .mobile-tiger-img {
+      position: relative;
+      z-index: 1;
+      width: 78%;
+      max-width: 290px;
+      height: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.85)) drop-shadow(0 0 20px var(--gold-glow));
+      animation: floatAnimation 4s ease-in-out infinite;
+    }
+
     .cta-btn { width: 100%; max-width: 380px; }
   }
 
@@ -355,10 +396,13 @@ src="https://www.facebook.net/tr?id=1018336844589721&ev=PageView&noscript=1"
     .logo img { height: 36px; }
     .header-btn { padding: 8px 16px; font-size: 0.8rem; }
 
-    .hero-win-section { padding: 40px 4vw; min-height: 460px; }
+    .hero-win-section { padding: 35px 4vw 30px; }
     .eyebrow-badge { font-size: 0.82rem; padding: 5px 12px; margin-bottom: 14px; }
     .hero-impact-title { font-size: 1.85rem; line-height: 1.15; margin-bottom: 16px; }
-    .hero-subtext { font-size: 0.96rem; margin-bottom: 24px; }
+    .hero-subtext { font-size: 0.96rem; margin-bottom: 18px; }
+    
+    .mobile-tiger-img { max-width: 250px; }
+
     .cta-btn { padding: 15px 24px; font-size: 1.02rem; }
 
     .trust { gap: 10px; padding: 0 3vw; margin-top: 30px; }
@@ -382,7 +426,7 @@ src="https://www.facebook.net/tr?id=1018336844589721&ev=PageView&noscript=1"
   <a href="https://bettbit.com/?clickid=JO842086597750&id=JO8420" onclick="if(typeof fbq === 'function') { fbq('track', 'Contact'); }" class="header-btn">CADASTRAR-SE</a>
 </header>
 
-<!-- Hero Section Inspired by Reference Image (Banner 8 Background + Left Text Overlay + Tiger Visible) -->
+<!-- Hero Section Inspired by Reference Image (Desktop: Banner 8 Background | Mobile: Dedicated 3D Glowing Floating Tiger Mascot) -->
 <section class="hero-win-section">
   <div class="hero-win-backdrop"></div>
   <div class="hero-win-container">
@@ -392,6 +436,12 @@ src="https://www.facebook.net/tr?id=1018336844589721&ev=PageView&noscript=1"
       <span class="gold-highlight">O BÔNUS DE 50% TE ESPERA</span>
     </h1>
     <p class="hero-subtext">Multiplique seu primeiro depósito na plataforma oficial B-bit. Saques instantâneos via PIX, suporte ao vivo 24/7 e jogos auditados.</p>
+    
+    <!-- Floating Tiger Mascot Image for Mobile Screen Clarity -->
+    <div class="mobile-tiger-container">
+      <img src="/Imagen%20nexxora/VErsion%202/tigre.png" alt="B-bit Tigre Mascot" class="mobile-tiger-img">
+    </div>
+
     <a href="https://bettbit.com/?clickid=JO842086597750&id=JO8420" onclick="if(typeof fbq === 'function') { fbq('track', 'Contact'); }" class="cta-btn">QUERO MEU BÔNUS DE 50%</a>
     <p class="cta-note">⚡ Liberação imediata após o cadastro</p>
   </div>
