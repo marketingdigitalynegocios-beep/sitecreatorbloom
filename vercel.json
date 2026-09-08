@@ -4,6 +4,9 @@
     { "source": "/admin", "destination": "/admin/index.html" },
     { "source": "/nexxora", "destination": "/nexxora.html" },
     { "source": "/luckybit", "destination": "/luckybit.html" },
-    { "source": "/luckybit2", "destination": "/luckybit2.html" }
+    { "source": "/luckybit2", "destination": "/luckybit2.html" },
+    { "source": "/b-bit", "destination": "/b-bit.html" },
+    { "source": "/b-bit2", "destination": "/b-bit2.html" }
   ]
 }
+

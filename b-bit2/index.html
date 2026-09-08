@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>B-bit | Plataforma Oficial de Jogos Online & Bônus de 50%</title>
+<!-- SEO & Meta Tags -->
+<meta name="description" content="B-bit - Sua plataforma premium de jogos online. Cadastro em segundos, saques instantâneos via PIX e suporte ao vivo 24/7. Resgate seu bônus de 50%!">
+
+<!-- Microsoft Clarity -->
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "y7haktxy1r");
+</script>
+
+<!-- RedTrack Universal Tracking Script -->
+<script type="text/javascript" src="https://trk.accbloom.online/track.js"></script>
+
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1018336844589721');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.net/tr?id=1018336844589721&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+
+<style>
+  :root{
+    --bg:#0a0712;
+    --bg-alt:#130e20;
+    --card-bg:#191228;
+    --gold:#f5b83d;
+    --gold-soft:#ffd97d;
+    --gold-glow: rgba(245, 184, 61, 0.4);
+    --ember:#e63946;
+    --green-accent:#10b981;
+    --ink:#f8fafc;
+    --ink-dim:#94a3b8;
+    --border:rgba(245, 184, 61, 0.25);
+    --border-soft:rgba(255, 255, 255, 0.1);
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  
+  body{
+    background: radial-gradient(circle at 50% 0%, #1e1333 0%, var(--bg) 70%);
+    color:var(--ink);
+    font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+    min-height: 100vh;
+    padding-bottom: 75px;
+    overflow-x: hidden;
+  }
+
+  /* Clean Header */
+  header{
+    display:flex; 
+    justify-content:space-between; 
+    align-items:center;
+    padding:14px 5vw;
+    border-bottom:1px solid var(--border);
+    background: rgba(10, 7, 18, 0.92);
+    backdrop-filter: blur(14px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .logo{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size:1.6rem;
+    font-weight:800;
+    letter-spacing:0.02em;
+    color:var(--gold-soft);
+    text-transform: uppercase;
+  }
+  .logo img{
+    height: 42px;
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 10px var(--gold-glow));
+  }
+  .logo span{color:var(--ember);}
+
+  .cta-btn{
+    display:inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--gold-soft) 0%, var(--gold) 100%);
+    color: #1a0f00;
+    font-weight:800;
+    font-size:1.05rem;
+    padding:14px 32px;
+    border-radius:10px;
+    text-decoration:none;
+    box-shadow: 0 6px 20px rgba(245, 184, 61, 0.35);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+  .cta-btn:hover{ 
+    transform:translateY(-3px) scale(1.02); 
+    box-shadow:0 10px 28px rgba(245, 184, 61, 0.55);
+    background:linear-gradient(135deg, #ffffff 0%, var(--gold-soft) 100%);
+  }
+  .cta-btn-sm {
+    padding: 10px 22px;
+    font-size: 0.9rem;
+  }
+
+  /* Full-Screen Clean Banner Hero Carousel */
+  .hero-slider-section {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    position: relative;
+  }
+
+  .carousel-container {
+    position: relative;
+    width: 100%;
+    border-radius: 0;
+    border: none;
+    border-bottom: 2px solid var(--border);
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.7);
+    background: var(--card-bg);
+    overflow: hidden;
+  }
+
+  .carousel-slides {
+    display: flex;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    width: 100%;
+  }
+
+  .slide {
+    min-width: 100%;
+    position: relative;
+    display: block;
+    text-decoration: none;
+    overflow: hidden;
+  }
+
+  .slide-img {
+    width: 100%;
+    height: auto;
+    max-height: 620px;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    filter: brightness(1) contrast(1.02);
+    transition: transform 5s ease;
+  }
+
+  .slide:hover .slide-img {
+    transform: scale(1.02);
+  }
+
+  /* Carousel Controls */
+  .carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    background: rgba(10, 7, 18, 0.75);
+    border: 1px solid var(--border);
+    color: var(--gold-soft);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.2s ease;
+    backdrop-filter: blur(6px);
+  }
+  .carousel-btn:hover {
+    background: var(--gold);
+    color: #1a0f00;
+    transform: translateY(-50%) scale(1.1);
+  }
+  .carousel-btn.prev { left: 20px; }
+  .carousel-btn.next { right: 20px; }
+
+  .carousel-dots {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 12px;
+    z-index: 10;
+  }
+  .dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.4);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0,0,0,0.5);
+  }
+  .dot.active {
+    width: 36px;
+    border-radius: 12px;
+    background: var(--gold);
+    box-shadow: 0 0 12px var(--gold-glow);
+  }
+
+  /* Dynamic Toast Notification Popup */
+  .toast-container {
+    position: fixed;
+    bottom: 85px;
+    left: 20px;
+    z-index: 1000;
+    pointer-events: none;
+  }
+  .toast-card {
+    background: rgba(19, 14, 32, 0.95);
+    border: 1px solid var(--gold);
+    border-left: 4px solid var(--green-accent);
+    border-radius: 14px;
+    padding: 12px 18px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.65), 0 0 15px rgba(16, 185, 129, 0.25);
+    backdrop-filter: blur(14px);
+    transform: translateY(120px) scale(0.9);
+    opacity: 0;
+    transition: all 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    max-width: 380px;
+    pointer-events: auto;
+  }
+  .toast-card.show {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  .toast-avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(245, 184, 61, 0.25), rgba(16, 185, 129, 0.25));
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    flex-shrink: 0;
+  }
+  .toast-body {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .toast-user {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .toast-action {
+    font-size: 0.82rem;
+    color: var(--gold-soft);
+    font-weight: 600;
+  }
+  .toast-time {
+    font-size: 0.72rem;
+    color: var(--ink-dim);
+    margin-top: 2px;
+  }
+
+  /* Trust Badges Bar */
+  .trust-section {
+    max-width: 1100px;
+    margin: 55px auto 0;
+    padding: 0 5vw;
+  }
+  .trust-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+  .trust-box {
+    background: rgba(25, 18, 40, 0.6);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 22px 16px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+  }
+  .trust-box:hover {
+    transform: translateY(-4px);
+    border-color: var(--gold);
+    background: rgba(25, 18, 40, 0.85);
+  }
+  .trust-icon {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    display: block;
+  }
+  .trust-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  .trust-sub {
+    font-size: 0.82rem;
+    color: var(--ink-dim);
+  }
+
+  /* Games Grid Section */
+  .games-section {
+    max-width: 1200px;
+    margin: 60px auto 0;
+    padding: 0 5vw;
+  }
+  .section-title {
+    text-align: center;
+    font-size: clamp(1.6rem, 3.2vw, 2.4rem);
+    font-weight: 800;
+    color: var(--ink);
+    margin-bottom: 10px;
+  }
+  .section-subtitle {
+    text-align: center;
+    color: var(--ink-dim);
+    font-size: 1.05rem;
+    margin-bottom: 35px;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+  .tile {
+    aspect-ratio: 1/1;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.5);
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    text-decoration: none;
+    display: block;
+  }
+  .tile-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+  }
+  .tile-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(10,7,18,0.05) 30%, rgba(10,7,18,0.95) 100%);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 16px 12px;
+    text-align: center;
+  }
+  .tile-label {
+    color: var(--ink);
+    font-size: 1rem;
+    font-weight: 700;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.9);
+  }
+  .tile:hover {
+    transform: translateY(-6px);
+    border-color: var(--gold);
+    box-shadow: 0 12px 30px rgba(245, 184, 61, 0.35);
+  }
+  .tile:hover .tile-img {
+    transform: scale(1.1);
+  }
+
+  /* Call to Action Final Section */
+  .cta-final-section {
+    max-width: 900px;
+    margin: 70px auto 40px;
+    padding: 50px 30px;
+    background: linear-gradient(135deg, rgba(30, 19, 51, 0.9), rgba(19, 14, 32, 0.95));
+    border: 2px solid var(--border);
+    border-radius: 24px;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-final-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 400px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(245, 184, 61, 0.25) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .cta-final-title {
+    font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+    font-weight: 900;
+    color: var(--ink);
+    margin-bottom: 14px;
+  }
+  .cta-final-text {
+    font-size: 1.1rem;
+    color: var(--ink-dim);
+    max-width: 600px;
+    margin: 0 auto 30px;
+  }
+
+  /* Floating Bottom Bar for Mobile & Quick Action */
+  .floating-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(10, 7, 18, 0.95);
+    border-top: 1px solid var(--border);
+    padding: 12px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 -10px 30px rgba(0,0,0,0.5);
+  }
+  .floating-btn {
+    width: 100%;
+    max-width: 500px;
+    padding: 14px;
+    font-size: 1rem;
+    font-weight: 800;
+  }
+
+  /* Footer */
+  footer {
+    border-top: 1px solid var(--border-soft);
+    padding: 40px 5vw 80px;
+    text-align: center;
+    background: rgba(10, 7, 18, 0.98);
+  }
+  footer p {
+    color: var(--ink-dim);
+    font-size: 0.85rem;
+    max-width: 700px;
+    margin: 0 auto 12px;
+    line-height: 1.6;
+  }
+
+  /* Responsive Rules */
+  @media (max-width: 900px) {
+    .trust-grid { grid-template-columns: repeat(2, 1fr); }
+    .grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  }
+  @media (max-width: 600px) {
+    header { padding: 10px 4vw; }
+    .logo { font-size: 1.25rem; }
+    .logo img { height: 34px; }
+    .cta-btn-sm { padding: 8px 16px; font-size: 0.82rem; }
+
+    .slide-img {
+      aspect-ratio: 16/9;
+      height: auto;
+      object-fit: cover;
+    }
+
+    .carousel-btn { width: 36px; height: 36px; font-size: 1.1rem; }
+    .carousel-btn.prev { left: 8px; }
+    .carousel-btn.next { right: 8px; }
+    .carousel-dots { bottom: 12px; gap: 8px; }
+    .dot { width: 10px; height: 10px; }
+    .dot.active { width: 28px; }
+
+    .toast-container { left: 10px; right: 10px; bottom: 75px; }
+    .toast-card { max-width: 100%; padding: 10px 14px; gap: 10px; }
+    .toast-avatar { width: 36px; height: 36px; font-size: 1.1rem; }
+    .toast-user { font-size: 0.82rem; }
+    .toast-action { font-size: 0.78rem; }
+    .toast-time { font-size: 0.68rem; }
+
+    .trust-section { margin-top: 30px; padding: 0 4vw; }
+    .trust-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .trust-box { padding: 14px 10px; }
+    .trust-icon { font-size: 1.6rem; margin-bottom: 4px; }
+    .trust-title { font-size: 0.9rem; }
+    .trust-sub { font-size: 0.75rem; }
+
+    .games-section { margin-top: 35px; padding: 0 4vw; }
+    .section-title { font-size: 1.35rem; }
+    .section-subtitle { font-size: 0.9rem; margin-bottom: 20px; }
+    .grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .tile-label { font-size: 0.85rem; }
+
+    .cta-final-section { margin: 40px auto 20px; padding: 30px 16px; }
+    .cta-final-title { font-size: 1.4rem; }
+    .cta-final-text { font-size: 0.92rem; margin-bottom: 20px; }
+    .cta-final-section .cta-btn { font-size: 1rem !important; padding: 14px 24px !important; width: 100%; }
+
+    .floating-bar { padding: 10px 14px; }
+    .floating-btn { font-size: 0.92rem; padding: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Header Clean -->
+<header>
+  <div class="logo">
+    <img src="/Imagen%20nexxora/VErsion%202/tigre.png" alt="B-bit Mascot Logo">
+    B-<span>bit</span>
+  </div>
+  <a href="https://bettbit.com/?clickid=JO842086597750&id=JO8420" onclick="if(typeof fbq === 'function') { fbq('track', 'Contact'); }" class="cta-btn cta-btn-sm">Entrar</a>
+</header>
+
+<!-- Main Full-Screen Clean Banner Hero Carousel -->
+<section class="hero-slider-section">
+  <div class="carousel-container">
+    <div class="carousel-slides" id="carouselSlides">
+      
+      <!-- Slide 1 -->
+      <a href="https://bettbit.com/?clickid=JO842086597750&id=JO8420" onclick="if(typeof fbq === 'function') { fbq('track', 'Contact'); }" class="slide active">
+        <img src="/banner%201.jpg" alt="Bônus de Boas-Vindas B-bit 50%" class="slide-img">
+      </a>
+
+      <!-- Slide 2 -->
+      <a href="https://bettbit.com/?clickid=JO842086597750&id=JO8420" onclick="if(typeof fbq === 'function') { fbq('track', 'Contact'); }" class="slide">
+        <img src="/banner%202.jpg" alt="Saques Instantâneos via PIX B-bit" class="slide-img">
+      </a>
+
+      <!-- Slide 3 -->
+      <a href="https://bettbit.com/?clickid=JO842086597750&id=JO8420" onclick="if(typeof fbq === 'function') { fbq('track', 'Contact'); }" class="slide">
+        <img src="/banner%203.jpg" alt="Cassino e Mesas ao Vivo B-bit" class="slide-img">
+      </a>
+
+    </div>
+
+    <!-- Controles -->
+    <button class="carousel-btn prev" id="prevBtn" aria-label="Slide anterior">❮</button>
+    <button class="carousel-btn next" id="nextBtn" aria-label="Próximo slide">❯</button>
+
+    <div class="carousel-dots" id="carouselDots">
+      <div class="dot active" data-index="0"></div>
+      <div class="dot" data-index="1"></div>
+      <div class="dot" data-index="2"></div>
+    </div>
+  </div>
+</section>
+
+<!-- Dynamic Toast Notification for New Users -->
+<div class="toast-container">
+  <div class="toast-card" id="toastCard">
+    <div class="toast-avatar" id="toastAvatar">👤</div>
+    <div class="toast-body">
+      <div class="toast-user" id="toastUser">Gabriel M. <span>• SP</span></div>
+      <div class="toast-action" id="toastAction">Acabou de se cadastrar e resgatou 50% de Bônus!</div>
+      <div class="toast-time" id="toastTime">agora mesmo</div>
+    </div>
+  </div>
+</div>
+
+<!-- Trust & Security Highlights -->
+<section class="trust-section">
+  <div class="trust-grid">
+    <div class="trust-box">
+      <span class="trust-icon">⚡</span>
+      <div class="trust-title">Saques via PIX</div>
+      <div class="trust-sub">Processados em minutos</div>
+    </div>
+    <div class="trust-box">
+      <span class="trust-icon">🔒</span>
+      <div class="trust-title">100% Protegido</div>
+      <div class="trust-sub">Criptografia bancária</div>
+    </div>
+    <div class="trust-box">
+      <span class="trust-icon">💬</span>
+      <div class="trust-title">Suporte 24/7</div>
+      <div class="trust-sub">Atendimento ao vivo</div>
+    </div>
+    <div class="trust-box">
+      <span class="trust-icon">🎁</span>
+      <div class="trust-title">+50% de Bônus</div>
+      <div class="trust-sub">Crédito no 1º depósito</div>
+    </div>
+  </div>
+</section>
+
+<!-- Games Showcase Grid -->
+<section class="games-section">
+  <h2 class="section-title">Os Jogos Mais Jogados</h2>
+  <p class="section-subtitle">Escolha entre centenas de títulos verificados e com altos índices de premiação</p>
+
+  <div class="grid">
+    <a href="https://bettbit.com/?clickid=JO842086597750&id=JO8420" onclick="if(typeof fbq === 'function') { fbq('track', 'Contact'); }" class="tile">
+      <img src="/Imagen%20nexxora/VErsion%202/Ruleta%20en%20vivo.jpg" alt="Roleta ao vivo" class="tile-img" loading="lazy">
+      <div class="tile-overlay"><span class="tile-label">Roleta ao vivo</span></div>
+    </a>
+    <a href="https://bettbit.com/?clickid=JO842086597750&id=JO8420" onclick="if(typeof fbq === 'function') { fbq('track', 'Contact'); }" class="tile">
+      <img src="/Imagen%20nexxora/VErsion%202/Slots%20cl%C3%A1sicos.jpg" alt="Slots clássicos" class="tile-img" loading="lazy">
+      <div class="tile-overlay"><span class="tile-label">Slots clássicos</span></div>
+    </a>
+    <a href="https://bettbit.com/?clickid=JO842086597750&id=JO8420" onclick="if(typeof fbq === 'function') { fbq('track', 'Contact'); }" class="tile">
+      <img src="/Imagen%20nexxora/VErsion%202/Blackjack.jpg" alt="Blackjack" class="tile-img" loading="lazy">
+      <div class="tile-overlay"><span class="tile-label">Blackjack</span></div>
+    </a>
+    <a href="https://bettbit.com/?clickid=JO842086597750&id=JO8420" onclick="if(typeof fbq === 'function') { fbq('track', 'Contact'); }" class="tile">
+      <img src="/Imagen%20nexxora/VErsion%202/Jackpot%20progresivo.jpg" alt="Jackpot progressivo" class="tile-img" loading="lazy">
+      <div class="tile-overlay"><span class="tile-label">Jackpot progressivo</span></div>
+    </a>
+    <a href="https://bettbit.com/?clickid=JO842086597750&id=JO8420" onclick="if(typeof fbq === 'function') { fbq('track', 'Contact'); }" class="tile">
+      <img src="/Imagen%20nexxora/VErsion%202/Bingo.jpg" alt="Bingo" class="tile-img" loading="lazy">
+      <div class="tile-overlay"><span class="tile-label">Bingo</span></div>
+    </a>
+    <a href="https://bettbit.com/?clickid=JO842086597750&id=JO8420" onclick="if(typeof fbq === 'function') { fbq('track', 'Contact'); }" class="tile">
+      <img src="/Imagen%20nexxora/VErsion%202/Cartas.jpg" alt="Jogos de cartas" class="tile-img" loading="lazy">
+      <div class="tile-overlay"><span class="tile-label">Jogos de cartas</span></div>
+    </a>
+    <a href="https://bettbit.com/?clickid=JO842086597750&id=JO8420" onclick="if(typeof fbq === 'function') { fbq('track', 'Contact'); }" class="tile">
+      <img src="/Imagen%20nexxora/VErsion%202/Tragamonedas.jpg" alt="Caça-níqueis" class="tile-img" loading="lazy">
+      <div class="tile-overlay"><span class="tile-label">Caça-níqueis</span></div>
+    </a>
+    <a href="https://bettbit.com/?clickid=JO842086597750&id=JO8420" onclick="if(typeof fbq === 'function') { fbq('track', 'Contact'); }" class="tile">
+      <img src="/Imagen%20nexxora/VErsion%202/Mesa%20en%20vivo.jpg" alt="Mesa ao vivo" class="tile-img" loading="lazy">
+      <div class="tile-overlay"><span class="tile-label">Mesa ao vivo</span></div>
+    </a>
+  </div>
+</section>
+
+<!-- Final CTA Section -->
+<section class="cta-final-section">
+  <h2 class="cta-final-title">Sua Conta B-bit Está Esperando</h2>
+  <p class="cta-final-text">Cadastre-se agora mesmo, faça seu primeiro depósito e receba seu bônus exclusivo de 50% com saques ilimitados via PIX.</p>
+  <a href="https://bettbit.com/?clickid=JO842086597750&id=JO8420" onclick="if(typeof fbq === 'function') { fbq('track', 'Contact'); }" class="cta-btn" style="padding: 16px 48px; font-size: 1.2rem;">Criar Minha Conta Agora</a>
+</section>
+
+<!-- Sticky Mobile Floating Bar -->
+<div class="floating-bar">
+  <a href="https://bettbit.com/?clickid=JO842086597750&id=JO8420" onclick="if(typeof fbq === 'function') { fbq('track', 'Contact'); }" class="cta-btn floating-btn">
+    🟢 CADASTRAR E GANHAR 50% EXTRA
+  </a>
+</div>
+
+<!-- Footer -->
+<footer>
+  <p>Serviço exclusivo para maiores de 18 anos. Jogue com responsabilidade. Ao continuar, você aceita os Termos de Serviço e o tratamento dos seus dados para fins de cadastro, verificação e suporte.</p>
+  <p>© 2026 B-bit - Todos os direitos reservados.</p>
+</footer>
+
+<!-- Interactive Carousel & Dynamic Toast Alerts Scripts -->
+<script>
+  // 1. Snappy Automatic Banner Carousel Logic (3.5s interval + Touch Swipe)
+  (function() {
+    const slides = document.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('.dot');
+    const slidesContainer = document.getElementById('carouselSlides');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    let currentIndex = 0;
+    let autoSlideTimer = null;
+    const slideIntervalMs = 3500; // Auto-slides every 3.5 seconds
+
+    function updateCarousel(index) {
+      if (index < 0) index = slides.length - 1;
+      if (index >= slides.length) index = 0;
+      currentIndex = index;
+
+      slidesContainer.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+      slides.forEach(function(slide, i) {
+        slide.classList.toggle('active', i === currentIndex);
+      });
+
+      dots.forEach(function(dot, i) {
+        dot.classList.toggle('active', i === currentIndex);
+      });
+    }
+
+    function nextSlide() {
+      updateCarousel(currentIndex + 1);
+    }
+
+    function startAutoSlide() {
+      stopAutoSlide();
+      autoSlideTimer = setInterval(nextSlide, slideIntervalMs);
+    }
+
+    function stopAutoSlide() {
+      if (autoSlideTimer) {
+        clearInterval(autoSlideTimer);
+        autoSlideTimer = null;
+      }
+    }
+
+    function resetAutoSlide() {
+      startAutoSlide();
+    }
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        updateCarousel(currentIndex - 1);
+        resetAutoSlide();
+      });
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        updateCarousel(currentIndex + 1);
+        resetAutoSlide();
+      });
+    }
+
+    dots.forEach(function(dot) {
+      dot.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        const index = parseInt(this.getAttribute('data-index'), 10);
+        updateCarousel(index);
+        resetAutoSlide();
+      });
+    });
+
+    // Touch Swipe Gesture Support for Mobile
+    let touchStartX = 0;
+    let touchEndX = 0;
+    const carouselContainer = document.querySelector('.carousel-container');
+
+    if (carouselContainer) {
+      carouselContainer.addEventListener('touchstart', function(e) {
+        touchStartX = e.changedTouches[0].screenX;
+      }, { passive: true });
+
+      carouselContainer.addEventListener('touchend', function(e) {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+      }, { passive: true });
+    }
+
+    function handleSwipe() {
+      const swipeDistance = touchEndX - touchStartX;
+      if (swipeDistance < -40) {
+        updateCarousel(currentIndex + 1);
+        resetAutoSlide();
+      } else if (swipeDistance > 40) {
+        updateCarousel(currentIndex - 1);
+        resetAutoSlide();
+      }
+    }
+
+    // Initialize snappy auto-slide
+    startAutoSlide();
+  })();
+
+  // 2. Dynamic Real-Time New User Toast Alerts
+  (function() {
+    const alerts = [
+      { name: "Gabriel M.", location: "São Paulo - SP", action: "Acabou de se cadastrar e resgatou 50% de Bônus! 🎁", icon: "👤" },
+      { name: "Juliana R.", location: "Rio de Janeiro - RJ", action: "Fez 1º depósito via PIX e ativou +50% Extra! ⚡", icon: "⚡" },
+      { name: "Matheus S.", location: "Belo Horizonte - MG", action: "Acabou de criar uma conta na B-bit! 🚀", icon: "🎉" },
+      { name: "Beatriz C.", location: "Curitiba - PR", action: "Gantiu 50% de saldo extra no cadastro! 🎁", icon: "👑" },
+      { name: "Lucas F.", location: "Salvador - BA", action: "Cadastrou-se e solicitou o Bônus de 50%! 🎯", icon: "🔥" },
+      { name: "Camila T.", location: "Fortaleza - CE", action: "Acabou de se registrar na plataforma! 🌟", icon: "✨" },
+      { name: "Rafael D.", location: "Porto Alegre - RS", action: "Resgatou 50% de Bônus no primeiro depósito! 💰", icon: "💸" },
+      { name: "Vanessa A.", location: "Goiânia - GO", action: "Acabou de criar sua conta com sucesso! 🛡️", icon: "✅" }
+    ];
+
+    const toastCard = document.getElementById('toastCard');
+    const toastAvatar = document.getElementById('toastAvatar');
+    const toastUser = document.getElementById('toastUser');
+    const toastAction = document.getElementById('toastAction');
+    const toastTime = document.getElementById('toastTime');
+
+    let alertIndex = 0;
+
+    function showNextToast() {
+      const alert = alerts[alertIndex];
+      toastAvatar.textContent = alert.icon;
+      toastUser.innerHTML = `${alert.name} <span style="color:#34d399; font-weight:500;">• ${alert.location}</span>`;
+      toastAction.textContent = alert.action;
+      toastTime.textContent = `há ${Math.floor(Math.random() * 8) + 2} segundos`;
+
+      toastCard.classList.add('show');
+
+      setTimeout(() => {
+        toastCard.classList.remove('show');
+      }, 4200);
+
+      alertIndex = (alertIndex + 1) % alerts.length;
+    }
+
+    setTimeout(() => {
+      showNextToast();
+      setInterval(showNextToast, 7500);
+    }, 2000);
+  })();
+</script>
+
+</body>
+</html>
