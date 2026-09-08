@@ -66,7 +66,7 @@ src="https://www.facebook.net/tr?id=1018336844589721&ev=PageView&noscript=1"
     overflow-x: hidden;
   }
 
-  /* Clean Header without badges */
+  /* Clean Header */
   header{
     display:flex; 
     justify-content:space-between; 
@@ -125,7 +125,7 @@ src="https://www.facebook.net/tr?id=1018336844589721&ev=PageView&noscript=1"
     font-size: 0.9rem;
   }
 
-  /* Edge-to-Edge Full-Screen Banner Hero Section */
+  /* Full-Screen Clean Banner Hero Carousel */
   .hero-slider-section {
     width: 100%;
     max-width: 100%;
@@ -154,87 +154,33 @@ src="https://www.facebook.net/tr?id=1018336844589721&ev=PageView&noscript=1"
   .slide {
     min-width: 100%;
     position: relative;
-    height: 75vh;
-    min-height: 460px;
-    max-height: 720px;
+    display: block;
+    text-decoration: none;
     overflow: hidden;
   }
 
   .slide-img {
     width: 100%;
-    height: 100%;
+    height: auto;
+    max-height: 620px;
     object-fit: cover;
     object-position: center;
     display: block;
-    filter: brightness(0.82) contrast(1.08);
-    transition: transform 6s ease;
+    filter: brightness(1) contrast(1.02);
+    transition: transform 5s ease;
   }
 
-  .slide.active .slide-img {
-    transform: scale(1.05);
+  .slide:hover .slide-img {
+    transform: scale(1.02);
   }
 
-  .slide-overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(90deg, rgba(10, 7, 18, 0.95) 0%, rgba(10, 7, 18, 0.65) 55%, transparent 100%);
-    display: flex;
-    align-items: center;
-    padding: 0 8vw;
-  }
-
-  .slide-content {
-    max-width: 580px;
-    z-index: 2;
-  }
-
-  .slide-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: rgba(245, 184, 61, 0.15);
-    border: 1px solid var(--gold);
-    color: var(--gold-soft);
-    padding: 6px 16px;
-    border-radius: 20px;
-    font-size: 0.85rem;
-    font-weight: 700;
-    margin-bottom: 16px;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-
-  .slide-title {
-    font-size: clamp(2rem, 4.5vw, 3.4rem);
-    font-weight: 900;
-    line-height: 1.12;
-    color: var(--ink);
-    margin-bottom: 16px;
-    text-shadow: 0 4px 14px rgba(0,0,0,0.9);
-  }
-
-  .slide-title em {
-    font-style: normal;
-    color: var(--gold);
-    background: linear-gradient(135deg, var(--gold-soft), var(--gold));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-
-  .slide-desc {
-    font-size: clamp(1rem, 1.8vw, 1.2rem);
-    color: var(--ink-dim);
-    margin-bottom: 28px;
-    line-height: 1.5;
-  }
-
-  /* Carousel Navigation & Indicators */
+  /* Carousel Controls */
   .carousel-btn {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    width: 52px;
-    height: 52px;
+    width: 50px;
+    height: 50px;
     background: rgba(10, 7, 18, 0.75);
     border: 1px solid var(--border);
     color: var(--gold-soft);
@@ -253,12 +199,12 @@ src="https://www.facebook.net/tr?id=1018336844589721&ev=PageView&noscript=1"
     color: #1a0f00;
     transform: translateY(-50%) scale(1.1);
   }
-  .carousel-btn.prev { left: 25px; }
-  .carousel-btn.next { right: 25px; }
+  .carousel-btn.prev { left: 20px; }
+  .carousel-btn.next { right: 20px; }
 
   .carousel-dots {
     position: absolute;
-    bottom: 25px;
+    bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
@@ -269,7 +215,7 @@ src="https://www.facebook.net/tr?id=1018336844589721&ev=PageView&noscript=1"
     width: 12px;
     height: 12px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.35);
+    background: rgba(255, 255, 255, 0.4);
     cursor: pointer;
     transition: all 0.3s ease;
     border: 1px solid rgba(0,0,0,0.5);
@@ -343,114 +289,6 @@ src="https://www.facebook.net/tr?id=1018336844589721&ev=PageView&noscript=1"
     margin-top: 2px;
   }
 
-  /* Promo Banner Highlights Cards */
-  .banner-cards-section {
-    max-width: 1200px;
-    margin: 60px auto 0;
-    padding: 0 5vw;
-  }
-  .section-title {
-    text-align: center;
-    font-size: clamp(1.6rem, 3.2vw, 2.4rem);
-    font-weight: 800;
-    color: var(--ink);
-    margin-bottom: 10px;
-  }
-  .section-subtitle {
-    text-align: center;
-    color: var(--ink-dim);
-    font-size: 1.05rem;
-    margin-bottom: 35px;
-  }
-
-  .banner-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-  }
-
-  .banner-card {
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    overflow: hidden;
-    position: relative;
-    transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
-    display: flex;
-    flex-direction: column;
-    text-decoration: none;
-    color: inherit;
-  }
-  .banner-card:hover {
-    transform: translateY(-8px);
-    border-color: var(--gold);
-    box-shadow: 0 15px 35px rgba(245, 184, 61, 0.25);
-  }
-  .banner-card-img-wrap {
-    position: relative;
-    aspect-ratio: 16/9;
-    overflow: hidden;
-  }
-  .banner-card-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s ease;
-  }
-  .banner-card:hover .banner-card-img {
-    transform: scale(1.08);
-  }
-  .banner-tag {
-    position: absolute;
-    top: 14px;
-    right: 14px;
-    background: rgba(10, 7, 18, 0.85);
-    border: 1px solid var(--gold);
-    color: var(--gold-soft);
-    padding: 4px 12px;
-    border-radius: 12px;
-    font-size: 0.75rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    backdrop-filter: blur(4px);
-  }
-  .banner-card-body {
-    padding: 22px;
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-  }
-  .banner-card-title {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: var(--gold-soft);
-    margin-bottom: 8px;
-  }
-  .banner-card-text {
-    font-size: 0.92rem;
-    color: var(--ink-dim);
-    margin-bottom: 20px;
-    flex-grow: 1;
-    line-height: 1.5;
-  }
-  .banner-card-btn {
-    align-self: flex-start;
-    background: rgba(245, 184, 61, 0.12);
-    color: var(--gold-soft);
-    border: 1px solid var(--border);
-    padding: 10px 20px;
-    border-radius: 8px;
-    font-size: 0.9rem;
-    font-weight: 700;
-    transition: all 0.2s ease;
-    width: 100%;
-    text-align: center;
-  }
-  .banner-card:hover .banner-card-btn {
-    background: var(--gold);
-    color: #1a0f00;
-  }
-
   /* Trust Badges Bar */
   .trust-section {
     max-width: 1100px;
@@ -497,6 +335,19 @@ src="https://www.facebook.net/tr?id=1018336844589721&ev=PageView&noscript=1"
     max-width: 1200px;
     margin: 60px auto 0;
     padding: 0 5vw;
+  }
+  .section-title {
+    text-align: center;
+    font-size: clamp(1.6rem, 3.2vw, 2.4rem);
+    font-weight: 800;
+    color: var(--ink);
+    margin-bottom: 10px;
+  }
+  .section-subtitle {
+    text-align: center;
+    color: var(--ink-dim);
+    font-size: 1.05rem;
+    margin-bottom: 35px;
   }
   .grid {
     display: grid;
@@ -626,17 +477,12 @@ src="https://www.facebook.net/tr?id=1018336844589721&ev=PageView&noscript=1"
 
   /* Responsive Rules */
   @media (max-width: 900px) {
-    .slide { height: 60vh; min-height: 400px; }
-    .slide-overlay { padding: 0 5vw; }
-    .banner-grid { grid-template-columns: 1fr; }
     .trust-grid { grid-template-columns: repeat(2, 1fr); }
     .grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
     .toast-container { left: 10px; right: 10px; bottom: 80px; }
     .toast-card { max-width: 100%; }
   }
   @media (max-width: 600px) {
-    .slide { height: 55vh; min-height: 360px; }
-    .slide-overlay { padding: 0 4vw; }
     .carousel-btn { width: 38px; height: 38px; font-size: 1.1rem; }
     .carousel-btn.prev { left: 10px; }
     .carousel-btn.next { right: 10px; }
@@ -655,49 +501,25 @@ src="https://www.facebook.net/tr?id=1018336844589721&ev=PageView&noscript=1"
   <a href="https://bettbit.com/?clickid=JO842086597750&id=JO8420" onclick="if(typeof fbq === 'function') { fbq('track', 'Contact'); }" class="cta-btn cta-btn-sm">Entrar</a>
 </header>
 
-<!-- Main Full-Screen Banner Carousel Hero -->
+<!-- Main Full-Screen Clean Banner Hero Carousel -->
 <section class="hero-slider-section">
   <div class="carousel-container">
     <div class="carousel-slides" id="carouselSlides">
       
       <!-- Slide 1 -->
-      <div class="slide active">
-        <img src="/banner%201.jpg" alt="Bônus de Boas-Vindas LuckyBit" class="slide-img">
-        <div class="slide-overlay">
-          <div class="slide-content">
-            <span class="slide-badge">🎁 Promoção Exclusiva</span>
-            <h1 class="slide-title">Deposite hoje e jogue com <em>50% Extra</em></h1>
-            <p class="slide-desc">Aproveite a melhor cotação e bônus de 50% direto no seu primeiro depósito. Cadastro em menos de 1 minuto!</p>
-            <a href="https://bettbit.com/?clickid=JO842086597750&id=JO8420" onclick="if(typeof fbq === 'function') { fbq('track', 'Contact'); }" class="cta-btn">Resgatar Bônus 50%</a>
-          </div>
-        </div>
-      </div>
+      <a href="https://bettbit.com/?clickid=JO842086597750&id=JO8420" onclick="if(typeof fbq === 'function') { fbq('track', 'Contact'); }" class="slide active">
+        <img src="/banner%201.jpg" alt="Bônus de Boas-Vindas LuckyBit 50%" class="slide-img">
+      </a>
 
       <!-- Slide 2 -->
-      <div class="slide">
-        <img src="/banner%202.jpg" alt="Saques Instantâneos via PIX" class="slide-img">
-        <div class="slide-overlay">
-          <div class="slide-content">
-            <span class="slide-badge">⚡ Pagamento em Minutos</span>
-            <h2 class="slide-title">Saques Automáticos <em>via PIX 24/7</em></h2>
-            <p class="slide-desc">Ganhou? Receba seus prêmios na sua conta bancária sem burocracia e com total segurança.</p>
-            <a href="https://bettbit.com/?clickid=JO842086597750&id=JO8420" onclick="if(typeof fbq === 'function') { fbq('track', 'Contact'); }" class="cta-btn">Jogar Agora</a>
-          </div>
-        </div>
-      </div>
+      <a href="https://bettbit.com/?clickid=JO842086597750&id=JO8420" onclick="if(typeof fbq === 'function') { fbq('track', 'Contact'); }" class="slide">
+        <img src="/banner%202.jpg" alt="Saques Instantâneos via PIX LuckyBit" class="slide-img">
+      </a>
 
       <!-- Slide 3 -->
-      <div class="slide">
+      <a href="https://bettbit.com/?clickid=JO842086597750&id=JO8420" onclick="if(typeof fbq === 'function') { fbq('track', 'Contact'); }" class="slide">
         <img src="/banner%203.jpg" alt="Cassino e Mesas ao Vivo LuckyBit" class="slide-img">
-        <div class="slide-overlay">
-          <div class="slide-content">
-            <span class="slide-badge">🎰 Cassino ao Vivo</span>
-            <h2 class="slide-title">As Melhores Mesas &amp; <em>Roleta ao Vivo</em></h2>
-            <p class="slide-desc">Sinta a emoção de jogar com crupiês ao vivo e prêmios multiplicadores a qualquer hora do dia.</p>
-            <a href="https://bettbit.com/?clickid=JO842086597750&id=JO8420" onclick="if(typeof fbq === 'function') { fbq('track', 'Contact'); }" class="cta-btn">Entrar nas Mesas</a>
-          </div>
-        </div>
-      </div>
+      </a>
 
     </div>
 
@@ -748,52 +570,6 @@ src="https://www.facebook.net/tr?id=1018336844589721&ev=PageView&noscript=1"
       <div class="trust-title">+50% de Bônus</div>
       <div class="trust-sub">Crédito no 1º depósito</div>
     </div>
-  </div>
-</section>
-
-<!-- Visual Banner Grid Highlights Section -->
-<section class="banner-cards-section">
-  <h2 class="section-title">Destaques da Semana</h2>
-  <p class="section-subtitle">Escolha sua promoção favorita e comece a jogar com vantagem</p>
-
-  <div class="banner-grid">
-    
-    <div class="banner-card">
-      <div class="banner-card-img-wrap">
-        <img src="/banner%201.jpg" alt="Bônus de Boas Vindas" class="banner-card-img">
-        <span class="banner-tag">🔥 Mais Popular</span>
-      </div>
-      <div class="banner-card-body">
-        <h3 class="banner-card-title">Bônus de Boas-Vindas +50%</h3>
-        <p class="banner-card-text">Faça o seu cadastro e ganhe 50% de saldo extra automaticamente no seu primeiro aporte para jogar onde quiser.</p>
-        <a href="https://bettbit.com/?clickid=JO842086597750&id=JO8420" onclick="if(typeof fbq === 'function') { fbq('track', 'Contact'); }" class="banner-card-btn">Quero Bônus 50%</a>
-      </div>
-    </div>
-
-    <div class="banner-card">
-      <div class="banner-card-img-wrap">
-        <img src="/banner%202.jpg" alt="Pagamento Rápido PIX" class="banner-card-img">
-        <span class="banner-tag">⚡ PIX Rápido</span>
-      </div>
-      <div class="banner-card-body">
-        <h3 class="banner-card-title">Sistema de Saque Expresso</h3>
-        <p class="banner-card-text">Sem complicação nem espera prolongada. Solicite seu pagamento e receba direto na sua chave PIX em instantes.</p>
-        <a href="https://bettbit.com/?clickid=JO842086597750&id=JO8420" onclick="if(typeof fbq === 'function') { fbq('track', 'Contact'); }" class="banner-card-btn">Cadastrar Agora</a>
-      </div>
-    </div>
-
-    <div class="banner-card">
-      <div class="banner-card-img-wrap">
-        <img src="/banner%203.jpg" alt="Salas VIP de Cassino" class="banner-card-img">
-        <span class="banner-tag">🏆 Salas VIP</span>
-      </div>
-      <div class="banner-card-body">
-        <h3 class="banner-card-title">Cassino Exclusivo ao Vivo</h3>
-        <p class="banner-card-text">Interaja em português nas mesas de Roleta, Blackjack e Game Shows com transmissões em HD.</p>
-        <a href="https://bettbit.com/?clickid=JO842086597750&id=JO8420" onclick="if(typeof fbq === 'function') { fbq('track', 'Contact'); }" class="banner-card-btn">Jogar ao Vivo</a>
-      </div>
-    </div>
-
   </div>
 </section>
 
@@ -905,18 +681,21 @@ src="https://www.facebook.net/tr?id=1018336844589721&ev=PageView&noscript=1"
       if (autoSlideInterval) clearInterval(autoSlideInterval);
     }
 
-    prevBtn.addEventListener('click', () => {
+    prevBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
       updateCarousel(currentIndex - 1);
       startAutoSlide();
     });
 
-    nextBtn.addEventListener('click', () => {
+    nextBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
       updateCarousel(currentIndex + 1);
       startAutoSlide();
     });
 
     dots.forEach((dot) => {
       dot.addEventListener('click', (e) => {
+        e.stopPropagation();
         const index = parseInt(e.target.getAttribute('data-index'));
         updateCarousel(index);
         startAutoSlide();
