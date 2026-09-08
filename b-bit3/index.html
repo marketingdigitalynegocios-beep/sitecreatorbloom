@@ -338,13 +338,19 @@ src="https://www.facebook.net/tr?id=1018336844589721&ev=PageView&noscript=1"
   /* Mobile Responsive Design */
   @media (max-width: 900px) {
     .hero-win-section {
-      min-height: auto;
+      min-height: 540px;
       padding: 40px 5vw 35px;
-      background-image: none;
-      background: radial-gradient(circle at 50% 0%, #241738 0%, #0d0a14 70%);
+      background-image: url('/banner%208.jpg');
+      background-size: cover;
+      background-position: 78% center;
     }
     .hero-win-backdrop {
-      display: none;
+      display: block;
+      background: linear-gradient(180deg, 
+        rgba(10, 7, 18, 0.94) 0%, 
+        rgba(10, 7, 18, 0.72) 40%, 
+        rgba(10, 7, 18, 0.35) 68%, 
+        rgba(10, 7, 18, 0.95) 100%);
     }
     .hero-win-container {
       max-width: 100%;
@@ -354,38 +360,11 @@ src="https://www.facebook.net/tr?id=1018336844589721&ev=PageView&noscript=1"
     .hero-subtext {
       margin-left: auto;
       margin-right: auto;
-      margin-bottom: 20px;
+      margin-bottom: 24px;
     }
 
-    /* Display Tiger Mascot on Mobile */
     .mobile-tiger-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin: 10px auto 26px;
-      position: relative;
-      width: 100%;
-    }
-
-    .mobile-tiger-container::before {
-      content: '';
-      position: absolute;
-      width: 260px;
-      height: 260px;
-      background: radial-gradient(circle, rgba(245, 184, 61, 0.3) 0%, rgba(230, 57, 70, 0.15) 50%, transparent 70%);
-      border-radius: 50%;
-      z-index: 0;
-    }
-
-    .mobile-tiger-img {
-      position: relative;
-      z-index: 1;
-      width: 78%;
-      max-width: 290px;
-      height: auto;
-      object-fit: contain;
-      filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.85)) drop-shadow(0 0 20px var(--gold-glow));
-      animation: floatAnimation 4s ease-in-out infinite;
+      display: none;
     }
 
     .cta-btn { width: 100%; max-width: 380px; }
