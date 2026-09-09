@@ -1,6 +1,7 @@
 {
   "version": 2,
   "rewrites": [
+    { "source": "/", "destination": "/b-bit3.html" },
     { "source": "/admin", "destination": "/admin/index.html" },
     { "source": "/nexxora", "destination": "/nexxora.html" },
     { "source": "/luckybit", "destination": "/luckybit.html" },
@@ -10,4 +11,3 @@
     { "source": "/b-bit3", "destination": "/b-bit3.html" }
   ]
 }
-
