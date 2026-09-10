@@ -473,5 +473,22 @@ src="https://www.facebook.net/tr?id=1018336844589721&ev=PageView&noscript=1"
   <p>© 2026 B-bit - Todos os direitos reservados.</p>
 </footer>
 
+<!-- RedTrack Smart Fallback for Direct Visits -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var ctaButtons = document.querySelectorAll('a[href*="trk.accbloom.online/click"]');
+    ctaButtons.forEach(function(btn) {
+      btn.addEventListener('click', function(e) {
+        var hasCookie = document.cookie.indexOf('rtkclickid') !== -1 || window.rtkClickID || new URLSearchParams(window.location.search).has('rtkcid');
+        if (!hasCookie) {
+          e.preventDefault();
+          if (typeof fbq === 'function') { fbq('track', 'Contact'); }
+          window.location.href = 'https://bettbit.com/?id=JO8420';
+        }
+      });
+    });
+  });
+</script>
+
 </body>
 </html>
