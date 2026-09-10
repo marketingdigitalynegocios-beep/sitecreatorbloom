@@ -64,7 +64,7 @@ flowchart TD
 - **Landings:**
   - Versión 1 (Clara): `https://sitecreatorbloom.vercel.app/landing_fa.html`
   - Versión 2 (Oscura - Bono 100%): `https://sitecreatorbloom.vercel.app/landing_fa_v2.html`
-- **Meta Pixel ID:** `1279024090875797`
+- **Meta Pixel ID:** `1094619412946528`
 - **RedTrack Campaign ID:** `6a850eede10af64050c0ae2d`
 - **Kommo Account:** `suportecassino365.kommo.com`
 - **Oferta:** +100% Extra en carga
